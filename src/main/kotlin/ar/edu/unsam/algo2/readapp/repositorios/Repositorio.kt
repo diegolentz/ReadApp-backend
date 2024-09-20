@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo2.readapp.repositorios
 
 import excepciones.BusinessException
+import org.springframework.stereotype.Component
 
 
 //Hace referencia a los objetos los cuales van a ser instancias en cada repositorio
@@ -14,6 +15,7 @@ interface AvaliableInstance {
 
 }
 
+@Component
 class Repositorio<T : AvaliableInstance> {
     var objetosEnMemoria: MutableSet<T> = mutableSetOf()
 
@@ -54,5 +56,7 @@ class Repositorio<T : AvaliableInstance> {
     private fun asignarID(objeto: T) {
         objeto.id = objetosEnMemoria.size + 1
     }
+
+    fun getAll() : Set<T> = objetosEnMemoria
 
 }
