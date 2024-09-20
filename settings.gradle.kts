@@ -1,1 +1,1 @@
-rootProject.name = "proyecto-base-tp"
+rootProject.name = "readapp-2024-backend-grupo-9"

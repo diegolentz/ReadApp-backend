@@ -3,6 +3,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.5"
     kotlin("jvm") version "1.9.24"
     kotlin("plugin.spring") version "1.9.24"
+    kotlin("plugin.serialization") version "1.6.0"
     jacoco
     war
 }
@@ -30,7 +31,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
     // testing
