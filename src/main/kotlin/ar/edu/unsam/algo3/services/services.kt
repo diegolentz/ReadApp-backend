@@ -13,11 +13,13 @@ class ServiceLibros() {
     val actualizador: ActualizadorLibro = ActualizadorLibro
     val repo: Repositorio<Libro> = Repositorio<Libro>()
 
-    fun get(): List<Libro> = repo.objetosEnMemoria.toList()
+    fun get(): List<Libro> = repo.getAll().toList()
 
     fun nuevoLibro(libro: Libro) : Libro {
         repo.create(libro)
         return libro
     }
+
+    fun getById(libroId: Int) : Libro = repo.getByID(libroId)
 
 }
