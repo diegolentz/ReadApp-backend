@@ -41,7 +41,7 @@ class Repositorio<T : AvaliableInstance> {
 
     //void
 //terminar implementacion
-    open fun update(objeto: T) {
+    fun update(objeto: T) {
         delete(objeto)
         objetosEnMemoria.add(objeto)
     }
@@ -57,6 +57,6 @@ class Repositorio<T : AvaliableInstance> {
         objeto.id = objetosEnMemoria.size + 1
     }
 
-    fun getAll() : Set<T> = objetosEnMemoria
+    fun getAll(): Set<T> = objetosEnMemoria
 
 }
