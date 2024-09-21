@@ -13,16 +13,19 @@ import org.springframework.web.bind.annotation.RestController
 class LibrosController(val serviceLibros: ServiceLibros) {
 
     @GetMapping("/libros")
-    fun obtenerLibros() : List<Libro> = serviceLibros.get()
+    fun obtenerLibros(): List<Libro> = serviceLibros.get()
 
     @GetMapping("/libros/{id}")
-    fun libroPorId(@PathVariable id:Int) = serviceLibros.getById(id)
+    fun libroPorId(@PathVariable id: Int) = serviceLibros.getById(id)
 
     @PostMapping("/libros")
-    fun crearLibro(@RequestBody libroBody:Libro) : Libro = serviceLibros.nuevoLibro(libroBody)
+    fun crearLibro(@RequestBody libroBody: Libro): Libro = serviceLibros.nuevoLibro(libroBody)
 
-
-
+    @PutMapping("/libros")
+    fun actualizarLibro(@RequestBody nuevoLibro: Libro): Libro {
+        serviceLibros.actualizarLibro(nuevoLibro)
+        return serviceLibros.getById(nuevoLibro.id)
+    }
 
 
 }

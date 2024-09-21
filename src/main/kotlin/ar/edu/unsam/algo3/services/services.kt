@@ -15,11 +15,13 @@ class ServiceLibros() {
 
     fun get(): List<Libro> = repo.getAll().toList()
 
-    fun nuevoLibro(libro: Libro) : Libro {
+    fun nuevoLibro(libro: Libro): Libro {
         repo.create(libro)
         return libro
     }
 
-    fun getById(libroId: Int) : Libro = repo.getByID(libroId)
+    fun getById(libroId: Int): Libro = repo.getByID(libroId)
+
+    fun actualizarLibro(libro: Libro) = repo.update(libro)
 
 }
