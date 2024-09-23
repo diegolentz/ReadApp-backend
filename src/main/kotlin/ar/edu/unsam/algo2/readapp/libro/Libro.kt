@@ -5,9 +5,10 @@ import ar.edu.unsam.algo2.readapp.builders.AutorBuilder
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 
 
-class Libro (
+class Libro(
     //Estas variables =>> cantidadPalabras y cantidadPaginas
     // Deben insultar en caso que se inicializen con valor 0 o menor
+
     var autor: Autor = AutorBuilder().build(),
     var cantidadPalabras: Int = 1,
     var cantidadPaginas: Int = 1,
@@ -16,10 +17,11 @@ class Libro (
     var traducciones: MutableSet<Lenguaje> = mutableSetOf(),
     var esComplejo: Boolean = false,
     var titulo: String = ""
-    ): AvaliableInstance {
-  
-    override var id:Int = -1//POR DEFAULT AL FINAL
-    override fun cumpleCriterioBusqueda(texto : String) = (titulo.contains(texto) || autor.apellido.contains(texto))
+) : AvaliableInstance {
+
+
+    override var id: Int = -1//POR DEFAULT AL FINAL
+    override fun cumpleCriterioBusqueda(texto: String) = (titulo.contains(texto) || autor.apellido.contains(texto))
 
     companion object {
         val PAGINAS_LIBRO_LARGO_MIN: Int = 600

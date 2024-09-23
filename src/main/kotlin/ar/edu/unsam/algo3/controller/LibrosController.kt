@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.controller
 
 import ar.edu.unsam.algo2.readapp.libro.Libro
+import ar.edu.unsam.algo3.services.LibroDTO
 import ar.edu.unsam.algo3.services.ServiceLibros
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -19,13 +20,12 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     fun libroPorId(@PathVariable id: Int) = serviceLibros.getById(id)
 
     @PostMapping("/libros")
-    fun crearLibro(@RequestBody libroBody: Libro): Libro = serviceLibros.nuevoLibro(libroBody)
+    fun crearLibro(@RequestBody libroBody: LibroDTO): Libro = serviceLibros.nuevoLibro(libroBody)
 
     @PutMapping("/libros")
     fun actualizarLibro(@RequestBody nuevoLibro: Libro): Libro {
         serviceLibros.actualizarLibro(nuevoLibro)
         return serviceLibros.getById(nuevoLibro.id)
     }
-
 
 }
