@@ -21,10 +21,8 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     fun crearLibro(@RequestBody libroBody: LibroDTO): Libro = serviceLibros.nuevoLibro(libroBody.convertir())
 
     @PutMapping("/libros")
-    fun actualizarLibro(@RequestBody nuevoLibro: Libro): Libro {
-        serviceLibros.actualizarLibro(nuevoLibro)
-        return serviceLibros.getById(nuevoLibro.id)
-    }
+    fun actualizarLibro(@RequestBody nuevoLibro: Libro): Libro = serviceLibros.actualizarLibro(nuevoLibro)
+
 
 }
 

@@ -19,7 +19,10 @@ object ServiceLibros {
 
     fun getById(libroId: Int): Libro = repo.getByID(libroId)
 
-    fun actualizarLibro(libro: Libro) = repo.update(libro)
+    fun actualizarLibro(libro: Libro) : Libro {
+        repo.update(libro)
+        return getById(libro.id)
+    }
 
 }
 
