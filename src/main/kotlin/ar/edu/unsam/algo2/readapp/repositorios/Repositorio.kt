@@ -1,6 +1,6 @@
 package ar.edu.unsam.algo2.readapp.repositorios
 
-import excepciones.BusinessException
+import excepciones.NotFoundException
 import org.springframework.stereotype.Component
 
 
@@ -32,7 +32,7 @@ class Repositorio<T : AvaliableInstance> {
 
     private fun validarExistencia(id: Int) {
         if (!existeElemento(id)) {
-            throw BusinessException("no se encuentra")
+            throw NotFoundException("no se encuentra el objeto")
         }
     }
 

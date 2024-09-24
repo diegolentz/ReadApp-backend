@@ -21,7 +21,7 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     fun crearLibro(@RequestBody libroBody: LibroDTO): Libro = serviceLibros.nuevoLibro(libroBody.convertir())
 
     @PutMapping("/libros")
-    fun actualizarLibro(@RequestBody nuevoLibro: Libro): Libro = serviceLibros.actualizarLibro(nuevoLibro)
+    fun actualizarLibro(@RequestBody nuevoLibro: LibroDTO): Libro = serviceLibros.actualizarLibro(nuevoLibro.convertir())
 
 
 }
@@ -33,7 +33,8 @@ class LibroDTO(
     var ediciones: Int = 1,
     var ventasSemanales: Int = 0,
     var traducciones: MutableSet<Lenguaje> = mutableSetOf(),
-    var titulo: String = ""
+    var titulo: String,
+    var id: Int = -1,
 ) {
     var autor: Autor = buscarAutor()
 
@@ -54,5 +55,6 @@ class LibroDTO(
             .ventasSemanales(ventasSemanales)
             .traducciones(traducciones)
             .titulo(titulo)
+            .id(id)
             .build()
 }

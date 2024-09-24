@@ -73,6 +73,10 @@ class LibroBuilder (val newLibro: Libro = Libro()) {
         newLibro.esComplejo = true
     }
 
+    fun id(id:Int) = apply{
+        newLibro.id = id
+    }
+
     fun build(): Libro {
         if (newLibro.cantidadPalabras <= 0) {
             throw BookException("El valor de cantidadPalabras no puede ser menor o igual 0")
