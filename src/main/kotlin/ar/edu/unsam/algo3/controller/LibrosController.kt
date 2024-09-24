@@ -21,18 +21,22 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     fun crearLibro(@RequestBody libroBody: LibroDTO): Libro = serviceLibros.nuevoLibro(libroBody.convertir())
 
     @PutMapping("/libros")
-    fun actualizarLibro(@RequestBody nuevoLibro: LibroDTO): Libro = serviceLibros.actualizarLibro(nuevoLibro.convertir())
+    fun actualizarLibro(@RequestBody nuevoLibro: LibroDTO): Libro =
+        serviceLibros.actualizarLibro(nuevoLibro.convertir())
+
+    @DeleteMapping("/libros/{id}")
+    fun borrarLibro(@PathVariable id: Int) = serviceLibros.borrarLibro(id)
 
 
 }
 
 class LibroDTO(
-    val id_autor: Int = 0,
-    var cantidadPalabras: Int = 1,
-    var cantidadPaginas: Int = 1,
-    var ediciones: Int = 1,
-    var ventasSemanales: Int = 0,
-    var traducciones: MutableSet<Lenguaje> = mutableSetOf(),
+    val id_autor: Int,
+    var cantidadPalabras: Int,
+    var cantidadPaginas: Int,
+    var ediciones: Int,
+    var ventasSemanales: Int,
+    var traducciones: MutableSet<Lenguaje>,
     var titulo: String,
     var id: Int = -1,
 ) {

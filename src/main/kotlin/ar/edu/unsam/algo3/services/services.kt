@@ -27,6 +27,12 @@ object ServiceLibros {
         return getById(libro.id)
     }
 
+    fun borrarLibro(idLibro: Int) : Libro{
+        val libro = getById(idLibro)
+        repo.delete(libro)
+        return libro
+    }
+
     fun libroValido(libro: Libro){
         if (libro.ediciones <= 0 || libro.ventasSemanales < 0) {
             throw BusinessException("El formato del libro es inválido")
