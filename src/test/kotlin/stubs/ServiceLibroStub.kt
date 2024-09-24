@@ -1,6 +1,6 @@
 package stubs
 
-import ServiceLibros
+import ar.edu.unsam.algo3.services.ServiceLibros
 
 class ServiceLibroStub : ServiceLibros {
 

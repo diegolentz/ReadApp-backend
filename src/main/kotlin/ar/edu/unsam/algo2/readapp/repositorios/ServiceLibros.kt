@@ -1,22 +1,20 @@
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
+import ar.edu.unsam.algo3.services.ServiceLibros
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import excepciones.BusinessException
 
 
-interface ServiceLibros {
-    fun getLibros(): String
-}
 
 object ActualizadorLibro {
 
     fun actualizar(servicio: ServiceLibros, repositorio: Repositorio<Libro>) {
-        val mapper = ObjectMapper().registerKotlinModule()
-        val listaLibros: List<JsonLibro> = mapper.readValue<List<JsonLibro>>(servicio.getLibros())
-        val listaLibrosActualizados = listaLibros.map { actualizarLibro(it, repositorio) }
-        listaLibrosActualizados.forEach { repositorio.update(it) }
+//        val mapper = ObjectMapper().registerKotlinModule()
+//        val listaLibros: List<JsonLibro> = mapper.readValue<List<JsonLibro>>(servicio.get())
+//        val listaLibrosActualizados = listaLibros.map { actualizarLibro(it, repositorio) }
+//        listaLibrosActualizados.forEach { repositorio.update(it) }
     }
 
     fun actualizarLibro(datosNuevos: JsonLibro, repositorio: Repositorio<Libro>): Libro {

@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo2.readapp.repositorios
 
-import excepciones.BusinessException
+import excepciones.NotFoundException
+import org.springframework.stereotype.Component
 
 
 //Hace referencia a los objetos los cuales van a ser instancias en cada repositorio
@@ -14,6 +15,7 @@ interface AvaliableInstance {
 
 }
 
+@Component
 class Repositorio<T : AvaliableInstance> {
     var objetosEnMemoria: MutableSet<T> = mutableSetOf()
 
@@ -30,7 +32,7 @@ class Repositorio<T : AvaliableInstance> {
 
     private fun validarExistencia(id: Int) {
         if (!existeElemento(id)) {
-            throw BusinessException("no se encuentra")
+            throw NotFoundException("no se encuentra el objeto")
         }
     }
 
@@ -39,7 +41,7 @@ class Repositorio<T : AvaliableInstance> {
 
     //void
 //terminar implementacion
-    open fun update(objeto: T) {
+    fun update(objeto: T) {
         delete(objeto)
         objetosEnMemoria.add(objeto)
     }
@@ -54,5 +56,7 @@ class Repositorio<T : AvaliableInstance> {
     private fun asignarID(objeto: T) {
         objeto.id = objetosEnMemoria.size + 1
     }
+
+    fun getAll(): Set<T> = objetosEnMemoria
 
 }
