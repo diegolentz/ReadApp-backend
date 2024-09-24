@@ -11,14 +11,26 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DisplayName("Dado un controller de tareas")
-class RecetaControllerTest(@Autowired val mockMvc: MockMvc) {
+@DisplayName("Dado un controller de Libros")
+class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
+
+
+    //Averiguar porque no encuentra los beans
+//    @Autowired
+//    lateinit var librosRepositorio : Repositorio<Libro>
+//
+//    @BeforeEach
+//    fun init(){
+//        librosRepositorio.clearAll()
+//        librosRepositorio.create(Libro())
+//    }
 
     @Test
     fun `puedo mockear una llamada al endpoint via get y me responde correctamente`() {
         mockMvc
-            .perform(MockMvcRequestBuilders.get("/ejemplo/"))
+            .perform(MockMvcRequestBuilders.get("/libros"))
             .andExpect(MockMvcResultMatchers.status().isOk)
-            .andExpect(MockMvcResultMatchers.content().string("hola"))
+            .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(0))
     }
 }

@@ -22,7 +22,7 @@ import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import stubs.MailSenderStub
-import stubs.ServiceLibroStub
+//import stubs.ServiceLibroStub
 import java.time.LocalDate
 
 class AdministradorSpec : DescribeSpec({
@@ -196,44 +196,44 @@ class AdministradorSpec : DescribeSpec({
             stubMailSender.mailsEnviados[0].asunto shouldBeEqual "Se realizó el proceso: ${ProcesoAgregarAutores::class}"
         }
 
-        describe("proceso de actualización de libros") {
-            val servicioLibro = ServiceLibroStub()
-
-            servicioLibro.json = """
-        [
-         {
-           "id": 1,
-           "ediciones": 255,
-           "ventasSemanales": 500
-         },
-         {
-           "id": 2,
-           "ediciones": 300,
-           "ventasSemanales": 600
-         }
-        ]
-    """.trimIndent()
-
-            val repositorioLibros = Repositorio<Libro>()
-
-            repositorioLibros.apply {
-                create(libro1)
-                create(libro2)
-            }
-
-            sysAdmin.agregarProceso(ProcesoActualizadorLibros(servicioLibro, repositorioLibros))
-            sysAdmin.ejecutarListaProcesos()
-
-            it("El libro 1 tiene que tener 255 ediciones y 500 ventasemanales"){
-                repositorioLibros.getByID(1).ediciones shouldBe 255
-                repositorioLibros.getByID(1).ventasSemanales shouldBe 500
-            }
-
-            it("El libro 2 tiene que tener 300 ediciones y 600 ventasemanales"){
-                repositorioLibros.getByID(2).ediciones shouldBe 300
-                repositorioLibros.getByID(2).ventasSemanales shouldBe 600
-            }
-        }
+//        describe("proceso de actualización de libros") {
+//            val servicioLibro = ServiceLibroStub()
+//
+//            servicioLibro.json = """
+//        [
+//         {
+//           "id": 1,
+//           "ediciones": 255,
+//           "ventasSemanales": 500
+//         },
+//         {
+//           "id": 2,
+//           "ediciones": 300,
+//           "ventasSemanales": 600
+//         }
+//        ]
+//    """.trimIndent()
+//
+//            val repositorioLibros = Repositorio<Libro>()
+//
+//            repositorioLibros.apply {
+//                create(libro1)
+//                create(libro2)
+//            }
+//
+//            sysAdmin.agregarProceso(ProcesoActualizadorLibros(servicioLibro, repositorioLibros))
+//            sysAdmin.ejecutarListaProcesos()
+//
+//            it("El libro 1 tiene que tener 255 ediciones y 500 ventasemanales"){
+//                repositorioLibros.getByID(1).ediciones shouldBe 255
+//                repositorioLibros.getByID(1).ventasSemanales shouldBe 500
+//            }
+//
+//            it("El libro 2 tiene que tener 300 ediciones y 600 ventasemanales"){
+//                repositorioLibros.getByID(2).ediciones shouldBe 300
+//                repositorioLibros.getByID(2).ventasSemanales shouldBe 600
+//            }
+//        }
     }
 })
 

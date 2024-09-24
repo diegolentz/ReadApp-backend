@@ -59,4 +59,6 @@ class Repositorio<T : AvaliableInstance> {
 
     fun getAll(): Set<T> = objetosEnMemoria
 
+    fun clearAll() = objetosEnMemoria.clear()
+
 }
