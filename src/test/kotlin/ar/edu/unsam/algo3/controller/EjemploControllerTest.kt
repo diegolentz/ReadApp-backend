@@ -1,5 +1,8 @@
 package ar.edu.unsam.algo3.controller
 
+import ar.edu.unsam.algo2.readapp.libro.Libro
+import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,14 +19,14 @@ class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
 
 
     //Averiguar porque no encuentra los beans
-//    @Autowired
-//    lateinit var librosRepositorio : Repositorio<Libro>
-//
-//    @BeforeEach
-//    fun init(){
-//        librosRepositorio.clearAll()
-//        librosRepositorio.create(Libro())
-//    }
+    @Autowired
+    lateinit var librosRepositorio : Repositorio<Libro>
+
+    @BeforeEach
+    fun init(){
+        librosRepositorio.clearAll()
+        librosRepositorio.create(Libro())
+    }
 
     @Test
     fun `puedo mockear una llamada al endpoint via get y me responde correctamente`() {

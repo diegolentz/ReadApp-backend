@@ -2,7 +2,6 @@ package ar.edu.unsam.algo2.readapp
 
 import LibroBuilder
 import ar.edu.unsam.algo2.readapp.administrador.Administrador
-import ar.edu.unsam.algo2.readapp.administrador.ProcesoActualizadorLibros
 import ar.edu.unsam.algo2.readapp.administrador.ProcesoAgregarAutores
 import ar.edu.unsam.algo2.readapp.builders.ProcesosBuilder
 import ar.edu.unsam.algo2.readapp.builders.UsuarioBuilder
@@ -20,7 +19,6 @@ import ar.edu.unsam.algo2.readapp.centrosDeLectura.CentroDeLectura
 import ar.edu.unsam.algo2.readapp.centrosDeLectura.Particular
 import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
-import ar.edu.unsam.algo2.readapp.libro.Libro
 import stubs.MailSenderStub
 //import stubs.ServiceLibroStub
 import java.time.LocalDate
