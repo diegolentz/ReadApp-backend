@@ -2,6 +2,7 @@ package ar.edu.unsam.algo3.services
 
 import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Libro
+import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import excepciones.BusinessException
 import org.springframework.stereotype.Service
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service
 
 @Service
 object ServiceLibros {
-    val repo: Repositorio<Libro> = Repositorio()
+    val repo : Repositorio<Libro> = Repositorio()
 
     fun get(): List<Libro> = repo.getAll().toList()
 

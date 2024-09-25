@@ -20,12 +20,11 @@ class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
 
     //Averiguar porque no encuentra los beans
     @Autowired
-    lateinit var librosRepositorio : Repositorio<Libro>
+    lateinit var repo: Repositorio<Libro>
 
     @BeforeEach
-    fun init(){
-        librosRepositorio.clearAll()
-        librosRepositorio.create(Libro())
+    fun init() {
+        repo.clearAll()
     }
 
     @Test
@@ -34,6 +33,14 @@ class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
             .perform(MockMvcRequestBuilders.get("/libros"))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(0))
+            .andExpect(MockMvcResultMatchers.jsonPath("$").isEmpty)
+    }
+
+    @Test
+    fun `Si agrego un libro se muestra correctamente`() {
+        repo.create(Libro(cantidadPalabras = 999999))
+        mockMvc
+        .perform(MockMvcRequestBuilders.get("/libros"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty)
     }
 }
