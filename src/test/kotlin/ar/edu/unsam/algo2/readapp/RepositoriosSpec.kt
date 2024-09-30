@@ -13,6 +13,7 @@ import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import excepciones.BusinessException
+import excepciones.NotFoundException
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
@@ -66,11 +67,11 @@ class RepositoriosSpec : DescribeSpec({
                     repositorioLibro.objetosEnMemoria shouldNotContain libroMock
 
                     it("Buscar por ID algo que NO existe") {
-                        shouldThrow<BusinessException> { repositorioLibro.getByID(1) }
+                        shouldThrow<NotFoundException> { repositorioLibro.getByID(1) }
                     }
 
                     it("Eliminar algo que NO existe") {
-                        shouldThrow<BusinessException> { repositorioLibro.delete(libroMock) }
+                        shouldThrow<NotFoundException> { repositorioLibro.delete(libroMock) }
 
                     }
                 }
@@ -78,7 +79,7 @@ class RepositoriosSpec : DescribeSpec({
                 it("Actualizarlos algo que NO existe") {
                     //OJO la manera de resolver esto
                     repositorioLibro.delete(libroMock)
-                    shouldThrow<BusinessException> { repositorioLibro.update(libroMock) }
+                    shouldThrow<NotFoundException> { repositorioLibro.update(libroMock) }
                 }
 
 

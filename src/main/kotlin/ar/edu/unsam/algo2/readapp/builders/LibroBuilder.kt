@@ -35,7 +35,7 @@ class LibroBuilder (val newLibro: Libro = Libro()) {
     }
 
     fun traducciones(traducciones: MutableSet<Lenguaje>)= apply {
-        newLibro.traducciones = mutableSetOf(traducciones)
+        newLibro.traducciones = traducciones
     }
 
     fun esComplejo(complejo: Boolean)= apply {
@@ -56,7 +56,7 @@ class LibroBuilder (val newLibro: Libro = Libro()) {
         repeat(cantidad) {
             lenguajesRandom.add(Lenguaje.values().random())
         }
-        newLibro.traducciones = mutableSetOf(lenguajesRandom)
+        newLibro.traducciones = lenguajesRandom
         return this
     }
 

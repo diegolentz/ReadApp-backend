@@ -14,7 +14,7 @@ class Libro(
     var cantidadPaginas: Int = 1,
     var ediciones: Int = 1,
     var ventasSemanales: Int = 0,
-    var traducciones: MutableSet<Any> = mutableSetOf(),
+    var traducciones: MutableSet<Lenguaje> = mutableSetOf(),
     var esComplejo: Boolean = false,
     var titulo: String = "",
     var imagen: String = ""
