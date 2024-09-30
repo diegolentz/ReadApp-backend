@@ -6,20 +6,20 @@ import ar.edu.unsam.algo2.readapp.usuario.Usuario
 
 
 class RecommendationDTO(
-    val creador: Usuario,
-    val librosRecomendados: MutableSet<Libro> = mutableSetOf(),
-    val titulo: String = "",
-    val contenido: String = "",
-    var publica: Boolean = true,
-    val valoraciones: MutableSet<Valoracion> = mutableSetOf()
+    val creador: String,
+    val librosRecomendados: MutableSet<Libro>,
+    val titulo: String,
+    val contenido: String,
+    var publica: Boolean,
+    val valoraciones: MutableSet<Valoracion>
 ) {
-    fun convertir(): Recomendacion =
-        Recomendacion(
-            creador = creador,
-            librosRecomendados = librosRecomendados,
-            titulo = titulo,
-            contenido = contenido,
-            publica = publica,
-            valoraciones = valoraciones
-        )
+//    fun convertir(): Recomendacion =
+//        Recomendacion(
+//            creador = creador,
+//            librosRecomendados = librosRecomendados,
+//            titulo = titulo,
+//            contenido = contenido,
+//            publica = publica,
+//            valoraciones = valoraciones
+//        )
 }

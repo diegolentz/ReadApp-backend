@@ -15,6 +15,7 @@ import java.time.LocalDate
 import java.time.Period
 
 class Usuario(
+    var photo:String = "",
     var nombre: String = "",
     var apellido: String = "",
     var alias: String = "",

@@ -1,18 +1,17 @@
-
 package ar.edu.unsam.algo3.controller
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
-import ar.edu.unsam.algo3.dominio.RecommendationDTO
-import ar.edu.unsam.algo3.services.ServiceRecommendation
+import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.services.ServiceUser
 
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(origins = ["http://localhost:4200"])
 @RestController
 
-class RecommendationController(val serviceRecommendation: ServiceRecommendation) {
+class UserController(val serviceUser: ServiceUser) {
 
-    @GetMapping("/recommendations")
-    fun getRecommendations(): List<Recomendacion> = serviceRecommendation.getAll()
+    @GetMapping("/users")
+    fun getRecommendations(): List<Usuario> = serviceUser.getAll()
 
 //    @GetMapping("/recommendations/{id}")
 //    fun getRecommendationById(@PathVariable id: Int) = serviceRecommendation.getById(id)

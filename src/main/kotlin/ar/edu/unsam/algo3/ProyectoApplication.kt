@@ -11,6 +11,4 @@ class ProyectoApplication
 fun main(args: Array<String>) {
     runApplication<ProyectoApplication>(*args)
 
-
-
 }
