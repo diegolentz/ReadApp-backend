@@ -14,6 +14,9 @@ class LibroBuilder (val newLibro: Libro = Libro()) {
     fun largo() = apply{
         newLibro.cantidadPaginas = Libro.PAGINAS_LIBRO_LARGO_MIN + 1
     }
+    fun imagen(imagen : String) = apply {
+        newLibro.imagen = imagen
+    }
     fun cantidadPalabras(palabras: Int) = apply {
         newLibro.cantidadPalabras = palabras
         
@@ -32,7 +35,7 @@ class LibroBuilder (val newLibro: Libro = Libro()) {
     }
 
     fun traducciones(traducciones: MutableSet<Lenguaje>)= apply {
-        newLibro.traducciones = traducciones
+        newLibro.traducciones = mutableSetOf(traducciones)
     }
 
     fun esComplejo(complejo: Boolean)= apply {
@@ -53,7 +56,7 @@ class LibroBuilder (val newLibro: Libro = Libro()) {
         repeat(cantidad) {
             lenguajesRandom.add(Lenguaje.values().random())
         }
-        newLibro.traducciones = lenguajesRandom
+        newLibro.traducciones = mutableSetOf(lenguajesRandom)
         return this
     }
 
