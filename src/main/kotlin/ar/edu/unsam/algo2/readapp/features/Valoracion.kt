@@ -1,8 +1,10 @@
 package ar.edu.unsam.algo2.readapp.features
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import excepciones.BusinessException
+import java.time.LocalDate
 
 class Valoracion(var valor: Int, var comentario: String, var autor: Usuario) {
+    var fecha: LocalDate = LocalDate.now()
     companion object{
         val VALOR_MIN:Int = 1
         val VALOR_MAX:Int = 5
