@@ -13,8 +13,8 @@ class UserController(val serviceUser: ServiceUser) {
     @GetMapping("/users")
     fun getRecommendations(): List<Usuario> = serviceUser.getAll()
 
-//    @GetMapping("/recommendations/{id}")
-//    fun getRecommendationById(@PathVariable id: Int) = serviceRecommendation.getById(id)
+    @GetMapping("/users/{id}")
+    fun getRecommendationById(@PathVariable id: Int) = serviceUser.getById(id)
 //
 //    @PostMapping("/recommendations/{id}")
 //    fun createRecommendation(@RequestBody recommendationDTO: RecommendationDTO): Recomendacion =
