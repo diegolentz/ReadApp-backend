@@ -16,12 +16,13 @@ object ServiceUser {
 
     fun getAll(): List<Usuario> = userRepository.getAll().toList()
 
+    fun getById(userID: Int): Usuario = userRepository.getByID(userID)
 //    fun createRecommendation(recommendation: Recomendacion): Recomendacion {
 //        recommendationRepository.create(recommendation)
 //        return this.getById(recommendation.id)
 //    }
 //
-//    fun getById(recommendationID: Int): Recomendacion = recommendationRepository.getByID(recommendationID)
+
 //
 //    fun updateRecommendation(recommendation: Recomendacion): Recomendacion {
 //        recommendationRepository.update(recommendation)

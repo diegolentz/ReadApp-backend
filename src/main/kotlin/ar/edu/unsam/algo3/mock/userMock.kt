@@ -7,17 +7,17 @@ import java.time.LocalDate
 
 val USERS = listOf(
     Usuario(
-        photo = "",
+        fotoPath = "inosuke.jpeg",
         nombre = "Inosuke",
-        alias = "",
+        alias = "elInosuke",
         fechaNacimiento = LocalDate.now(),
-        apellido = "",
+        apellido = "Hashibira",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
         lenguaje = Lenguaje.values().random()
     ),
     Usuario(
-        photo = "",
+        fotoPath = "",
         nombre = "Tanjiro",
         alias = "",
         fechaNacimiento = LocalDate.now(),
@@ -27,7 +27,7 @@ val USERS = listOf(
         lenguaje = Lenguaje.values().random()
     ),
     Usuario(
-        photo = "",
+        fotoPath = "",
         nombre = "Momonosuke",
         alias = "",
         fechaNacimiento = LocalDate.now(),
@@ -37,7 +37,7 @@ val USERS = listOf(
         lenguaje = Lenguaje.values().random()
     ),
     Usuario(
-        photo = "",
+        fotoPath = "",
         nombre = "Saitama",
         alias = "",
         fechaNacimiento = LocalDate.now(),
@@ -47,7 +47,7 @@ val USERS = listOf(
         lenguaje = Lenguaje.values().random()
     ),
     Usuario(
-        photo = "",
+        fotoPath = "",
         nombre = "Ronoroa",
         alias = "",
         fechaNacimiento = LocalDate.now(),
@@ -57,7 +57,7 @@ val USERS = listOf(
         lenguaje = Lenguaje.values().random()
     ),
     Usuario(
-        photo = "",
+        fotoPath = "",
         nombre = "Kinemon",
         alias = "",
         fechaNacimiento = LocalDate.now(),
