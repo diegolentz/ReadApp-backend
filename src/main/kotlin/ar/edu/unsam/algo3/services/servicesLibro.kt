@@ -12,21 +12,31 @@ object ServiceLibros {
     val repoLibro: Repositorio<Libro> = Repositorio()
     var libros: MutableList<Libro> = mutableListOf()
 
+
     init {
         LIBROS.forEach {
             repoLibro.create(it)
         }
     }
+    fun get() : List<Libro> = repoLibro.getAll().toList()
 
-    fun get(): List<LibroDTO> {
+
+    fun getSearch(): List<LibroDTO> {
         libros = repoLibro.getAll().toMutableList()
         return libros.map { it : Libro -> it.toDTO() }
     }
 
-    fun nuevoLibro(libro: Libro): Libro {
-        libroValido(libro)
-        repoLibro.create(libro)
-        return getById(libro.id)
+    fun agregarLeido(idLibro : Int,idUser : Int) : Libro {
+        var libro = this.getById(idLibro)
+        var usuario = ServiceUser.getById(idUser)
+        usuario.leer(libro)
+
+        return libro
+    }
+
+    fun obtenerLeido(idUser: Int) : List<Libro> {
+        var usuario = ServiceUser.getById(idUser)
+        return  usuario.librosLeidos
     }
 
     fun getById(libroId: Int): Libro = repoLibro.getByID(libroId)
@@ -37,9 +47,11 @@ object ServiceLibros {
         return getById(libro.id)
     }
 
-    fun borrarLibro(idLibro: Int): Libro {
-        val libro = getById(idLibro)
-        repoLibro.delete(libro)
+    fun borrarLibro(idLibro: Int, idUser: Int): Libro {
+        val libro = this.getById(idLibro)
+        val usuario = ServiceUser.getById(idUser)
+        usuario.librosLeidos.remove(libro)
+
         return libro
     }
 
