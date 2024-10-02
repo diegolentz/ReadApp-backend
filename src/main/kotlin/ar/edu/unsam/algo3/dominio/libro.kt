@@ -11,6 +11,7 @@ class LibroDTO(
     var traducciones: MutableSet<Lenguaje>,
     var titulo: String,
     var id: Int,
+    var imagen: String
 ) {
 
 }
