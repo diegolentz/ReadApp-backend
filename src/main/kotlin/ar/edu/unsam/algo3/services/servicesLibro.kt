@@ -39,6 +39,11 @@ object ServiceLibros {
         return  usuario.librosLeidos
     }
 
+
+    fun obtenerALeer(idUser: Int) : Set<Libro> {
+        var usuario = ServiceUser.getById(idUser)
+        return  usuario.librosALeer
+    }
     fun getById(libroId: Int): Libro = repoLibro.getByID(libroId)
 
     fun actualizarLibro(libro: Libro): Libro {

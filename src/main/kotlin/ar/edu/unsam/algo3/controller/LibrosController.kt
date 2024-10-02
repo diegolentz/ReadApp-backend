@@ -23,18 +23,18 @@ class LibrosController(val serviceLibros: ServiceLibros) {
         serviceLibros.agregarLeido(idLibro, idUser)
 
     @DeleteMapping("/libroLeido")
-    fun borrarLibro(@RequestParam idLibro: Int, @RequestParam idUser: Int) = serviceLibros.borrarLibro(idLibro, idUser)
+    fun borrarLibroLeido(@RequestParam idLibro: Int, @RequestParam idUser: Int) = serviceLibros.borrarLibro(idLibro, idUser)
 
+    //para libros a leer
+    @GetMapping("/librosALeer")
+    fun obtenerALeeer(@RequestParam idUser: Int) = serviceLibros.obtenerALeer(idUser)
 
+    @PostMapping("/libroALeer")
+    fun postLibroALeer(@RequestParam idLibro: Int, @RequestParam idUser: Int) =
+        serviceLibros.agregarLeido(idLibro, idUser)
 
-
-
-//    @GetMapping("/libros/{id}")
-//    fun libroPorId(@PathVariable id: Int) = serviceLibros.getById(id)
-
-//    @PutMapping("/libros")
-//    fun actualizarLibro(@RequestBody nuevoLibro: LibroDTO): Libro =
-//        serviceLibros.actualizarLibro(nuevoLibro.convertir())
+    @DeleteMapping("/libroALeer")
+    fun borrarLibroALeer(@RequestParam idLibro: Int, @RequestParam idUser: Int) = serviceLibros.borrarLibro(idLibro, idUser)
 
 
 }
