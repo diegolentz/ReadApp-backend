@@ -59,7 +59,8 @@ class Libro(
             ventasSemanales = ventasSemanales,
             traducciones = traducciones,
             titulo = titulo,
-            id = id
+            id = id,
+            imagen = imagen
         )
 
 //    fun fromDTO(libroDTO: LibroDTO): Libro {
