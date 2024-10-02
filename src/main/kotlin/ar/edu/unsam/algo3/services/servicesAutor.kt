@@ -1,61 +1,27 @@
-import ar.edu.unsam.algo2.readapp.builders.AutorBuilder
+package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.libro.Autor
-import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
+import ar.edu.unsam.algo3.mock.AUTOR
+import org.springframework.stereotype.Service
 
+
+@Service
 object ServiceAutor {
     val repoAutor: Repositorio<Autor> = Repositorio()
 
     // Inicialización de datos predeterminados
     init {
-        // Crear autores
-        val garciaMarquez = AutorBuilder()
-            .lenguaNativa(Lenguaje.RUSO)
-            .edad(50)
-            .nombre("Gabriel")
-            .apellido("Garcia Marquez")
-            .seudonimo("El Gabo")
-            .build()
-
-        val rowling = AutorBuilder()
-            .lenguaNativa(Lenguaje.INGLES)
-            .edad(42)
-            .nombre("J.K.")
-            .apellido("Rowling")
-            .seudonimo("Robert Galbraith")
-            .build()
-
-        val allende = AutorBuilder()
-            .lenguaNativa(Lenguaje.ESPANIOL)
-            .edad(67)
-            .nombre("Isabel")
-            .apellido("Allende")
-            .seudonimo("La Novelista")
-            .build()
-
-        val kafka = AutorBuilder()
-            .lenguaNativa(Lenguaje.ALEMAN)
-            .edad(55)
-            .nombre("Franz")
-            .apellido("Kafka")
-            .seudonimo("El Existencialista")
-            .build()
-
-        val proust = AutorBuilder()
-            .lenguaNativa(Lenguaje.FRANCES)
-            .edad(48)
-            .nombre("Marcel")
-            .apellido("Proust")
-            .seudonimo("El Memorialista")
-            .build()
-
-        // Agregar autores al repositorio
-        repoAutor.create(garciaMarquez)
-        repoAutor.create(rowling)
-        repoAutor.create(allende)
-        repoAutor.create(kafka)
-        repoAutor.create(proust)
+        AUTOR.forEach(
+            { autor -> repoAutor.create(autor) }
+        )
     }
     fun get(): List<Autor> = repoAutor.getAll().toList()
 
+    fun getById(autorID: Int): Autor = repoAutor.getByID(autorID)
+
+    fun borrarAutor(idAutor: Int): Autor {
+        val autor = getById(idAutor)
+        repoAutor.delete(autor)
+        return autor
+    }
 }
