@@ -15,20 +15,20 @@ import org.springframework.web.bind.annotation.*
 class LibrosController(val serviceLibros: ServiceLibros) {
 
     @GetMapping("/libros")
-    fun obtenerLibros(): List<Libro> = serviceLibros.get()
+    fun obtenerLibros(): List<LibroDTO> = serviceLibros.get()
 
-    @GetMapping("/libros/{id}")
-    fun libroPorId(@PathVariable id: Int) = serviceLibros.getById(id)
-
-    @PostMapping("/libros")
-    fun crearLibro(@RequestBody libroBody: LibroDTO): Libro = serviceLibros.nuevoLibro(libroBody.convertir())
-
-    @PutMapping("/libros")
-    fun actualizarLibro(@RequestBody nuevoLibro: LibroDTO): Libro =
-        serviceLibros.actualizarLibro(nuevoLibro.convertir())
-
-    @DeleteMapping("/libros/{id}")
-    fun borrarLibro(@PathVariable id: Int) = serviceLibros.borrarLibro(id)
+//    @GetMapping("/libros/{id}")
+//    fun libroPorId(@PathVariable id: Int) = serviceLibros.getById(id)
+//
+//    @PostMapping("/libros")
+//    fun crearLibro(@RequestBody libroBody: LibroDTO): Libro = serviceLibros.nuevoLibro(libroBody.convertir())
+//
+//    @PutMapping("/libros")
+//    fun actualizarLibro(@RequestBody nuevoLibro: LibroDTO): Libro =
+//        serviceLibros.actualizarLibro(nuevoLibro.convertir())
+//
+//    @DeleteMapping("/libros/{id}")
+//    fun borrarLibro(@PathVariable id: Int) = serviceLibros.borrarLibro(id)
 
 
 }
