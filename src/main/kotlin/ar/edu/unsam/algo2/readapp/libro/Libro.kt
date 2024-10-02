@@ -1,6 +1,8 @@
 package ar.edu.unsam.algo2.readapp.libro
 
 
+import LibroBuilder
+import LibroDTO
 import ar.edu.unsam.algo2.readapp.builders.AutorBuilder
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 
@@ -45,7 +47,35 @@ class Libro(
     fun cantidadDeLenguajes(): Int = lenguajes().size
     fun lenguajes(): Set<Any> = (this.traducciones).plus(lenguajeAutor())
 
+
+
+
+    fun toDTO(): LibroDTO =
+        LibroDTO(
+            autor = convertirAutor(this.autor),
+            cantidadPalabras = cantidadPalabras,
+            cantidadPaginas = cantidadPaginas,
+            ediciones = ediciones,
+            ventasSemanales = ventasSemanales,
+            traducciones = traducciones,
+            titulo = titulo,
+            id = id
+        )
+
+//    fun fromDTO(libroDTO: LibroDTO): Libro {
+//        var autor = encontrarAutor(libroDTO.id)
+//        LibroBuilder()
+//        .autor(autor)
+//
+//    }
+
+    fun convertirAutor(autor : Autor): String = "${autor.nombre} ${autor.apellido}"
+//    fun encontrarAutor(id: Int): Autor =
+
 }
+
+
+
 
 
 

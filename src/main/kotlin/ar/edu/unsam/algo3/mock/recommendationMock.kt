@@ -1,10 +1,11 @@
 package ar.edu.unsam.algo3.mock
 
-import ServiceAutor
+
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.features.Valoracion
 
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.services.ServiceAutor
 import ar.edu.unsam.algo3.services.ServiceLibros
 import java.time.LocalDate
 import java.util.*
