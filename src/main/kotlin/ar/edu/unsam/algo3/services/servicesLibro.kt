@@ -44,6 +44,13 @@ object ServiceLibros {
         var usuario = ServiceUser.getById(idUser)
         return  usuario.librosALeer
     }
+    fun agregarALeer(idLibro : Int,idUser : Int): Libro {
+        var libro = this.getById(idLibro)
+        var usuario = ServiceUser.getById(idUser)
+        usuario.agregarLibroALeer(libro)
+
+        return libro
+    }
     fun getById(libroId: Int): Libro = repoLibro.getByID(libroId)
 
     fun actualizarLibro(libro: Libro): Libro {
@@ -52,10 +59,18 @@ object ServiceLibros {
         return getById(libro.id)
     }
 
-    fun borrarLibro(idLibro: Int, idUser: Int): Libro {
+    fun borrarLibroLeido(idLibro: Int, idUser: Int): Libro {
         val libro = this.getById(idLibro)
         val usuario = ServiceUser.getById(idUser)
         usuario.librosLeidos.remove(libro)
+
+        return libro
+    }
+
+    fun borrarLibroLeer(idLibro: Int, idUser: Int): Libro {
+        val libro = this.getById(idLibro)
+        val usuario = ServiceUser.getById(idUser)
+        usuario.librosALeer.remove(libro)
 
         return libro
     }
