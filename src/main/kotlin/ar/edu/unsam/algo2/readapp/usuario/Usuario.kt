@@ -243,7 +243,8 @@ class Usuario(
         return UserBasicDTO(
             id = user.id,
             fotoPath = user.fotoPath,
-            nombreApellido = user.nombre + ' ' + user.apellido,
+            nombre = user.nombre,
+            apellido = user.apellido,
             alias = user.alias,
             lenguaje = user.lenguaje,
             palabrasPorMinutos = user.palabrasPorMinutos
@@ -260,7 +261,7 @@ class Usuario(
             lenguaje = user.lenguaje,
             palabrasPorMinutos = user.palabrasPorMinutos,
             fechaNacimiento = user.fechaNacimiento ,
-            direccionMail = user.direccionMail,
+            email = user.direccionMail,
             perfil =  user.perfil,
             tipoDeLector = user.tipoDeLector,
             amigos = user.amigos,

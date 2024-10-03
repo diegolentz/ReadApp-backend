@@ -12,7 +12,8 @@ import java.time.LocalDate
 class UserBasicDTO(
     val id:Int,
     var fotoPath:String,
-    val nombreApellido: String,
+    val nombre: String,
+    val apellido:String,
     val alias: String,
     val lenguaje: Lenguaje,
     //Solo para vistas home, mis recomendaciones,
@@ -29,7 +30,7 @@ class UserProfileDTO(
     var palabrasPorMinutos: Int,
     //Exclusivo de perfil de usuario
     var fechaNacimiento: LocalDate,
-    var direccionMail: String,
+    var email: String,
     var perfil: PerfilDeUsuario,
     var tipoDeLector: TipoDeLector,
     val amigos: MutableList<Usuario>,
