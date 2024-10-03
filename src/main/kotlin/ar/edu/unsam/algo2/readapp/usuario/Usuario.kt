@@ -9,6 +9,8 @@ import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.observers.AgregarLibroObserver
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
+import ar.edu.unsam.algo3.dominio.UserBasicDTO
+import ar.edu.unsam.algo3.dominio.UserProfileDTO
 import excepciones.BusinessException
 import excepciones.RecomendacionException
 import java.time.LocalDate
@@ -236,4 +238,36 @@ class Usuario(
     fun agregarObserver(observer: AgregarLibroObserver) {
         this.listaObservers.add(observer)
     }
+
+    fun toDTOBasic(user:Usuario): UserBasicDTO{
+        return UserBasicDTO(
+            id = user.id,
+            fotoPath = user.fotoPath,
+            nombreApellido = user.nombre + ' ' + user.apellido,
+            alias = user.alias,
+            lenguaje = user.lenguaje,
+            palabrasPorMinutos = user.palabrasPorMinutos
+        )
+    }
+
+    fun toDTOProfile(user:Usuario): UserProfileDTO{
+        return UserProfileDTO(
+            id = user.id,
+            fotoPath = user.fotoPath,
+            nombre = user.nombre,
+            apellido =  user.apellido,
+            alias = user.alias,
+            lenguaje = user.lenguaje,
+            palabrasPorMinutos = user.palabrasPorMinutos,
+            fechaNacimiento = user.fechaNacimiento ,
+            direccionMail = user.direccionMail,
+            perfil =  user.perfil,
+            tipoDeLector = user.tipoDeLector,
+            amigos = user.amigos,
+            librosLeidos = user.librosLeidos,
+            librosALeer = user.librosALeer,
+            recomendacionesAValorar = user.recomendacionesAValorar
+        )
+    }
+
 }

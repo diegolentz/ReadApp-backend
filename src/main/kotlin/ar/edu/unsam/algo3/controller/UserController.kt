@@ -1,5 +1,4 @@
 package ar.edu.unsam.algo3.controller
-import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.services.ServiceUser
 
@@ -11,10 +10,13 @@ import org.springframework.web.bind.annotation.*
 class UserController(val serviceUser: ServiceUser) {
 
     @GetMapping("/users")
-    fun getRecommendations(): List<Usuario> = serviceUser.getAll()
+    fun getAllUsers(): List<Usuario> = serviceUser.getAll()
 
-    @GetMapping("/users/{id}")
-    fun getRecommendationById(@PathVariable id: Int) = serviceUser.getById(id)
+    @GetMapping("/user/basic/{id}")
+    fun getUserBasicByID(@PathVariable id: Int) = serviceUser.getByIdBasic(id)
+
+    @GetMapping("/user/profile/{id}")
+    fun getUserProfileByID(@PathVariable id: Int) = serviceUser.getByIdProfile(id)
 //
 //    @PostMapping("/recommendations/{id}")
 //    fun createRecommendation(@RequestBody recommendationDTO: RecommendationDTO): Recomendacion =

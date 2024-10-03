@@ -1,6 +1,8 @@
 package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.dominio.UserBasicDTO
+import ar.edu.unsam.algo3.dominio.UserProfileDTO
 import ar.edu.unsam.algo3.mock.USERS
 import org.springframework.stereotype.Service
 
@@ -35,7 +37,19 @@ object ServiceUser {
 
     fun getAll(): List<Usuario> = userRepository.getAll().toList()
 
-    fun getById(userID: Int): Usuario = userRepository.getByID(userID)
+    fun getByIdRaw(userID: Int): Usuario = userRepository.getByID(userID)
+
+    fun getByIdBasic(userID: Int): UserBasicDTO{
+        val userNotDTO = userRepository.getByID(userID)
+        val userDTO = userNotDTO.toDTOBasic(userNotDTO)
+        return userDTO
+    }
+
+    fun getByIdProfile(userID: Int): UserProfileDTO{
+        val userNotDTO = userRepository.getByID(userID)
+        val userDTO = userNotDTO.toDTOProfile(userNotDTO)
+        return userDTO
+    }
 //    fun createRecommendation(recommendation: Recomendacion): Recomendacion {
 //        recommendationRepository.create(recommendation)
 //        return this.getById(recommendation.id)
