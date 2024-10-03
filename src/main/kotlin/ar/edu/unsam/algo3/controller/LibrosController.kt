@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(origins = arrayOf("http://localhost:4200"))
 @RestController
-
 class LibrosController(val serviceLibros: ServiceLibros) {
 
     //traer todos los libros

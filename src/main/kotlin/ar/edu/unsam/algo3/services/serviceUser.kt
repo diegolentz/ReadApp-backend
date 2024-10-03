@@ -12,7 +12,26 @@ object ServiceUser {
         USERS.forEach { user ->
             userRepository.create(user)
         }
-    }
+
+        var libros = ServiceLibros.get()
+
+        val usuarios =   this.getAll()
+
+        usuarios[0].agregarLibroALeer(libros[0])
+        usuarios[0].agregarLibroALeer(libros[1])
+        usuarios[0].agregarLibroALeer(libros[2])
+        usuarios[0].agregarLibroALeer(libros[3])
+        usuarios[0].agregarLibroALeer(libros[4])
+        usuarios[0].agregarLibroALeer(libros[5])
+
+
+        usuarios[0].leer(libros[6])
+        usuarios[0].leer(libros[7])
+        usuarios[0].leer(libros[8])
+        usuarios[0].leer(libros[9])
+//        usuarios[0].leer(libros[10])
+//        usuarios[0].leer(libros[11])
+  }
 
     fun getAll(): List<Usuario> = userRepository.getAll().toList()
 
