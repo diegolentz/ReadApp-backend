@@ -1,7 +1,9 @@
 package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.dominio.*
 import ar.edu.unsam.algo3.mock.USERS
+import excepciones.BusinessException
 import org.springframework.stereotype.Service
 
 
@@ -24,35 +26,49 @@ object ServiceUser {
         usuarios[0].agregarLibroALeer(libros[4])
         usuarios[0].agregarLibroALeer(libros[5])
 
-
         usuarios[0].leer(libros[6])
         usuarios[0].leer(libros[7])
         usuarios[0].leer(libros[8])
         usuarios[0].leer(libros[9])
-//        usuarios[0].leer(libros[10])
-//        usuarios[0].leer(libros[11])
+
   }
 
     fun getAll(): List<Usuario> = userRepository.getAll().toList()
 
-    fun getById(userID: Int): Usuario = userRepository.getByID(userID)
-//    fun createRecommendation(recommendation: Recomendacion): Recomendacion {
-//        recommendationRepository.create(recommendation)
-//        return this.getById(recommendation.id)
-//    }
-//
+    fun getByIdRaw(idTypeString: String): Usuario{
+        val usuario:Usuario?
+        try {
+            val idTypeNumber = Integer.valueOf(idTypeString)
+            usuario = userRepository.getByID(idTypeNumber)
+        }catch (err:NumberFormatException){
+            throw BusinessException("$idTypeString no es un entero")
+        }
+        return usuario
+    }
+    fun getByIdBasic(idTypeString: String): UserBasicDTO{
+        return this.getByIdRaw(idTypeString).toDTOBasic()
+    }
 
-//
-//    fun updateRecommendation(recommendation: Recomendacion): Recomendacion {
-//        recommendationRepository.update(recommendation)
-//        return getById(recommendation.id)
-//    }
-//
-//    fun deleteRecommendation(recommendationID: Int): Recomendacion {
-//        val recommendation = getById(recommendationID)
-//        recommendationRepository.delete(recommendation)
-//        return recommendation
-//    }
-
+    fun getByIdProfile(idTypeString: String):UserProfileDTO{
+        return this.getByIdRaw(idTypeString).toDTOProfile()
+    }
+    fun validateLogin(loginRequest: LoginRequest): LoginResponse{
+        val usuario = this.checkUsername(loginRequest.username)
+        this.checkPassword(loginRequest.password, usuario!!.password)
+        return LoginResponse(userID = usuario.id)
+    }
+    private fun checkUsername(username:String):Usuario?{
+        val usuario:Usuario? = this.userRepository.getAll().find {
+            it.username.equals(username)
+        }
+        if(usuario == null) throw BusinessException("USUARIO INCORRECTO")
+        return usuario
+    }
+    private fun checkPassword(inputPassword:String, userPassword:String){
+        if(inputPassword != userPassword){
+            throw BusinessException("LOGIN INVALIDO")
+        }
+    }
 }
+
 

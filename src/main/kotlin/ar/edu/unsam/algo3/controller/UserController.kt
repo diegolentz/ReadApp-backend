@@ -1,6 +1,6 @@
 package ar.edu.unsam.algo3.controller
-import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.dominio.*
 import ar.edu.unsam.algo3.services.ServiceUser
 
 import org.springframework.web.bind.annotation.*
@@ -11,14 +11,26 @@ import org.springframework.web.bind.annotation.*
 class UserController(val serviceUser: ServiceUser) {
 
     @GetMapping("/users")
-    fun getRecommendations(): List<Usuario> = serviceUser.getAll()
+    fun getAllUsersBasic(): List<UserBasicDTO>{
+        return serviceUser.getAll().map { it ->
+            it.toDTOBasic()
+        }
+    }
 
-    @GetMapping("/users/{id}")
-    fun getRecommendationById(@PathVariable id: Int) = serviceUser.getById(id)
-//
-//    @PostMapping("/recommendations/{id}")
-//    fun createRecommendation(@RequestBody recommendationDTO: RecommendationDTO): Recomendacion =
-//        serviceRecommendation.createRecommendation(recommendationDTO.convertir())
+    @GetMapping("/user/basic/{idUsuario}")
+    fun getUserBasicByID(@PathVariable idUsuario: String):UserBasicDTO{
+        return serviceUser.getByIdBasic(idUsuario)
+    }
+
+    @GetMapping("/user/profile/{idUsuario}")
+    fun getUserProfileByID(@PathVariable idUsuario: String):UserProfileDTO{
+        return serviceUser.getByIdProfile(idUsuario)
+    }
+
+    @PostMapping("/login")
+    fun login(@RequestBody loginRequestBody: LoginRequest):LoginResponse{
+        return serviceUser.validateLogin(loginRequestBody)
+    }
 //
 //    @PutMapping("/recommendations/{id}")
 //    fun updateRecommendation(@RequestBody newRecommendation: RecommendationDTO): Recomendacion =

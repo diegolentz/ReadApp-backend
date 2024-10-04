@@ -34,7 +34,7 @@ class Repositorio<T : AvaliableInstance> {
 
     private fun validarExistencia(id: Int) {
         if (!existeElemento(id)) {
-            throw NotFoundException("no se encuentra el objeto")
+            throw NotFoundException("No existe objeto con ID: $id")
         }
     }
 
