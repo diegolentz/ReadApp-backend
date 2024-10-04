@@ -238,37 +238,4 @@ class Usuario(
     fun agregarObserver(observer: AgregarLibroObserver) {
         this.listaObservers.add(observer)
     }
-
-    fun toDTOBasic(user:Usuario): UserBasicDTO{
-        return UserBasicDTO(
-            id = user.id,
-            fotoPath = user.fotoPath,
-            nombre = user.nombre,
-            apellido = user.apellido,
-            alias = user.alias,
-            lenguaje = user.lenguaje,
-            palabrasPorMinutos = user.palabrasPorMinutos
-        )
-    }
-
-    fun toDTOProfile(user:Usuario): UserProfileDTO{
-        return UserProfileDTO(
-            id = user.id,
-            fotoPath = user.fotoPath,
-            nombre = user.nombre,
-            apellido =  user.apellido,
-            alias = user.alias,
-            lenguaje = user.lenguaje,
-            palabrasPorMinutos = user.palabrasPorMinutos,
-            fechaNacimiento = user.fechaNacimiento ,
-            email = user.direccionMail,
-            perfil =  user.perfil,
-            tipoDeLector = user.tipoDeLector,
-            amigos = user.amigos,
-            librosLeidos = user.librosLeidos,
-            librosALeer = user.librosALeer,
-            recomendacionesAValorar = user.recomendacionesAValorar
-        )
-    }
-
 }

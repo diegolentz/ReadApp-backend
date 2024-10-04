@@ -3,7 +3,10 @@ import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.dominio.UserBasicDTO
 import ar.edu.unsam.algo3.dominio.UserProfileDTO
+import ar.edu.unsam.algo3.dominio.toDTOBasic
+import ar.edu.unsam.algo3.dominio.toDTOProfile
 import ar.edu.unsam.algo3.mock.USERS
+import excepciones.BusinessException
 import org.springframework.stereotype.Service
 
 
@@ -26,47 +29,32 @@ object ServiceUser {
         usuarios[0].agregarLibroALeer(libros[4])
         usuarios[0].agregarLibroALeer(libros[5])
 
-
         usuarios[0].leer(libros[6])
         usuarios[0].leer(libros[7])
         usuarios[0].leer(libros[8])
         usuarios[0].leer(libros[9])
-//        usuarios[0].leer(libros[10])
-//        usuarios[0].leer(libros[11])
+
   }
 
     fun getAll(): List<Usuario> = userRepository.getAll().toList()
 
-    fun getByIdRaw(userID: Int): Usuario = userRepository.getByID(userID)
-
-    fun getByIdBasic(userID: Int): UserBasicDTO{
-        val userNotDTO = userRepository.getByID(userID)
-        val userDTO = userNotDTO.toDTOBasic(userNotDTO)
-        return userDTO
+    fun getByIdRaw(idTypeString: String): Usuario{
+        val usuario:Usuario?
+        try {
+            val idTypeNumber = Integer.valueOf(idTypeString)
+            usuario = userRepository.getByID(idTypeNumber)
+        }catch (err:NumberFormatException){
+            throw BusinessException("$idTypeString no es un entero")
+        }
+        return usuario
+    }
+    fun getByIdBasic(idTypeString: String): UserBasicDTO{
+        return this.getByIdRaw(idTypeString).toDTOBasic()
     }
 
-    fun getByIdProfile(userID: Int): UserProfileDTO{
-        val userNotDTO = userRepository.getByID(userID)
-        val userDTO = userNotDTO.toDTOProfile(userNotDTO)
-        return userDTO
+    fun getByIdProfile(idTypeString: String):UserProfileDTO{
+        return this.getByIdRaw(idTypeString).toDTOProfile()
     }
-//    fun createRecommendation(recommendation: Recomendacion): Recomendacion {
-//        recommendationRepository.create(recommendation)
-//        return this.getById(recommendation.id)
-//    }
-//
-
-//
-//    fun updateRecommendation(recommendation: Recomendacion): Recomendacion {
-//        recommendationRepository.update(recommendation)
-//        return getById(recommendation.id)
-//    }
-//
-//    fun deleteRecommendation(recommendationID: Int): Recomendacion {
-//        val recommendation = getById(recommendationID)
-//        recommendationRepository.delete(recommendation)
-//        return recommendation
-//    }
 
 }
 

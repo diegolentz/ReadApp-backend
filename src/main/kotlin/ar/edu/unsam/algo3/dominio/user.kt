@@ -9,7 +9,7 @@ import ar.edu.unsam.algo2.readapp.usuario.*
 import java.time.LocalDate
 
 
-class UserBasicDTO(
+data class UserBasicDTO(
     val id:Int,
     var fotoPath:String,
     val nombre: String,
@@ -20,7 +20,17 @@ class UserBasicDTO(
     val palabrasPorMinutos: Int,
 )
 
-class UserProfileDTO(
+fun Usuario.toDTOBasic() = UserBasicDTO(
+    id = id,
+    fotoPath = fotoPath,
+    nombre = nombre,
+    apellido = apellido,
+    alias = alias,
+    lenguaje = lenguaje,
+    palabrasPorMinutos = palabrasPorMinutos
+)
+
+data class UserProfileDTO(
     var id: Int,
     var fotoPath:String,
     var nombre: String,
@@ -39,3 +49,20 @@ class UserProfileDTO(
     val recomendacionesAValorar: MutableList<Recomendacion>,
 )
 
+fun Usuario.toDTOProfile() = UserProfileDTO(
+    id = id,
+    fotoPath = fotoPath,
+    nombre = nombre,
+    apellido =  apellido,
+    alias = alias,
+    lenguaje = lenguaje,
+    palabrasPorMinutos = palabrasPorMinutos,
+    fechaNacimiento = fechaNacimiento ,
+    email = direccionMail,
+    perfil =  perfil,
+    tipoDeLector = tipoDeLector,
+    amigos = amigos,
+    librosLeidos = librosLeidos,
+    librosALeer = librosALeer,
+    recomendacionesAValorar = recomendacionesAValorar
+)

@@ -28,32 +28,32 @@ object ServiceLibros {
 
     fun agregarLeido(idLibro : Int,idUser : Int) : Libro {
         var libro = this.getById(idLibro)
-        var usuario = ServiceUser.getByIdRaw(idUser)
+        var usuario = ServiceUser.getByIdRaw(idUser.toString())
         usuario.leer(libro)
 
         return libro
     }
 
     fun obtenerLeido(idUser: Int) : List<Libro> {
-        var usuario = ServiceUser.getByIdRaw(idUser)
+        var usuario = ServiceUser.getByIdRaw(idUser.toString())
         return  usuario.librosLeidos
     }
 
 
     fun obtenerALeer(idUser: Int) : Set<Libro> {
-        var usuario = ServiceUser.getByIdRaw(idUser)
+        var usuario = ServiceUser.getByIdRaw(idUser.toString())
         return  usuario.librosALeer
     }
     fun agregarALeer(idLibro : Int,idUser : Int): Libro {
         var libro = this.getById(idLibro)
-        var usuario = ServiceUser.getByIdRaw(idUser)
+        var usuario = ServiceUser.getByIdRaw(idUser.toString())
         usuario.agregarLibroALeer(libro)
 
         return libro
     }
 
     fun paraLeer(idUser: Int): List<Libro> {
-        val usuario = ServiceUser.getById(idUser)
+        val usuario = ServiceUser.getByIdRaw(idUser.toString())
         val aLeer = usuario.librosALeer.toList()
         val leido = usuario.librosLeidos.toList()
         val libros = this.get()
@@ -70,7 +70,7 @@ object ServiceLibros {
 
     fun borrarLibroLeido(idLibro: Int, idUser: Int): Libro {
         val libro = this.getById(idLibro)
-        val usuario = ServiceUser.getByIdRaw(idUser)
+        val usuario = ServiceUser.getByIdRaw(idUser.toString())
         usuario.librosLeidos.remove(libro)
 
         return libro
@@ -78,7 +78,7 @@ object ServiceLibros {
 
     fun borrarLibroLeer(idLibro: Int, idUser: Int): Libro {
         val libro = this.getById(idLibro)
-        val usuario = ServiceUser.getByIdRaw(idUser)
+        val usuario = ServiceUser.getByIdRaw(idUser.toString())
         usuario.librosALeer.remove(libro)
 
         return libro
