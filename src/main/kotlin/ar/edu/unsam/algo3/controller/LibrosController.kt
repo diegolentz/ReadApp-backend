@@ -35,5 +35,8 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     @DeleteMapping("/libroALeer")
     fun borrarLibroALeer(@RequestParam idLibro: Int, @RequestParam idUser: Int) = serviceLibros.borrarLibroLeer(idLibro, idUser)
 
+    //libros para leer
+    @GetMapping("/add-Books")
+    fun agregarALeeer(@RequestParam idUser: Int) = serviceLibros.paraLeer(idUser)
 
 }

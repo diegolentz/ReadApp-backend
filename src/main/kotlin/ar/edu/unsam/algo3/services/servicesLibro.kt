@@ -51,6 +51,15 @@ object ServiceLibros {
 
         return libro
     }
+
+    fun paraLeer(idUser: Int): List<Libro> {
+        val usuario = ServiceUser.getById(idUser)
+        val aLeer = usuario.librosALeer.toList()
+        val leido = usuario.librosLeidos.toList()
+        val libros = this.get()
+
+        return libros.filter { it !in leido && it !in aLeer }
+    }
     fun getById(libroId: Int): Libro = repoLibro.getByID(libroId)
 
     fun actualizarLibro(libro: Libro): Libro {
