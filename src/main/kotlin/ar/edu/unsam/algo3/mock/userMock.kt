@@ -16,7 +16,10 @@ val USERS = listOf(
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
         lenguaje = Lenguaje.values().random()
-    ),
+    ).apply {
+        username = "admin"
+        password = "1234"
+    },
     Usuario(
         fotoPath = "dwightSchrute.jpeg",
         nombre = "Dwight Schrute",
