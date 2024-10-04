@@ -1,10 +1,7 @@
 package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
-import ar.edu.unsam.algo3.dominio.UserBasicDTO
-import ar.edu.unsam.algo3.dominio.UserProfileDTO
-import ar.edu.unsam.algo3.dominio.toDTOBasic
-import ar.edu.unsam.algo3.dominio.toDTOProfile
+import ar.edu.unsam.algo3.dominio.*
 import ar.edu.unsam.algo3.mock.USERS
 import excepciones.BusinessException
 import org.springframework.stereotype.Service
@@ -55,6 +52,23 @@ object ServiceUser {
     fun getByIdProfile(idTypeString: String):UserProfileDTO{
         return this.getByIdRaw(idTypeString).toDTOProfile()
     }
-
+    fun validateLogin(loginRequest: LoginRequest): LoginResponse{
+        val usuario = this.checkUsername(loginRequest.username)
+        this.checkPassword(loginRequest.password, usuario!!.password)
+        return LoginResponse(userID = usuario.id)
+    }
+    private fun checkUsername(username:String):Usuario?{
+        val usuario:Usuario? = this.userRepository.getAll().find {
+            it.username.equals(username)
+        }
+        if(usuario == null) throw BusinessException("USUARIO INCORRECTO")
+        return usuario
+    }
+    private fun checkPassword(inputPassword:String, userPassword:String){
+        if(inputPassword != userPassword){
+            throw BusinessException("LOGIN INVALIDO")
+        }
+    }
 }
+
 

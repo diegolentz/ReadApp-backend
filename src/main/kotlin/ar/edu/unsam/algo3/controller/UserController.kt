@@ -1,8 +1,6 @@
 package ar.edu.unsam.algo3.controller
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
-import ar.edu.unsam.algo3.dominio.UserBasicDTO
-import ar.edu.unsam.algo3.dominio.UserProfileDTO
-import ar.edu.unsam.algo3.dominio.toDTOBasic
+import ar.edu.unsam.algo3.dominio.*
 import ar.edu.unsam.algo3.services.ServiceUser
 
 import org.springframework.web.bind.annotation.*
@@ -28,10 +26,11 @@ class UserController(val serviceUser: ServiceUser) {
     fun getUserProfileByID(@PathVariable idUsuario: String):UserProfileDTO{
         return serviceUser.getByIdProfile(idUsuario)
     }
-//
-//    @PostMapping("/recommendations/{id}")
-//    fun createRecommendation(@RequestBody recommendationDTO: RecommendationDTO): Recomendacion =
-//        serviceRecommendation.createRecommendation(recommendationDTO.convertir())
+
+    @PostMapping("/login")
+    fun login(@RequestBody loginRequestBody: LoginRequest):LoginResponse{
+        return serviceUser.validateLogin(loginRequestBody)
+    }
 //
 //    @PutMapping("/recommendations/{id}")
 //    fun updateRecommendation(@RequestBody newRecommendation: RecommendationDTO): Recomendacion =

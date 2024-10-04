@@ -66,3 +66,12 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     librosALeer = librosALeer,
     recomendacionesAValorar = recomendacionesAValorar
 )
+
+class LoginRequest(
+    var username:String = "",
+    var password:String = ""
+)
+
+class LoginResponse(
+    var userID:Int = -1
+)

@@ -44,6 +44,8 @@ class Usuario(
     val recomendacionesAValorar: MutableList<Recomendacion> = mutableListOf()
     val recomendacionesValoradas: MutableMap<Recomendacion, Valoracion> = mutableMapOf()
 
+    var username:String = ""
+    var password:String = ""
 
     fun edad(): Int {
         return Period.between(this.fechaNacimiento, LocalDate.now()).years
