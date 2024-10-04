@@ -23,9 +23,12 @@ object ServiceRecommendation {
 
     fun getById(recommendationID: Int): Recomendacion = recommendationRepository.getByID(recommendationID)
 
-    fun updateRecommendation(recommendation: Recomendacion): Recomendacion {
-        recommendationRepository.update(recommendation)
-        return getById(recommendation.id)
+    fun updateRecommendation(recomendacionActualizada: Recomendacion,id:Int): Recomendacion {
+
+        var recomendacion = getById(id)
+        recomendacion.actualizar(recomendacionActualizada)
+        recommendationRepository.update(recomendacion)
+        return recomendacion
     }
 
     fun deleteRecommendation(recommendationID: Int): Recomendacion {

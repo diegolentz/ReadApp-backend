@@ -21,10 +21,10 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
 //    fun createRecommendation(@RequestBody recommendationDTO: RecommendationDTO): Recomendacion =
 //        serviceRecommendation.createRecommendation(recommendationDTO.convertir())
 //
-//    @PutMapping("/recommendations/{id}")
-//    fun updateRecommendation(@RequestBody newRecommendation: RecommendationDTO): Recomendacion =
-//        serviceRecommendation.updateRecommendation(newRecommendation.convertir())
-//
+    @PutMapping("/recommendations/{id}")
+    fun updateRecommendation(@RequestBody newRecommendation: Recomendacion,@PathVariable id: Int): Recomendacion =
+        serviceRecommendation.updateRecommendation(newRecommendation,id)
+
 //    @DeleteMapping("/recommendations{id}")
 //    fun deleteRecommendation(@PathVariable id: Int) = serviceRecommendation.deleteRecommendation(id)
 
