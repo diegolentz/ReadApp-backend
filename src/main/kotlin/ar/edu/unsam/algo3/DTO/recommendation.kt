@@ -1,13 +1,12 @@
-package ar.edu.unsam.algo3.dominio
-import ar.edu.unsam.algo2.readapp.features.Recomendacion
+package ar.edu.unsam.algo3.DTO
+import LibroDTO
 import ar.edu.unsam.algo2.readapp.features.Valoracion
 import ar.edu.unsam.algo2.readapp.libro.Libro
-import ar.edu.unsam.algo2.readapp.usuario.Usuario
 
 
 class RecomendacionDTO(
     val creador: String,
-    val librosRecomendados: MutableSet<Libro>,
+    val librosRecomendados: MutableSet<LibroDTO>,
     val titulo: String,
     val contenido: String,
     var publica: Boolean,

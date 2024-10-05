@@ -1,4 +1,4 @@
-package ar.edu.unsam.algo3.dominio
+package ar.edu.unsam.algo3.DTO
 
 import java.util.*
 

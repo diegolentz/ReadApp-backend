@@ -1,6 +1,5 @@
 package ar.edu.unsam.algo3.controller
-import ar.edu.unsam.algo2.readapp.usuario.Usuario
-import ar.edu.unsam.algo3.dominio.*
+import ar.edu.unsam.algo3.DTO.*
 import ar.edu.unsam.algo3.services.ServiceUser
 
 import org.springframework.web.bind.annotation.*

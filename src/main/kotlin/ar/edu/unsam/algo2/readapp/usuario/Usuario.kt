@@ -9,8 +9,6 @@ import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.observers.AgregarLibroObserver
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
-import ar.edu.unsam.algo3.dominio.UserBasicDTO
-import ar.edu.unsam.algo3.dominio.UserProfileDTO
 import excepciones.BusinessException
 import excepciones.RecomendacionException
 import java.time.LocalDate

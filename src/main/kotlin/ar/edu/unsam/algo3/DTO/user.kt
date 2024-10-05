@@ -1,10 +1,7 @@
-package ar.edu.unsam.algo3.dominio
+package ar.edu.unsam.algo3.DTO
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
-import ar.edu.unsam.algo2.readapp.features.Valoracion
-import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
-import ar.edu.unsam.algo2.readapp.observers.AgregarLibroObserver
 import ar.edu.unsam.algo2.readapp.usuario.*
 import java.time.LocalDate
 

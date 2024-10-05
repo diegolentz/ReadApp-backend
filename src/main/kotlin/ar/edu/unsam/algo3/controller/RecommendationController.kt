@@ -1,7 +1,6 @@
 
 package ar.edu.unsam.algo3.controller
-import ar.edu.unsam.algo2.readapp.features.Recomendacion
-import ar.edu.unsam.algo3.dominio.RecomendacionDTO
+import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 
 import ar.edu.unsam.algo3.services.ServiceRecommendation
 

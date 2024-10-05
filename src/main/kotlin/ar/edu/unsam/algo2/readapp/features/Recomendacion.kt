@@ -1,9 +1,10 @@
 package ar.edu.unsam.algo2.readapp.features
 
+import LibroDTO
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
-import ar.edu.unsam.algo3.dominio.RecomendacionDTO
+import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 
 
 class Recomendacion(
@@ -95,13 +96,13 @@ class Recomendacion(
 
     fun toDTO(): RecomendacionDTO = RecomendacionDTO(
         creador = nombreApellido(this.creador),
-        librosRecomendados = librosRecomendados,
+        librosRecomendados = parseLibro(librosRecomendados),
         titulo = titulo,
         contenido = contenido,
         publica = publica,
         valoraciones = valoraciones
     )
     fun nombreApellido(creador: Usuario): String = "${creador.nombre} ${creador.apellido}"
-
+    fun parseLibro(libros: MutableSet<Libro>): MutableSet<LibroDTO> = libros.map { it.toDTO() }.toMutableSet()
 }
 

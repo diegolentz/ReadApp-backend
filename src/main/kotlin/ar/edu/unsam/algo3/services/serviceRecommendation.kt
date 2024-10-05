@@ -1,7 +1,7 @@
 package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
-import ar.edu.unsam.algo3.dominio.RecomendacionDTO
+import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 
 import ar.edu.unsam.algo3.mock.RECOMMENDATIONS
 import org.springframework.stereotype.Service
