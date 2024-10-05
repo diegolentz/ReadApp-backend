@@ -5,7 +5,7 @@ import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 
 
-class RecommendationDTO(
+class RecomendacionDTO(
     val creador: String,
     val librosRecomendados: MutableSet<Libro>,
     val titulo: String,

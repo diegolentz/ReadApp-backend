@@ -7,26 +7,23 @@ import ar.edu.unsam.algo2.readapp.features.Valoracion
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.services.ServiceAutor
 import ar.edu.unsam.algo3.services.ServiceLibros
+import ar.edu.unsam.algo3.services.ServiceUser
 import java.time.LocalDate
 import java.util.*
 
-val users = listOf(
-    Usuario("Inosuke"),
-    Usuario("Tanjiro"),
-    Usuario("Momonosuke"),
-    Usuario("Saitama"),
-    Usuario("Ronoroa"),
-    Usuario("Kinemon")
-)
+
+
+private val books = ServiceLibros.get()
+
+val authors = ServiceAutor.get()
+var users = ServiceUser.getAll()
+
+
 private val valorations = mutableSetOf(
     Valoracion(5,"Muy buena recomendacion para aquellos que buscan enntretenerse un rato", users[0] ),
     Valoracion(1,"Una perdida de tiempo no la recomiendo, no derrochen papel asi", users[3]),
     Valoracion(3,"Mas o menos safa",users[5] ),
 )
-private val books = ServiceLibros.get()
-
-private val authors = ServiceAutor.get()
-
 val RECOMMENDATIONS = listOf(
     Recomendacion(
         creador = users[0],

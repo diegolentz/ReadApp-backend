@@ -1,7 +1,8 @@
 
 package ar.edu.unsam.algo3.controller
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
-import ar.edu.unsam.algo3.dominio.RecommendationDTO
+import ar.edu.unsam.algo3.dominio.RecomendacionDTO
+
 import ar.edu.unsam.algo3.services.ServiceRecommendation
 
 import org.springframework.web.bind.annotation.*
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 class RecommendationController(val serviceRecommendation: ServiceRecommendation) {
 
     @GetMapping("/recommendations")
-    fun getRecommendations(): List<Recomendacion> = serviceRecommendation.getAll()
+    fun getRecommendations(): List<RecomendacionDTO> = serviceRecommendation.getAll()
 
    @GetMapping("/recommendations/{id}")
    fun getRecommendationById(@PathVariable id: Int) = serviceRecommendation.getById(id)

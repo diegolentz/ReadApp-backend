@@ -1,6 +1,8 @@
 package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
+import ar.edu.unsam.algo3.dominio.RecomendacionDTO
+
 import ar.edu.unsam.algo3.mock.RECOMMENDATIONS
 import org.springframework.stereotype.Service
 
@@ -8,13 +10,17 @@ import org.springframework.stereotype.Service
 @Service
 object ServiceRecommendation {
     private val recommendationRepository: Repositorio<Recomendacion> = Repositorio()
+    var recomendaciones : MutableList<Recomendacion> = mutableListOf()
     init {
         RECOMMENDATIONS.forEach { recommendation ->
             recommendationRepository.create(recommendation)
         }
     }
 
-    fun getAll(): List<Recomendacion> = recommendationRepository.getAll().toList()
+    fun getAll(): List<RecomendacionDTO> {
+        recomendaciones = recommendationRepository.getAll().toMutableList()
+        return recomendaciones.map { it : Recomendacion -> it.toDTO() }
+    }
 
     fun createRecommendation(recommendation: Recomendacion): Recomendacion {
         recommendationRepository.create(recommendation)

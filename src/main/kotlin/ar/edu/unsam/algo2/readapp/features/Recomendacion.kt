@@ -3,6 +3,7 @@ package ar.edu.unsam.algo2.readapp.features
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.dominio.RecomendacionDTO
 
 
 class Recomendacion(
@@ -91,5 +92,16 @@ class Recomendacion(
     override fun cumpleCriterioBusqueda(texto: String) =  creador.apellido === texto ||
             librosRecomendados.any { libro -> libro.titulo.contains(texto) ||
                     valoraciones.any { valoracion -> valoracion.comentario.contains(texto)}}
+
+    fun toDTO(): RecomendacionDTO = RecomendacionDTO(
+        creador = nombreApellido(this.creador),
+        librosRecomendados = librosRecomendados,
+        titulo = titulo,
+        contenido = contenido,
+        publica = publica,
+        valoraciones = valoraciones
+    )
+    fun nombreApellido(creador: Usuario): String = "${creador.nombre} ${creador.apellido}"
+
 }
 
