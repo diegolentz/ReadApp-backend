@@ -14,11 +14,12 @@ val USERS = listOf(
         apellido = "Hashibira",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.entries.random(),
 
-
-
-    ),
+        lenguaje = Lenguaje.entries.random()
+    ).apply {
+        username = "admin"
+        password = "1234"
+    },
     Usuario(
         fotoPath = "dwightSchrute.jpeg",
         nombre = "Dwight Schrute",
