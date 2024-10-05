@@ -1,8 +1,12 @@
-package ar.edu.unsam.algo3.dominio
+package ar.edu.unsam.algo3.DTO
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
+<<<<<<< HEAD:src/main/kotlin/ar/edu/unsam/algo3/DTO/user.kt
+import ar.edu.unsam.algo2.readapp.usuario.*
+=======
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+>>>>>>> development:src/main/kotlin/ar/edu/unsam/algo3/dominio/user.kt
 import java.time.LocalDate
 
 

@@ -1,9 +1,14 @@
 package ar.edu.unsam.algo2.readapp.features
 
+import LibroDTO
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
-import ar.edu.unsam.algo3.dominio.RecommendationDTO
+
+import ar.edu.unsam.algo3.DTO.RecomendacionDTO
+import ar.edu.unsam.algo3.DTO.ValoracionDTO
+
+//import ar.edu.unsam.algo3.dominio.RecommendationDTO
 
 
 class Recomendacion(
@@ -69,12 +74,6 @@ class Recomendacion(
     ///////////////////////////////////////////////////////////////////
     fun editar(libroParaAgregar: Libro) { librosRecomendados.add(libroParaAgregar) }
 
-    fun actualizar(recomendacionActualizada: RecommendationDTO){
-        titulo = recomendacionActualizada.titulo
-        librosRecomendados = recomendacionActualizada.librosRecomendados
-        contenido = recomendacionActualizada.contenido
-        publica = recomendacionActualizada.publica
-    }
 
     //////////////////////////////////////////////////////////////////
     //////////            CALCULO
@@ -99,5 +98,17 @@ class Recomendacion(
     override fun cumpleCriterioBusqueda(texto: String) =  creador.apellido === texto ||
             librosRecomendados.any { libro -> libro.titulo.contains(texto) ||
                     valoraciones.any { valoracion -> valoracion.comentario.contains(texto)}}
+
+    fun toDTO(): RecomendacionDTO = RecomendacionDTO(
+        creador = this.creador.nombreApellido(creador),
+        librosRecomendados = parseLibro(librosRecomendados),
+        titulo = titulo,
+        contenido = contenido,
+        publica = publica,
+        valoraciones = parseValoraciones(valoraciones),
+        id = this.id
+    )
+    fun parseLibro(libros: MutableSet<Libro>): MutableSet<LibroDTO> = libros.map { it.toDTO() }.toMutableSet()
+    fun parseValoraciones(valoraciones: MutableSet<Valoracion>): MutableSet<ValoracionDTO> = valoraciones.map { it.toDTO() }.toMutableSet()
 }
 

@@ -3,7 +3,7 @@ import ar.edu.unsam.algo2.readapp.builders.UsuarioBuilder
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
-import ar.edu.unsam.algo3.dominio.*
+import ar.edu.unsam.algo3.DTO.*
 import ar.edu.unsam.algo3.mock.USERS
 import excepciones.BusinessException
 import org.springframework.stereotype.Service

@@ -1,8 +1,7 @@
 package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
-import ar.edu.unsam.algo3.dominio.RecommendationDTO
-import ar.edu.unsam.algo3.dominio.toDTO
+import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 import ar.edu.unsam.algo3.mock.RECOMMENDATIONS
 import org.springframework.stereotype.Service
 
@@ -10,14 +9,17 @@ import org.springframework.stereotype.Service
 @Service
 object ServiceRecommendation {
     private val recommendationRepository: Repositorio<Recomendacion> = Repositorio()
+    var recomendaciones : MutableList<Recomendacion> = mutableListOf()
     init {
         RECOMMENDATIONS.forEach { recommendation ->
             recommendationRepository.create(recommendation)
         }
     }
 
-    fun getAll(): List<RecommendationDTO> {
-        return recommendationRepository.getAll().map { it.toDTO() }
+
+    fun getAll(): List<RecomendacionDTO> {
+        recomendaciones = recommendationRepository.getAll().toMutableList()
+        return recomendaciones.map { it: Recomendacion -> it.toDTO() }
     }
 
     fun createRecommendation(recommendation: Recomendacion): Recomendacion {
@@ -25,14 +27,16 @@ object ServiceRecommendation {
         return this.getById(recommendation.id)
     }
 
-    fun getById(recommendationID: Int): Recomendacion = recommendationRepository.getByID(recommendationID)
+    fun getByIdDTO (recommendationID: Int): RecomendacionDTO {
+        return recommendationRepository.getByID(recommendationID).toDTO()
+    }
 
-    fun updateRecommendation(recomendacionActualizada: RecommendationDTO): RecommendationDTO {
+    fun getById (recommendationID: Int): Recomendacion =
+        recommendationRepository.getByID(recommendationID)
 
-        var recomendacion = getById(recomendacionActualizada.id)
-        recomendacion.actualizar(recomendacionActualizada)
-        recommendationRepository.update(recomendacion)
-        return recomendacion.toDTO()
+
+    fun updateRecommendation(recomendacionActualizada: RecomendacionDTO): RecomendacionDTO {
+       TODO()
     }
 
     fun deleteRecommendation(recommendationID: Int): Recomendacion {
