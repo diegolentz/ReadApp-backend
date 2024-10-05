@@ -1,10 +1,13 @@
 package ar.edu.unsam.algo3.services
+import ar.edu.unsam.algo2.readapp.builders.UsuarioBuilder
+import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.dominio.*
 import ar.edu.unsam.algo3.mock.USERS
 import excepciones.BusinessException
 import org.springframework.stereotype.Service
+import kotlin.random.Random
 
 
 @Service
@@ -58,16 +61,43 @@ object ServiceUser {
         return LoginResponse(userID = usuario.id)
     }
     private fun checkUsername(username:String):Usuario?{
-        val usuario:Usuario? = this.userRepository.getAll().find {
-            it.username.equals(username)
-        }
-        if(usuario == null) throw BusinessException("USUARIO INCORRECTO")
+        val usuario: Usuario = this.findUsername(username) ?: throw BusinessException("USUARIO INCORRECTO")
         return usuario
     }
     private fun checkPassword(inputPassword:String, userPassword:String){
         if(inputPassword != userPassword){
-            throw BusinessException("LOGIN INVALIDO")
+            throw BusinessException("PASSWORD INCORRECTA")
         }
+    }
+
+    fun createAccount(newAccountRequest: CreateAccountRequest): CreateAccountResponse{
+        this.checkAvaliableUsername(newAccountRequest.username)
+        val newUser = this.newDefaultUser(newAccountRequest)
+        userRepository.create(newUser)
+        return CreateAccountResponse(userID = newUser.id)
+    }
+
+    private fun checkAvaliableUsername(username: String){
+        val usuario:Usuario? = this.findUsername(username)
+        //Si es Not Null, existe un Usuario con ese Username
+        if(usuario != null) throw BusinessException("Nombre de usuario NO DISPONIBLE")
+    }
+    private fun findUsername(username:String):Usuario?{
+        val usuario:Usuario? = this.userRepository.getAll().find {
+            it.username == username
+        }
+        return usuario
+    }
+
+    private fun newDefaultUser(newAccountRequest: CreateAccountRequest):Usuario{
+        return UsuarioBuilder()
+            .username(newAccountRequest.username)
+            .password(newAccountRequest.password)
+            .nombre(newAccountRequest.name)
+            .email(newAccountRequest.email)
+            .alias(newAccountRequest.name)
+            .lenguaje(Lenguaje.ESPANIOL)
+            .build()
     }
 }
 

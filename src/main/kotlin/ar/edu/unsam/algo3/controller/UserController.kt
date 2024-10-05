@@ -1,5 +1,4 @@
 package ar.edu.unsam.algo3.controller
-import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.dominio.*
 import ar.edu.unsam.algo3.services.ServiceUser
 
@@ -31,13 +30,10 @@ class UserController(val serviceUser: ServiceUser) {
     fun login(@RequestBody loginRequestBody: LoginRequest):LoginResponse{
         return serviceUser.validateLogin(loginRequestBody)
     }
-//
-//    @PutMapping("/recommendations/{id}")
-//    fun updateRecommendation(@RequestBody newRecommendation: RecommendationDTO): Recomendacion =
-//        serviceRecommendation.updateRecommendation(newRecommendation.convertir())
-//
-//    @DeleteMapping("/recommendations{id}")
-//    fun deleteRecommendation(@PathVariable id: Int) = serviceRecommendation.deleteRecommendation(id)
 
+    @PostMapping("/createAccount")
+    fun createAccount(@RequestBody loginRequestBody: CreateAccountRequest):CreateAccountResponse{
+        return serviceUser.createAccount(loginRequestBody)
+    }
 
 }

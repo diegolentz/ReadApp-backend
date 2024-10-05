@@ -34,5 +34,11 @@ class UsuarioBuilder(val nuevoUsuario: Usuario = Usuario()) {
         nuevoUsuario.lenguaje = lenguaje
     }
 
+    fun username(username: String): UsuarioBuilder = apply {
+        nuevoUsuario.username = username
+    }
+    fun password(password: String): UsuarioBuilder = apply {
+        nuevoUsuario.password = password
+    }
     fun build(): Usuario = nuevoUsuario
 }
