@@ -101,7 +101,8 @@ class Recomendacion(
         titulo = titulo,
         contenido = contenido,
         publica = publica,
-        valoraciones = parseValoraciones(valoraciones)
+        valoraciones = parseValoraciones(valoraciones),
+        id = this.id
     )
     fun parseLibro(libros: MutableSet<Libro>): MutableSet<LibroDTO> = libros.map { it.toDTO() }.toMutableSet()
     fun parseValoraciones(valoraciones: MutableSet<Valoracion>): MutableSet<ValoracionDTO> = valoraciones.map { it.toDTO() }.toMutableSet()

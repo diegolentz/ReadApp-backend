@@ -27,7 +27,13 @@ object ServiceRecommendation {
         return this.getById(recommendation.id)
     }
 
-    fun getById(recommendationID: Int): Recomendacion = recommendationRepository.getByID(recommendationID)
+    fun getByIdDTO (recommendationID: Int): RecomendacionDTO {
+        return recommendationRepository.getByID(recommendationID).toDTO()
+    }
+
+    fun getById (recommendationID: Int): Recomendacion =
+        recommendationRepository.getByID(recommendationID)
+
 
     fun updateRecommendation(recommendation: Recomendacion): Recomendacion {
         recommendationRepository.update(recommendation)

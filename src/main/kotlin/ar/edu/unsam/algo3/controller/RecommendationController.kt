@@ -15,7 +15,7 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
     fun getRecommendations(): List<RecomendacionDTO> = serviceRecommendation.getAll()
 
    @GetMapping("/recommendations/{id}")
-   fun getRecommendationById(@PathVariable id: Int) = serviceRecommendation.getById(id)
+   fun getRecommendationById(@PathVariable id: Int) : RecomendacionDTO = serviceRecommendation.getByIdDTO(id)
 
 //    @PostMapping("/recommendations/{id}")
 //    fun createRecommendation(@RequestBody recommendationDTO: RecommendationDTO): Recomendacion =
