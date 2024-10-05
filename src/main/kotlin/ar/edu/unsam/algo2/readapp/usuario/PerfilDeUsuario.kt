@@ -32,6 +32,8 @@ import ar.edu.unsam.algo2.readapp.libro.Libro
 interface PerfilDeUsuario {
     abstract fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean
     fun recomendacionEsInteresante(recomendacion: Recomendacion, usuario: Usuario) = condicion(recomendacion, usuario)
+
+    fun toList(): List<String>
 }
 
 object Precavido : PerfilDeUsuario {
@@ -41,23 +43,33 @@ object Precavido : PerfilDeUsuario {
             usuario
         )
 
+    override fun toList(): List<String> = listOf("Precavido")
+
+
     private fun tieneLibrosLeidosPorAmigo(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         usuario.librosLeidosAmigos().intersect(recomendacion.librosRecomendados).isNotEmpty()
+
+
 }
 
 object Leedor : PerfilDeUsuario {
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean = true
+
+    override fun toList(): List<String> = listOf("Leedor")
 }
 
 object Poliglota : PerfilDeUsuario {
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         recomendacion.cantidadDeLenguajes() >= 5
 
+    override fun toList(): List<String> = listOf("Poliglota")
 }
 
 object Nativista : PerfilDeUsuario {
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         recomendacion.librosRecomendados.any { it.lenguajeAutor() == (usuario.lenguaje) }
+
+    override fun toList(): List<String> = listOf("Nativista")
 }
 
 class Calculador(var rangoMin: Double, var rangoMax: Double) : PerfilDeUsuario {
@@ -74,11 +86,15 @@ class Calculador(var rangoMin: Double, var rangoMax: Double) : PerfilDeUsuario {
         this.rangoMin = rangoMin
         this.rangoMax = rangoMax
     }
+
+    override fun toList(): List<String> = listOf("Calculador")
 }
 
 object Demandante : PerfilDeUsuario {
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         recomendacion.valoraciones.any { it.valor in 4..5 }
+
+    override fun toList(): List<String> = listOf("Demandante")
 }
 
 object Experimentado : PerfilDeUsuario {
@@ -94,6 +110,8 @@ object Experimentado : PerfilDeUsuario {
 
     //Funcion que me devuelve una lista con los autores consagrados del libro
     private fun autoresConsagrados(libro: Libro) = libro.autor.esConsagrado()
+
+    override fun toList(): List<String> = listOf("Experimentado")
 }
 
 object Cambiante : PerfilDeUsuario {
@@ -113,16 +131,20 @@ object Cambiante : PerfilDeUsuario {
 
     private fun esLeedor(usuario: Usuario): Boolean = usuario.edad() < EDAD_MAX_LEEDOR
 
+    override fun toList(): List<String> = listOf("Cambiante")
 }
 
-class Combinador(val perfiles : MutableSet<PerfilDeUsuario> ) : PerfilDeUsuario {
+class Combinador(val perfiles: MutableSet<PerfilDeUsuario>) : PerfilDeUsuario {
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean =
-        perfiles.all { it.condicion(recomendacion,usuario) }
+        perfiles.all { it.condicion(recomendacion, usuario) }
 
-    fun agregarPerfil(perfil : PerfilDeUsuario){
+    fun agregarPerfil(perfil: PerfilDeUsuario) {
         perfiles.add(perfil)
     }
-    fun eliminarPerfil(perfil : PerfilDeUsuario){
+
+    fun eliminarPerfil(perfil: PerfilDeUsuario) {
         perfiles.remove(perfil)
     }
+
+    override fun toList(): List<String> = perfiles.flatMap { it.toList() }
 }

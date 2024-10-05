@@ -1,6 +1,5 @@
 package ar.edu.unsam.algo3.mock
 
-import ar.edu.unsam.algo2.readapp.builders.UsuarioBuilder
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import java.time.LocalDate
@@ -15,7 +14,10 @@ val USERS = listOf(
         apellido = "Hashibira",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.values().random()
+        lenguaje = Lenguaje.values().random(),
+
+
+
     ),
     Usuario(
         fotoPath = "dwightSchrute.jpeg",
