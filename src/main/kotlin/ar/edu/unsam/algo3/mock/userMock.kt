@@ -10,15 +10,14 @@ val USERS = listOf(
         fotoPath = "inosuke.jpeg",
         nombre = "Inosuke",
         alias = "elInosuke",
-        fechaNacimiento = LocalDate.now(),
         apellido = "Hashibira",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
 
         lenguaje = Lenguaje.entries.random()
     ).apply {
-        username = "admin"
-        password = "1234"
+        username = "diego"
+        password = "diego"
     },
     Usuario(
         fotoPath = "dwightSchrute.jpeg",
@@ -28,8 +27,12 @@ val USERS = listOf(
         apellido = "",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.entries.random()
-    ),
+        lenguaje = Lenguaje.values().random()
+    ).apply {
+        username = "valen"
+        password = "valen"
+    },
+
     Usuario(
         fotoPath = "ippo.jpeg",
         nombre = "Mamoru Takamura",
@@ -38,8 +41,12 @@ val USERS = listOf(
         apellido = "",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.entries.random()
-    ),
+        lenguaje = Lenguaje.values().random()
+    ).apply {
+        username = "delfi"
+        password = "delfi"
+    },
+
     Usuario(
         fotoPath = "kellyKapoor.jpeg",
         nombre = "Kelly Kapoor",
@@ -48,8 +55,12 @@ val USERS = listOf(
         apellido = "",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.entries.random()
-    ),
+        lenguaje = Lenguaje.values().random()
+    ).apply {
+        username = "pica"
+        password = "pica"
+    },
+
     Usuario(
         fotoPath = "kevinMalone.jpeg",
         nombre = "Kevin Malone",
@@ -60,8 +71,8 @@ val USERS = listOf(
         direccionMail = "",
         lenguaje = Lenguaje.entries.random()
     ).apply {
-        username = "admin"
-        password = "admin"
+        username = "adrian"
+        password = "adrian"
     },
     Usuario(
         fotoPath = "",
@@ -71,8 +82,12 @@ val USERS = listOf(
         apellido = "",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.entries.random()
-    )
+        lenguaje = Lenguaje.values().random()
+    ).apply {
+        username = "admin"
+        password = "admin"
+    }
+
 )
 
 

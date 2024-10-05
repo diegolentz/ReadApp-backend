@@ -72,3 +72,14 @@ class LoginRequest(
 class LoginResponse(
     var userID:Int = -1
 )
+
+class CreateAccountRequest(
+    var username:String = "",
+    var password:String = "",
+    var name:String = "",
+    var email:String = ""
+)
+
+class CreateAccountResponse(
+    var userID:Int = -1
+)
