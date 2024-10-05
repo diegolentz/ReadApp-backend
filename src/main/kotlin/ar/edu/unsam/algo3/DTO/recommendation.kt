@@ -10,7 +10,7 @@ class RecomendacionDTO(
     val titulo: String,
     val contenido: String,
     var publica: Boolean,
-    val valoraciones: MutableSet<Valoracion>
+    val valoraciones: MutableSet<ValoracionDTO>
 ) {
 //    fun convertir(): Recomendacion =
 //        Recomendacion(

@@ -5,6 +5,7 @@ import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.DTO.RecomendacionDTO
+import ar.edu.unsam.algo3.DTO.ValoracionDTO
 
 
 class Recomendacion(
@@ -95,14 +96,15 @@ class Recomendacion(
                     valoraciones.any { valoracion -> valoracion.comentario.contains(texto)}}
 
     fun toDTO(): RecomendacionDTO = RecomendacionDTO(
-        creador = nombreApellido(this.creador),
+        creador = this.creador.nombreApellido(creador),
         librosRecomendados = parseLibro(librosRecomendados),
         titulo = titulo,
         contenido = contenido,
         publica = publica,
-        valoraciones = valoraciones
+        valoraciones = parseValoraciones(valoraciones)
     )
     fun nombreApellido(creador: Usuario): String = "${creador.nombre} ${creador.apellido}"
     fun parseLibro(libros: MutableSet<Libro>): MutableSet<LibroDTO> = libros.map { it.toDTO() }.toMutableSet()
+    fun parseValoraciones(valoraciones: MutableSet<Valoracion>): MutableSet<ValoracionDTO> = valoraciones.map { it.toDTO() }.toMutableSet()
 }
 

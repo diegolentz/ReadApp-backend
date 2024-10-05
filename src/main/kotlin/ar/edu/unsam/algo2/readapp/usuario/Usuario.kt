@@ -238,4 +238,6 @@ class Usuario(
     fun agregarObserver(observer: AgregarLibroObserver) {
         this.listaObservers.add(observer)
     }
+
+    fun nombreApellido(usuario: Usuario): String = "${usuario.nombre} ${usuario.apellido}"
 }
