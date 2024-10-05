@@ -68,22 +68,22 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     recomendacionesAValorar = recomendacionesAValorar
 )
 
-class LoginRequest(
+data class LoginRequest(
     var username:String = "",
     var password:String = ""
 )
 
-class LoginResponse(
+data class LoginResponse(
     var userID:Int = -1
 )
 
-class CreateAccountRequest(
+data class CreateAccountRequest(
     var username:String = "",
     var password:String = "",
     var name:String = "",
     var email:String = ""
 )
 
-class CreateAccountResponse(
+data class CreateAccountResponse(
     var userID:Int = -1
 )
