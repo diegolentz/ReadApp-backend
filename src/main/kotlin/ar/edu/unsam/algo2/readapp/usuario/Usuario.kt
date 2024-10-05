@@ -22,12 +22,12 @@ class Usuario(
     var fechaNacimiento: LocalDate = LocalDate.now(),
     var palabrasPorMinutos: Int = (5..250).random(),
     var direccionMail: String = "",
-    var lenguaje: Lenguaje = Lenguaje.values().random()
+    var lenguaje: Lenguaje = Lenguaje.entries.random()
 ) : AvaliableInstance {
 
     //Interfaces
-    var tipoDeLector: TipoDeLector = Promedio
-    var perfil: PerfilDeUsuario = Leedor
+    var tipoDeLector: TipoDeLector = Recurrente
+    var perfil: PerfilDeUsuario = Combinador(mutableSetOf(Leedor,Precavido, Nativista, Demandante, Cambiante, Poliglota, Experimentado, Calculador(20.04,21.04)))
 
     val listaObservers: MutableList<AgregarLibroObserver> = mutableListOf()
     override var id: Int = -1//POR DEFAULT AL FINAL

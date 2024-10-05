@@ -4,15 +4,18 @@ import LibroDTO
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+
 import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 import ar.edu.unsam.algo3.DTO.ValoracionDTO
 
+//import ar.edu.unsam.algo3.dominio.RecommendationDTO
+
 
 class Recomendacion(
-    val creador: Usuario,
-    val librosRecomendados: MutableSet<Libro> = mutableSetOf(),
-    val titulo: String = "",
-    val contenido: String = "",
+    var creador: Usuario,
+    var librosRecomendados: MutableSet<Libro> = mutableSetOf(),
+    var titulo: String = "",
+    var contenido: String = "",
     var publica: Boolean = true,
     val valoraciones: MutableSet<Valoracion> = mutableSetOf()
 ): AvaliableInstance {
@@ -70,6 +73,7 @@ class Recomendacion(
     //////////            ACCIONES
     ///////////////////////////////////////////////////////////////////
     fun editar(libroParaAgregar: Libro) { librosRecomendados.add(libroParaAgregar) }
+
 
     //////////////////////////////////////////////////////////////////
     //////////            CALCULO

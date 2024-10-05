@@ -12,5 +12,5 @@ class RecomendacionDTO(
     var publica: Boolean,
     val valoraciones: MutableSet<ValoracionDTO>,
     var id : Int
-) 
+)
 

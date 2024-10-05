@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*
 class RecommendationController(val serviceRecommendation: ServiceRecommendation) {
 
     @GetMapping("/recommendations")
+
     fun getRecommendations(): List<RecomendacionDTO> = serviceRecommendation.getAll()
 
    @GetMapping("/recommendations/{id}")
@@ -21,10 +22,10 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
 //    fun createRecommendation(@RequestBody recommendationDTO: RecommendationDTO): Recomendacion =
 //        serviceRecommendation.createRecommendation(recommendationDTO.convertir())
 //
-//    @PutMapping("/recommendations/{id}")
-//    fun updateRecommendation(@RequestBody newRecommendation: RecommendationDTO): Recomendacion =
-//        serviceRecommendation.updateRecommendation(newRecommendation.convertir())
-//
+//    @PutMapping("/recommendations")
+//    fun updateRecommendation(@RequestBody newRecommendation: RecommendationDTO): RecommendationDTO =
+//        serviceRecommendation.updateRecommendation(newRecommendation)
+
 //    @DeleteMapping("/recommendations{id}")
 //    fun deleteRecommendation(@PathVariable id: Int) = serviceRecommendation.deleteRecommendation(id)
 

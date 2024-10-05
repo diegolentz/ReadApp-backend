@@ -11,11 +11,15 @@ import ar.edu.unsam.algo3.services.ServiceUser
 import java.time.LocalDate
 import java.util.*
 
+<<<<<<< HEAD
 
 
 val books = ServiceLibros.get()
 val authors = ServiceAutor.get()
 var users = ServiceUser.getAll()
+=======
+val users = ServiceUser.getAll()
+>>>>>>> development
 
 private val valorations = mutableSetOf(
     Valoracion(5,"Muy buena recomendacion para aquellos que buscan enntretenerse un rato", users[0] ),

@@ -1,5 +1,9 @@
 package ar.edu.unsam.algo3.controller
+<<<<<<< HEAD
 import ar.edu.unsam.algo3.DTO.*
+=======
+import ar.edu.unsam.algo3.dominio.*
+>>>>>>> development
 import ar.edu.unsam.algo3.services.ServiceUser
 
 import org.springframework.web.bind.annotation.*
@@ -30,13 +34,10 @@ class UserController(val serviceUser: ServiceUser) {
     fun login(@RequestBody loginRequestBody: LoginRequest):LoginResponse{
         return serviceUser.validateLogin(loginRequestBody)
     }
-//
-//    @PutMapping("/recommendations/{id}")
-//    fun updateRecommendation(@RequestBody newRecommendation: RecommendationDTO): Recomendacion =
-//        serviceRecommendation.updateRecommendation(newRecommendation.convertir())
-//
-//    @DeleteMapping("/recommendations{id}")
-//    fun deleteRecommendation(@PathVariable id: Int) = serviceRecommendation.deleteRecommendation(id)
 
+    @PostMapping("/createAccount")
+    fun createAccount(@RequestBody loginRequestBody: CreateAccountRequest):CreateAccountResponse{
+        return serviceUser.createAccount(loginRequestBody)
+    }
 
 }

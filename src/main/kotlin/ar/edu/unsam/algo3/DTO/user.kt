@@ -2,7 +2,11 @@ package ar.edu.unsam.algo3.DTO
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
+<<<<<<< HEAD:src/main/kotlin/ar/edu/unsam/algo3/DTO/user.kt
 import ar.edu.unsam.algo2.readapp.usuario.*
+=======
+import ar.edu.unsam.algo2.readapp.usuario.Usuario
+>>>>>>> development:src/main/kotlin/ar/edu/unsam/algo3/dominio/user.kt
 import java.time.LocalDate
 
 
@@ -38,8 +42,8 @@ data class UserProfileDTO(
     //Exclusivo de perfil de usuario
     var fechaNacimiento: LocalDate,
     var email: String,
-    var perfil: PerfilDeUsuario,
-    var tipoDeLector: TipoDeLector,
+    var perfil: List<String>,
+    var tipoDeLector: String,
     val amigos: MutableList<Usuario>,
     val librosLeidos: MutableList<Libro>,
     val librosALeer: MutableSet<Libro>,
@@ -54,10 +58,10 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     alias = alias,
     lenguaje = lenguaje,
     palabrasPorMinutos = palabrasPorMinutos,
-    fechaNacimiento = fechaNacimiento ,
+    fechaNacimiento = fechaNacimiento,
     email = direccionMail,
-    perfil =  perfil,
-    tipoDeLector = tipoDeLector,
+    perfil =  perfil.toList(),
+    tipoDeLector = tipoDeLector.toString(),
     amigos = amigos,
     librosLeidos = librosLeidos,
     librosALeer = librosALeer,
@@ -70,5 +74,16 @@ class LoginRequest(
 )
 
 class LoginResponse(
+    var userID:Int = -1
+)
+
+class CreateAccountRequest(
+    var username:String = "",
+    var password:String = "",
+    var name:String = "",
+    var email:String = ""
+)
+
+class CreateAccountResponse(
     var userID:Int = -1
 )
