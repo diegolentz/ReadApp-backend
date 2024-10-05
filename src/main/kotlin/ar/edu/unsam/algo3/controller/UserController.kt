@@ -1,9 +1,9 @@
 package ar.edu.unsam.algo3.controller
-<<<<<<< HEAD
+
 import ar.edu.unsam.algo3.DTO.*
-=======
+
 import ar.edu.unsam.algo3.dominio.*
->>>>>>> development
+
 import ar.edu.unsam.algo3.services.ServiceUser
 
 import org.springframework.web.bind.annotation.*

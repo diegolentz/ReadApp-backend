@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*
 class RecommendationController(val serviceRecommendation: ServiceRecommendation) {
 
     @GetMapping("/recommendations")
-
     fun getRecommendations(): List<RecomendacionDTO> = serviceRecommendation.getAll()
 
    @GetMapping("/recommendations/{id}")
