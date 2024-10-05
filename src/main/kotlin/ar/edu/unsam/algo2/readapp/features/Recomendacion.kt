@@ -103,7 +103,6 @@ class Recomendacion(
         publica = publica,
         valoraciones = parseValoraciones(valoraciones)
     )
-    fun nombreApellido(creador: Usuario): String = "${creador.nombre} ${creador.apellido}"
     fun parseLibro(libros: MutableSet<Libro>): MutableSet<LibroDTO> = libros.map { it.toDTO() }.toMutableSet()
     fun parseValoraciones(valoraciones: MutableSet<Valoracion>): MutableSet<ValoracionDTO> = valoraciones.map { it.toDTO() }.toMutableSet()
 }
