@@ -12,15 +12,5 @@ class RecomendacionDTO(
     var publica: Boolean,
     val valoraciones: MutableSet<ValoracionDTO>,
     var id : Int
-) {
-//    fun convertir(): Recomendacion =
-//        Recomendacion(
-//            creador = creador,
-//            librosRecomendados = librosRecomendados,
-//            titulo = titulo,
-//            contenido = contenido,
-//            publica = publica,
-//            valoraciones = valoraciones
-//        )
-}
+) 
 
