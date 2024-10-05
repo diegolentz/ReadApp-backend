@@ -1,6 +1,5 @@
 package ar.edu.unsam.algo3.mock
 
-import ar.edu.unsam.algo2.readapp.builders.UsuarioBuilder
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import java.time.LocalDate
@@ -14,7 +13,8 @@ val USERS = listOf(
         apellido = "Hashibira",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.values().random()
+
+        lenguaje = Lenguaje.entries.random()
     ).apply {
         username = "diego"
         password = "diego"
@@ -32,6 +32,7 @@ val USERS = listOf(
         username = "valen"
         password = "valen"
     },
+
     Usuario(
         fotoPath = "ippo.jpeg",
         nombre = "Mamoru Takamura",
@@ -45,6 +46,7 @@ val USERS = listOf(
         username = "delfi"
         password = "delfi"
     },
+
     Usuario(
         fotoPath = "kellyKapoor.jpeg",
         nombre = "Kelly Kapoor",
@@ -58,6 +60,7 @@ val USERS = listOf(
         username = "pica"
         password = "pica"
     },
+
     Usuario(
         fotoPath = "kevinMalone.jpeg",
         nombre = "Kevin Malone",
@@ -66,7 +69,7 @@ val USERS = listOf(
         apellido = "",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.values().random()
+        lenguaje = Lenguaje.entries.random()
     ).apply {
         username = "adrian"
         password = "adrian"
@@ -84,6 +87,7 @@ val USERS = listOf(
         username = "admin"
         password = "admin"
     }
+
 )
 
 

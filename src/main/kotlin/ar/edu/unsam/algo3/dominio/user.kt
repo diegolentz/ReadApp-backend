@@ -1,11 +1,8 @@
 package ar.edu.unsam.algo3.dominio
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
-import ar.edu.unsam.algo2.readapp.features.Valoracion
-import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
-import ar.edu.unsam.algo2.readapp.observers.AgregarLibroObserver
-import ar.edu.unsam.algo2.readapp.usuario.*
+import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import java.time.LocalDate
 
 
@@ -41,8 +38,8 @@ data class UserProfileDTO(
     //Exclusivo de perfil de usuario
     var fechaNacimiento: LocalDate,
     var email: String,
-    var perfil: PerfilDeUsuario,
-    var tipoDeLector: TipoDeLector,
+    var perfil: List<String>,
+    var tipoDeLector: String,
     val amigos: MutableList<Usuario>,
     val librosLeidos: MutableList<Libro>,
     val librosALeer: MutableSet<Libro>,
@@ -57,10 +54,10 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     alias = alias,
     lenguaje = lenguaje,
     palabrasPorMinutos = palabrasPorMinutos,
-    fechaNacimiento = fechaNacimiento ,
+    fechaNacimiento = fechaNacimiento,
     email = direccionMail,
-    perfil =  perfil,
-    tipoDeLector = tipoDeLector,
+    perfil =  perfil.toList(),
+    tipoDeLector = tipoDeLector.toString(),
     amigos = amigos,
     librosLeidos = librosLeidos,
     librosALeer = librosALeer,

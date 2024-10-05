@@ -24,16 +24,20 @@ import ar.edu.unsam.algo2.readapp.libro.Libro
 
 interface TipoDeLector {
     fun tiempoDeLectura(usuario: Usuario, libro: Libro): Double
+
+    override fun toString() : String
 }
 
 object Promedio : TipoDeLector {
     override fun tiempoDeLectura(usuario: Usuario, libro: Libro): Double = 0.0
+    override fun toString() : String = "Promedio"
 }
 object Ansioso : TipoDeLector {
     const val ESCALAR_DEFAULT = 0.2 // 20%
     const val ESCALAR_BEST_SELLER = 0.5 //50%
 
     override fun tiempoDeLectura(usuario: Usuario, libro: Libro): Double = -(usuario.tiempoLecturaBase(libro) * modificadorAnsioso(libro))
+    override fun toString(): String = "Ansioso"
 
     //Metodo auxiliar que me devuelve escalar a multiplicar
     private fun modificadorAnsioso(libro: Libro): Double = if(libro.esBestSeller()) ESCALAR_BEST_SELLER else ESCALAR_DEFAULT // 50% y 20%
@@ -60,6 +64,8 @@ object Fanatico : TipoDeLector {
         return  if (condicionesLectorFanatico(usuario, libro)) tiempoSegunLongitudLibro(libro)
                 else{0.0}
     }
+
+    override fun toString(): String = "Fanatico"
 }
 object Recurrente : TipoDeLector {
     val porcentajeLimite = 0.05
@@ -74,4 +80,6 @@ object Recurrente : TipoDeLector {
     }
 
     fun calcularPorcentajeReduccion(usuario: Usuario, libro: Libro):Double = usuario.cantidadLecturasDe(libro)*0.01
+
+    override fun toString(): String = "Recurrente"
 }

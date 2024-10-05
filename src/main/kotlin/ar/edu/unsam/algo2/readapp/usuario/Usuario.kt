@@ -9,8 +9,6 @@ import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.observers.AgregarLibroObserver
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
-import ar.edu.unsam.algo3.dominio.UserBasicDTO
-import ar.edu.unsam.algo3.dominio.UserProfileDTO
 import excepciones.BusinessException
 import excepciones.RecomendacionException
 import java.time.LocalDate
@@ -24,12 +22,12 @@ class Usuario(
     var fechaNacimiento: LocalDate = LocalDate.now(),
     var palabrasPorMinutos: Int = (5..250).random(),
     var direccionMail: String = "",
-    var lenguaje: Lenguaje = Lenguaje.values().random()
+    var lenguaje: Lenguaje = Lenguaje.entries.random()
 ) : AvaliableInstance {
 
     //Interfaces
-    var tipoDeLector: TipoDeLector = Promedio
-    var perfil: PerfilDeUsuario = Leedor
+    var tipoDeLector: TipoDeLector = Recurrente
+    var perfil: PerfilDeUsuario = Combinador(mutableSetOf(Leedor,Precavido, Nativista, Demandante, Cambiante, Poliglota, Experimentado, Calculador(20.04,21.04)))
 
     val listaObservers: MutableList<AgregarLibroObserver> = mutableListOf()
     override var id: Int = -1//POR DEFAULT AL FINAL
