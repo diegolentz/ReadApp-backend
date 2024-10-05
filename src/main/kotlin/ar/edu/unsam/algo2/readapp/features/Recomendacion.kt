@@ -3,6 +3,7 @@ package ar.edu.unsam.algo2.readapp.features
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.dominio.RecommendationDTO
 
 
 class Recomendacion(
@@ -68,7 +69,7 @@ class Recomendacion(
     ///////////////////////////////////////////////////////////////////
     fun editar(libroParaAgregar: Libro) { librosRecomendados.add(libroParaAgregar) }
 
-    fun actualizar(recomendacionActualizada: Recomendacion){
+    fun actualizar(recomendacionActualizada: RecommendationDTO){
         titulo = recomendacionActualizada.titulo
         librosRecomendados = recomendacionActualizada.librosRecomendados
         contenido = recomendacionActualizada.contenido
