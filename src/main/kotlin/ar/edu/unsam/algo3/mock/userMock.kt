@@ -14,7 +14,7 @@ val USERS = listOf(
         apellido = "Hashibira",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.values().random(),
+        lenguaje = Lenguaje.entries.random(),
 
 
 
@@ -27,7 +27,7 @@ val USERS = listOf(
         apellido = "",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.values().random()
+        lenguaje = Lenguaje.entries.random()
     ),
     Usuario(
         fotoPath = "ippo.jpeg",
@@ -37,7 +37,7 @@ val USERS = listOf(
         apellido = "",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.values().random()
+        lenguaje = Lenguaje.entries.random()
     ),
     Usuario(
         fotoPath = "kellyKapoor.jpeg",
@@ -47,7 +47,7 @@ val USERS = listOf(
         apellido = "",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.values().random()
+        lenguaje = Lenguaje.entries.random()
     ),
     Usuario(
         fotoPath = "kevinMalone.jpeg",
@@ -57,7 +57,7 @@ val USERS = listOf(
         apellido = "",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.values().random()
+        lenguaje = Lenguaje.entries.random()
     ).apply {
         username = "admin"
         password = "admin"
@@ -70,7 +70,7 @@ val USERS = listOf(
         apellido = "",
         palabrasPorMinutos = (5..250).random(),
         direccionMail = "",
-        lenguaje = Lenguaje.values().random()
+        lenguaje = Lenguaje.entries.random()
     )
 )
 

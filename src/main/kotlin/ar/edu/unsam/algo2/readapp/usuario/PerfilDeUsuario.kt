@@ -30,7 +30,7 @@ import ar.edu.unsam.algo2.readapp.libro.Libro
 ///                          (el tiempo correspondiente a leer toda la serie de libros), este rango puede variar entre los distintos usuarios
 
 interface PerfilDeUsuario {
-    abstract fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean
+    fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean
     fun recomendacionEsInteresante(recomendacion: Recomendacion, usuario: Usuario) = condicion(recomendacion, usuario)
 
     fun toList(): List<String>
