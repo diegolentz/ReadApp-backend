@@ -22,17 +22,24 @@ object ServiceUser {
 
         val usuarios =   this.getAll()
 
-        usuarios[0].agregarLibroALeer(libros[0])
-        usuarios[0].agregarLibroALeer(libros[1])
-        usuarios[0].agregarLibroALeer(libros[2])
-        usuarios[0].agregarLibroALeer(libros[3])
-        usuarios[0].agregarLibroALeer(libros[4])
-        usuarios[0].agregarLibroALeer(libros[5])
+        val diego = usuarios[0]
+        diego.agregarLibroALeer(libros[0])
+        diego.agregarLibroALeer(libros[1])
+        diego.agregarLibroALeer(libros[2])
+        diego.agregarLibroALeer(libros[3])
+        diego.agregarLibroALeer(libros[4])
+        diego.agregarLibroALeer(libros[5])
 
-        usuarios[0].leer(libros[6])
-        usuarios[0].leer(libros[7])
-        usuarios[0].leer(libros[8])
-        usuarios[0].leer(libros[9])
+        diego.leer(libros[6])
+        diego.leer(libros[7])
+        diego.leer(libros[8])
+        diego.leer(libros[9])
+
+        diego.agregarAmigo(usuarios[1])
+        diego.agregarAmigo(usuarios[2])
+        diego.agregarAmigo(usuarios[3])
+
+        
 
   }
 
