@@ -2,7 +2,9 @@ package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo3.DTO.RecomendacionDTO
+import ar.edu.unsam.algo3.DTO.RecomendacionEditarDTO
 import ar.edu.unsam.algo3.mock.RECOMMENDATIONS
+import excepciones.BusinessException
 import org.springframework.stereotype.Service
 
 
@@ -35,8 +37,11 @@ object ServiceRecommendation {
         recommendationRepository.getByID(recommendationID)
 
 
-    fun updateRecommendation(recomendacionActualizada: RecomendacionDTO): RecomendacionDTO {
-       TODO()
+    fun updateRecommendation(recomendacionActualizada: RecomendacionEditarDTO): RecomendacionEditarDTO {
+        val recomendacion = getById(recomendacionActualizada.id)
+        recomendacion.actualizar(recomendacionActualizada)
+        recommendationRepository.update(recomendacion)
+        return recomendacion.editarDTO()
     }
 
     fun deleteRecommendation(recommendationID: Int): Recomendacion {
