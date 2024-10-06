@@ -33,7 +33,7 @@ class Valoracion(var valor: Int, var comentario: String, var autor: Usuario) {
         author = this.autor.nombreApellido(autor),
         score = this.valor,
         date = this.fecha,
-        comment = this.comentario
+        comentario = this.comentario
     )
     
 }

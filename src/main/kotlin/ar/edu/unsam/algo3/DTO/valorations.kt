@@ -7,8 +7,5 @@ class ValoracionDTO (
     var author: String,
     var score: Int,
     var date: LocalDate,
-    var comment: String
-){
-
-
-}
+    var comentario: String
+)
