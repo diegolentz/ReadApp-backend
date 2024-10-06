@@ -15,7 +15,7 @@ class LibrosController(val serviceLibros: ServiceLibros) {
 
     //para libros leidos
     @GetMapping("/librosLeidos")
-    fun obtenerLeido(@RequestParam idUser: Int) = serviceLibros.obtenerLeido(idUser)
+    fun obtenerLeido(@RequestParam idUser: Int) : List<LibroDTO> = serviceLibros.obtenerLeido(idUser)
 
     @PostMapping("/libroLeido")
     fun postLibroLeido(@RequestParam idLibro: Int, @RequestParam idUser: Int) =
@@ -26,7 +26,7 @@ class LibrosController(val serviceLibros: ServiceLibros) {
 
     //para libros a leer
     @GetMapping("/librosALeer")
-    fun obtenerALeeer(@RequestParam idUser: Int) = serviceLibros.obtenerALeer(idUser)
+    fun obtenerALeeer(@RequestParam idUser: Int): List<LibroDTO> = serviceLibros.obtenerALeer(idUser)
 
     @PostMapping("/libroALeer")
     fun postLibroALeer(@RequestParam idLibro: Int, @RequestParam idUser: Int) =
@@ -37,6 +37,6 @@ class LibrosController(val serviceLibros: ServiceLibros) {
 
     //libros para leer
     @GetMapping("/add-Books")
-    fun agregarALeeer(@RequestParam idUser: Int) = serviceLibros.paraLeer(idUser)
+    fun agregarALeeer(@RequestParam idUser: Int): List<LibroDTO> = serviceLibros.paraLeer(idUser)
 
 }
