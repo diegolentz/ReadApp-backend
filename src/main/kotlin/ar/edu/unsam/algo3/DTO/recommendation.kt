@@ -14,3 +14,10 @@ class RecomendacionDTO(
     var id : Int
 )
 
+class RecomendacionEditarDTO(
+    val titulo: String,
+    val librosRecomendados: MutableSet<LibroDTO>,
+    val contenido: String,
+    val publica: Boolean,
+    var id:Int
+)

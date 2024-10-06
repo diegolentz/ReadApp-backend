@@ -6,6 +6,7 @@ import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 
 import ar.edu.unsam.algo3.DTO.RecomendacionDTO
+import ar.edu.unsam.algo3.DTO.RecomendacionEditarDTO
 import ar.edu.unsam.algo3.DTO.ValoracionDTO
 
 //import ar.edu.unsam.algo3.dominio.RecommendationDTO
@@ -74,6 +75,12 @@ class Recomendacion(
     ///////////////////////////////////////////////////////////////////
     fun editar(libroParaAgregar: Libro) { librosRecomendados.add(libroParaAgregar) }
 
+    fun actualizar(recomendacionActualizada: RecomendacionEditarDTO){
+        this.titulo = recomendacionActualizada.titulo
+        this.publica = recomendacionActualizada.publica
+        this.contenido = recomendacionActualizada.contenido
+        /*this.librosRecomendados = recomendacionActualizada.librosRecomendados.map { it -> it. }*/
+    }
 
     //////////////////////////////////////////////////////////////////
     //////////            CALCULO
@@ -110,5 +117,13 @@ class Recomendacion(
     )
     fun parseLibro(libros: MutableSet<Libro>): MutableSet<LibroDTO> = libros.map { it.toDTO() }.toMutableSet()
     fun parseValoraciones(valoraciones: MutableSet<Valoracion>): MutableSet<ValoracionDTO> = valoraciones.map { it.toDTO() }.toMutableSet()
+
+    fun editarDTO(): RecomendacionEditarDTO = RecomendacionEditarDTO(
+        titulo = this.titulo,
+        contenido = this.contenido,
+        publica = publica,
+        librosRecomendados = parseLibro(librosRecomendados),
+        id = this.id
+    )
 }
 
