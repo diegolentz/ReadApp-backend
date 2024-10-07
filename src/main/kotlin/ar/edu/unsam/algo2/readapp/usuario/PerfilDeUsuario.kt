@@ -33,7 +33,9 @@ interface PerfilDeUsuario {
     fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean
     fun recomendacionEsInteresante(recomendacion: Recomendacion, usuario: Usuario) = condicion(recomendacion, usuario)
 
-    fun toList(): List<String>
+    fun toList(): List<String> = listOf(this.toString())
+
+    override fun toString(): String
 }
 
 object Precavido : PerfilDeUsuario {
@@ -43,33 +45,31 @@ object Precavido : PerfilDeUsuario {
             usuario
         )
 
-    override fun toList(): List<String> = listOf("Precavido")
-
 
     private fun tieneLibrosLeidosPorAmigo(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         usuario.librosLeidosAmigos().intersect(recomendacion.librosRecomendados).isNotEmpty()
 
-
+    override fun toString(): String = "Precavido"
 }
 
 object Leedor : PerfilDeUsuario {
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean = true
 
-    override fun toList(): List<String> = listOf("Leedor")
+    override fun toString(): String = "Leedor"
 }
 
 object Poliglota : PerfilDeUsuario {
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         recomendacion.cantidadDeLenguajes() >= 5
 
-    override fun toList(): List<String> = listOf("Poliglota")
+    override fun toString(): String = "Poliglota"
 }
 
 object Nativista : PerfilDeUsuario {
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         recomendacion.librosRecomendados.any { it.lenguajeAutor() == (usuario.lenguaje) }
 
-    override fun toList(): List<String> = listOf("Nativista")
+    override fun toString(): String = "Nativista"
 }
 
 class Calculador(var rangoMin: Double, var rangoMax: Double) : PerfilDeUsuario {
@@ -87,14 +87,14 @@ class Calculador(var rangoMin: Double, var rangoMax: Double) : PerfilDeUsuario {
         this.rangoMax = rangoMax
     }
 
-    override fun toList(): List<String> = listOf("Calculador")
+    override fun toString(): String = "Calculador"
 }
 
 object Demandante : PerfilDeUsuario {
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         recomendacion.valoraciones.any { it.valor in 4..5 }
 
-    override fun toList(): List<String> = listOf("Demandante")
+    override fun toString(): String = "Demandante"
 }
 
 object Experimentado : PerfilDeUsuario {
@@ -111,7 +111,7 @@ object Experimentado : PerfilDeUsuario {
     //Funcion que me devuelve una lista con los autores consagrados del libro
     private fun autoresConsagrados(libro: Libro) = libro.autor.esConsagrado()
 
-    override fun toList(): List<String> = listOf("Experimentado")
+    override fun toString(): String = "Experimentado"
 }
 
 object Cambiante : PerfilDeUsuario {
@@ -131,7 +131,7 @@ object Cambiante : PerfilDeUsuario {
 
     private fun esLeedor(usuario: Usuario): Boolean = usuario.edad() < EDAD_MAX_LEEDOR
 
-    override fun toList(): List<String> = listOf("Cambiante")
+    override fun toString(): String = "Cambiante"
 }
 
 class Combinador(val perfiles: MutableSet<PerfilDeUsuario>) : PerfilDeUsuario {
@@ -147,4 +147,6 @@ class Combinador(val perfiles: MutableSet<PerfilDeUsuario>) : PerfilDeUsuario {
     }
 
     override fun toList(): List<String> = perfiles.flatMap { it.toList() }
+
+    override fun toString(): String = "Combinador"
 }
