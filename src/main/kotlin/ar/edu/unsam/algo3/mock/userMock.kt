@@ -8,16 +8,16 @@ import java.time.LocalDate
 val USERS = listOf(
     Usuario(
         fotoPath = "inosuke.jpeg",
-        nombre = "Inosuke",
-        alias = "elInosuke",
-        apellido = "Hashibira",
+        nombre = "Diego",
+        alias = "El diego",
+        apellido = "Lentz",
         palabrasPorMinutos = (5..250).random(),
-        direccionMail = "",
+        direccionMail = "diegoLentz@gmail.com",
 
-        lenguaje = Lenguaje.entries.random()
+        lenguaje = Lenguaje.ESPANIOL
     ).apply {
         username = "diego"
-        password = "diego"
+        password = "1234"
     },
     Usuario(
         fotoPath = "dwightSchrute.jpeg",
