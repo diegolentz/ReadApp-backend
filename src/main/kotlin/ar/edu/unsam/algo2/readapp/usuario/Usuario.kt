@@ -22,7 +22,8 @@ class Usuario(
     var fechaNacimiento: LocalDate = LocalDate.now(),
     var palabrasPorMinutos: Int = (5..250).random(),
     var direccionMail: String = "",
-    var lenguaje: Lenguaje = Lenguaje.entries.random()
+    var lenguaje: Lenguaje = Lenguaje.entries.random(),
+    var email:String = "example@example.com"
 ) : AvaliableInstance {
 
     //Interfaces

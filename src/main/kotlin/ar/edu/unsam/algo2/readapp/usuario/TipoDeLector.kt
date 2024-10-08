@@ -83,3 +83,4 @@ object Recurrente : TipoDeLector {
 
     override fun toString(): String = "Recurrente"
 }
+

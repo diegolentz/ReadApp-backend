@@ -1,18 +1,17 @@
 package ar.edu.unsam.algo3.DTO
+
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
-import ar.edu.unsam.algo2.readapp.usuario.*
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
-
 import java.time.LocalDate
 
 
 data class UserBasicDTO(
-    val id:Int,
-    var fotoPath:String,
+    val id: Int,
+    var fotoPath: String,
     val nombre: String,
-    val apellido:String,
+    val apellido: String,
     val alias: String,
     val lenguaje: Lenguaje,
     //Solo para vistas home, mis recomendaciones,
@@ -31,7 +30,7 @@ fun Usuario.toDTOBasic() = UserBasicDTO(
 
 data class UserProfileDTO(
     var id: Int,
-    var fotoPath:String,
+    var fotoPath: String,
     var nombre: String,
     var apellido: String,
     var alias: String,
@@ -52,13 +51,13 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     id = id,
     fotoPath = fotoPath,
     nombre = nombre,
-    apellido =  apellido,
+    apellido = apellido,
     alias = alias,
     lenguaje = lenguaje,
     palabrasPorMinutos = palabrasPorMinutos,
     fechaNacimiento = fechaNacimiento,
     email = direccionMail,
-    perfil =  perfil.toList(),
+    perfil = perfil.toList(),
     tipoDeLector = tipoDeLector.toString(),
     amigos = amigos,
     librosLeidos = librosLeidos,
@@ -66,22 +65,33 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     recomendacionesAValorar = recomendacionesAValorar
 )
 
+data class UserInfoDTO(
+    var id: Int?,
+    var nombre: String?,
+    var apellido: String?,
+    var alias: String?,
+    var fechaNacimiento: LocalDate?,
+    var email: String?,
+    var perfil: List<String>?,
+    var tipoDeLector: String?,
+)
+
 data class LoginRequest(
-    var username:String = "",
-    var password:String = ""
+    var username: String = "",
+    var password: String = ""
 )
 
 data class LoginResponse(
-    var userID:Int = -1
+    var userID: Int = -1
 )
 
 data class CreateAccountRequest(
-    var username:String = "",
-    var password:String = "",
-    var name:String = "",
-    var email:String = ""
+    var username: String = "",
+    var password: String = "",
+    var name: String = "",
+    var email: String = ""
 )
 
 data class CreateAccountResponse(
-    var userID:Int = -1
+    var userID: Int = -1
 )
