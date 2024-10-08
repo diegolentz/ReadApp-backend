@@ -136,7 +136,7 @@ object ServiceUser {
         this.checkAvaliableUsername(newAccountRequest.username)
         val newUser = this.newDefaultUser(newAccountRequest)
         userRepository.create(newUser)
-        return CreateAccountResponse(userID = newUser.id)
+        return CreateAccountResponse()
     }
 
 

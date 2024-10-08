@@ -44,4 +44,8 @@ class UserController(val serviceUser: ServiceUser) {
     @PutMapping("/updateInfoUsuario")
     fun updateUsuario(@RequestBody body: UserInfoDTO): UserProfileDTO = serviceUser.updateUserInfo(body)
 
+    @PostMapping("/passwordRecovery")
+    fun passwordRecovery(@RequestBody loginRequestBody: CreateAccountRequest): CreateAccountResponse {
+        return serviceUser.createAccount(loginRequestBody)
+    }
 }

@@ -93,7 +93,7 @@ data class CreateAccountRequest(
 )
 
 data class CreateAccountResponse(
-    var userID: Int = -1
+    var message:String = "Cuenta creada con exito"
 )
 
 fun Usuario.toDTOProfileFriends() = UserProfileFriendsDTO(
