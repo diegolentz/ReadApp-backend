@@ -95,3 +95,35 @@ data class CreateAccountRequest(
 data class CreateAccountResponse(
     var userID: Int = -1
 )
+
+fun Usuario.toDTOProfileFriends() = UserProfileFriendsDTO(
+    id = id,
+    fotoPath = fotoPath,
+    nombre = nombre,
+    apellido = apellido,
+    amigos = amigos.map { it.toDTOFriend() }
+    )
+
+data class UserProfileFriendsDTO(
+    var id: Int?,
+    var fotoPath: String,
+    var nombre: String,
+    var apellido: String,
+    var amigos: List<UserFriendDTO>
+)
+
+fun Usuario.toDTOFriend() = UserFriendDTO(
+    id = id,
+    fotoPath = fotoPath,
+    nombre = nombre,
+    apellido = apellido,
+    alias = alias
+)
+
+data class UserFriendDTO(
+    var id: Int?,
+    var fotoPath: String,
+    var nombre: String,
+    var apellido: String,
+    var alias: String
+)

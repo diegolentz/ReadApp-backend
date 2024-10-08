@@ -38,7 +38,7 @@ class Usuario(
     val librosLeidos: MutableList<Libro> = mutableListOf() //List para cantidad con repetidos
     val cantidadVecesLeido: MutableList<Int> = mutableListOf()
     val librosALeer: MutableSet<Libro> = mutableSetOf()
-    val amigos: MutableList<Usuario> = mutableListOf()
+    var amigos: MutableList<Usuario> = mutableListOf()
     val recomendaciones: MutableList<Recomendacion> = mutableListOf()
     val recomendacionesAValorar: MutableList<Recomendacion> = mutableListOf()
     val recomendacionesValoradas: MutableMap<Recomendacion, Valoracion> = mutableMapOf()

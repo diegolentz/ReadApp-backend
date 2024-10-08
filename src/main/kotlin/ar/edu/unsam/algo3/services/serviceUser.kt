@@ -66,6 +66,10 @@ object ServiceUser {
         return this.getByIdRaw(idTypeString).toDTOProfile()
     }
 
+    fun getByIdFriends(idTypeString: String): UserProfileFriendsDTO {
+        return this.getByIdRaw(idTypeString).toDTOProfileFriends()
+    }
+
     fun validateLogin(loginRequest: LoginRequest): LoginResponse {
         val usuario = this.checkUsername(loginRequest.username)
         this.checkPassword(loginRequest.password, usuario!!.password)
