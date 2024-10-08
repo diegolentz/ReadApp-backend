@@ -45,6 +45,7 @@ val USERS = listOf(
     ).apply {
         username = "delfi"
         password = "delfi"
+        amigos = mutableListOf(Usuario(nombre = "Andrea", apellido = "Perez"))
     },
 
     Usuario(

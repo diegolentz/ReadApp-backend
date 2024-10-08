@@ -26,6 +26,11 @@ class UserController(val serviceUser: ServiceUser) {
         return serviceUser.getByIdProfile(idUsuario)
     }
 
+    @GetMapping("/user/friends/{idUsuario}")
+    fun getUserFriendsByID(@PathVariable idUsuario: String): UserProfileFriendsDTO {
+        return serviceUser.getByIdFriends(idUsuario)
+    }
+
     @PostMapping("/login")
     fun login(@RequestBody loginRequestBody: LoginRequest): LoginResponse {
         return serviceUser.validateLogin(loginRequestBody)
