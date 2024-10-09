@@ -11,6 +11,7 @@ class RecomendacionDTO(
     val contenido: String,
     var publica: Boolean,
     val valoraciones: MutableSet<ValoracionDTO>,
+    val valoracionTotal:Int,
     var id : Int
 )
 

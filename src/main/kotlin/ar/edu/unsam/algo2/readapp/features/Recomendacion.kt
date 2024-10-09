@@ -22,7 +22,6 @@ class Recomendacion(
 ): AvaliableInstance {
 
 
-
     override var id:Int = -1//POR DEFAULT AL FINAL
     //////////////////////////////////////////////////////////////////
     //////////            ESTADOS
@@ -85,6 +84,16 @@ class Recomendacion(
     //////////////////////////////////////////////////////////////////
     //////////            CALCULO
     ///////////////////////////////////////////////////////////////////
+
+    fun valoracionTotal() : Int = this.valoraciones.sumOf { it.valor }
+    fun valoracionPromedio(): Int {
+        return if (this.valoraciones.isEmpty()) {
+            0
+        } else {
+            this.valoracionTotal() / this.valoraciones.size
+        }
+    }
+
     fun tiempoNetoLectura(usuario: Usuario): Double {
         return this.tiempodeLectura(usuario) - this.tiempoQueSePuedeAhorrar(usuario)
     }
@@ -113,11 +122,9 @@ class Recomendacion(
         contenido = contenido,
         publica = publica,
         valoraciones = parseValoraciones(valoraciones),
+        valoracionTotal = this.valoracionPromedio(),
         id = this.id
     )
-    fun parseLibro(libros: MutableSet<Libro>): MutableSet<LibroDTO> = libros.map { it.toDTO() }.toMutableSet()
-    fun parseValoraciones(valoraciones: MutableSet<Valoracion>): MutableSet<ValoracionDTO> = valoraciones.map { it.toDTO() }.toMutableSet()
-
     fun editarDTO(): RecomendacionEditarDTO = RecomendacionEditarDTO(
         titulo = this.titulo,
         contenido = this.contenido,
@@ -125,5 +132,8 @@ class Recomendacion(
         librosRecomendados = parseLibro(librosRecomendados),
         id = this.id
     )
+    fun parseLibro(libros: MutableSet<Libro>): MutableSet<LibroDTO> = libros.map { it.toDTO() }.toMutableSet()
+
+    fun parseValoraciones(valoraciones: MutableSet<Valoracion>): MutableSet<ValoracionDTO> = valoraciones.map { it.toDTO() }.toMutableSet()
 }
 
