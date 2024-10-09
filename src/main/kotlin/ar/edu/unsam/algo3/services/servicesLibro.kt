@@ -3,6 +3,7 @@ package ar.edu.unsam.algo3.services
 import LibroDTO
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
+import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.mock.LIBROS
 import excepciones.BusinessException
 import org.springframework.stereotype.Service
@@ -34,19 +35,31 @@ object ServiceLibros {
         return libro
     }
 
-    fun obtenerLeido(idUser: Int) : List<LibroDTO> {
-        var usuario = ServiceUser.getByIdRaw(idUser.toString())
-        var libros = usuario.librosLeidos.toList()
+    fun obtenerLibros(idUser: Int, estado: Boolean): List<LibroDTO> {
+        val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
+        val libros: List<Libro> = if (estado) {
+            usuario.librosLeidos.toList()
+        } else {
+            usuario.librosALeer.toList()
+        }
+        return libros.map { it : Libro -> it.toDTO() }
+    }
+
+    fun agregarLibros(idUser: Int, estado: Boolean, idLibro: List<Int>): List<LibroDTO> {
+        val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
+
+        val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }
+        libros.forEach { libro ->
+            if (estado) {
+                usuario.librosLeidos.add(libro)  // Agregar a "Leídos" si estado es true
+            } else {
+                usuario.librosALeer.add(libro)   // Agregar a "Por leer" si estado es false
+            }
+        }
         return libros.map { it : Libro -> it.toDTO() }
 
     }
 
-
-    fun obtenerALeer(idUser: Int) : List<LibroDTO> {
-        var usuario = ServiceUser.getByIdRaw(idUser.toString())
-        var libros = usuario.librosALeer.toList()
-        return libros.map { it : Libro -> it.toDTO() }
-    }
     fun agregarALeer(idLibro : Int,idUser : Int): Libro {
         var libro = this.getById(idLibro)
         var usuario = ServiceUser.getByIdRaw(idUser.toString())
@@ -65,12 +78,6 @@ object ServiceLibros {
     }
     fun getById(libroId: Int): Libro = repoLibro.getByID(libroId)
 
-    fun actualizarLibro(libro: Libro): Libro {
-        libroValido(libro)
-        repoLibro.update(libro)
-        return getById(libro.id)
-    }
-
     fun borrarLibroLeido(idLibro: Int, idUser: Int): Libro {
         val libro = this.getById(idLibro)
         val usuario = ServiceUser.getByIdRaw(idUser.toString())
@@ -85,11 +92,5 @@ object ServiceLibros {
         usuario.librosALeer.remove(libro)
 
         return libro
-    }
-
-    fun libroValido(libro: Libro) {
-        if (libro.ediciones <= 0 || libro.ventasSemanales < 0) {
-            throw BusinessException("El formato del libro es inválido")
-        }
     }
 }
