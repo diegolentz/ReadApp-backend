@@ -78,5 +78,10 @@ class Libro(
 
 
 
+data class AgregarLibroRequest(
+    val idUser: Int,
+    val estado: Boolean,
+    var idLibro: List<Int>
+)
 
 

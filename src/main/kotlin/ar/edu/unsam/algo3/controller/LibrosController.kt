@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.controller
 
 import LibroDTO
+import ar.edu.unsam.algo2.readapp.libro.AgregarLibroRequest
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo3.services.ServiceLibros
 import org.springframework.web.bind.annotation.*
@@ -13,24 +14,17 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     @GetMapping("/librosSearch")
     fun obtenerSearch(): List<LibroDTO> = serviceLibros.getSearch()
 
-    //para libros leidos
-    @GetMapping("/librosLeidos")
-    fun obtenerLeido(@RequestParam idUser: Int) : List<LibroDTO> = serviceLibros.obtenerLeido(idUser)
+    //libros por estado
+    @GetMapping("/obtenerlibroEstado")
+    fun obtenerLibroEstado(@RequestParam idUser: Int, @RequestParam estado: Boolean): List<LibroDTO> = serviceLibros.obtenerLibros(idUser,estado)
 
-    @PostMapping("/libroLeido")
-    fun postLibroLeido(@RequestParam idLibro: Int, @RequestParam idUser: Int) =
-        serviceLibros.agregarLeido(idLibro, idUser)
+    @PostMapping("/agregarLibroEstado")
+    fun postLibroEstado(@RequestBody request: AgregarLibroRequest): List<LibroDTO> {
+        return serviceLibros.agregarLibros(request.idUser, request.estado, request.idLibro)
+    }
 
     @DeleteMapping("/libroLeido")
     fun borrarLibroLeido(@RequestParam idLibro: Int, @RequestParam idUser: Int) = serviceLibros.borrarLibroLeido(idLibro, idUser)
-
-    //para libros a leer
-    @GetMapping("/librosALeer")
-    fun obtenerALeeer(@RequestParam idUser: Int): List<LibroDTO> = serviceLibros.obtenerALeer(idUser)
-
-    @PostMapping("/libroALeer")
-    fun postLibroALeer(@RequestParam idLibro: Int, @RequestParam idUser: Int) =
-        serviceLibros.agregarALeer(idLibro, idUser)
 
     @DeleteMapping("/libroALeer")
     fun borrarLibroALeer(@RequestParam idLibro: Int, @RequestParam idUser: Int) = serviceLibros.borrarLibroLeer(idLibro, idUser)
