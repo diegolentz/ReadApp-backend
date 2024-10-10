@@ -21,6 +21,8 @@ object ServiceLibros {
     }
     fun get() : List<Libro> = repoLibro.getAll().toList()
 
+    fun getById(libroId: Int): Libro = repoLibro.getByID(libroId)
+
 
     fun getSearch(): List<LibroDTO> {
         libros = repoLibro.getAll().toMutableList()
@@ -37,25 +39,23 @@ object ServiceLibros {
         val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
         val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }
         val librosAgregados : List<Libro> = usuario.agregarLibros(libros, estado)
-
-        return librosAgregados.map { it.toDTO() }.toList()
+        return librosAgregados.map { it.toDTO() }
     }
 
     fun paraLeer(idUser: Int): List<LibroDTO> {
         val usuario = ServiceUser.getByIdRaw(idUser.toString())
-        val aLeer = usuario.librosALeer.toList()
-        val leido = usuario.librosLeidos.toList()
         val libros = this.get()
-
-        return libros.filter { it !in leido && it !in aLeer }.map { it.toDTO() }
+       val agregarParaLeer : List<Libro> = usuario.agregarALeer(libros)
+        return agregarParaLeer.map { it.toDTO() }
     }
-    fun getById(libroId: Int): Libro = repoLibro.getByID(libroId)
+
+
+
 
     fun borrarLibroLeido(idLibro: Int, idUser: Int): Libro {
         val libro = this.getById(idLibro)
         val usuario = ServiceUser.getByIdRaw(idUser.toString())
         usuario.librosLeidos.remove(libro)
-
         return libro
     }
 
@@ -63,7 +63,6 @@ object ServiceLibros {
         val libro = this.getById(idLibro)
         val usuario = ServiceUser.getByIdRaw(idUser.toString())
         usuario.librosALeer.remove(libro)
-
         return libro
     }
 }

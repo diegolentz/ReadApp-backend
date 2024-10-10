@@ -18,7 +18,7 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     @GetMapping("/obtenerlibroEstado")
     fun obtenerLibroEstado(@RequestParam idUser: Int, @RequestParam estado: Boolean): List<LibroDTO> = serviceLibros.obtenerLibros(idUser,estado)
 
-    @PostMapping("/agregarLibroEstado")
+    @PutMapping("/agregarLibroEstado")
     fun postLibroEstado(@RequestBody request: AgregarLibroRequest): List<LibroDTO> {
         return serviceLibros.agregarLibros(request.idUser, request.estado, request.idLibro)
     }

@@ -90,6 +90,13 @@ class Usuario(
         return libros
     }
 
+    fun agregarALeer(libros: List<Libro>): List<Libro> {
+        val librosNoExistentes = libros.filter { libro ->
+            libro !in librosALeer && libro !in librosLeidos
+        }
+        return librosNoExistentes
+    }
+
     fun leer(libro: Libro) {
         if (this.leido(libro)) cuantificarLibroLeido(libro)
         else {
@@ -98,12 +105,9 @@ class Usuario(
         }
     }
 
-
     fun cuantificarLibroLeido(libro: Libro) {
         cantidadVecesLeido[librosLeidos.indexOf(libro)] += 1
     }
-
-
 
     fun leido(libro: Libro): Boolean = this.librosLeidos.contains(libro)
     fun cantidadLecturasDe(libro: Libro): Int {
