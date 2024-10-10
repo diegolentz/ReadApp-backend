@@ -74,6 +74,22 @@ class Usuario(
     fun tiempoLecturaFinal(libro: Libro): Double =
         this.tiempoLecturaBase(libro) + tipoDeLector.tiempoDeLectura(this, libro)
 
+    fun mostrarLibros(estado: Boolean): List<Libro> =
+        if (estado) librosLeidos.toList()
+        else librosALeer.toList()
+
+    fun agregarLibros(libros: List<Libro>, estado: Boolean) : List<Libro> {
+        libros.forEach { libro ->
+            if (estado) {
+                librosALeer.remove(libro)
+                leer(libro)
+            } else {
+                librosALeer.add(libro)
+            }
+        }
+        return libros
+    }
+
     fun leer(libro: Libro) {
         if (this.leido(libro)) cuantificarLibroLeido(libro)
         else {
@@ -82,16 +98,13 @@ class Usuario(
         }
     }
 
+
     fun cuantificarLibroLeido(libro: Libro) {
         cantidadVecesLeido[librosLeidos.indexOf(libro)] += 1
     }
-    fun agregarLeido(libro: Libro) {
-        librosALeer.remove(libro)
-        leer(libro)
-    }
-    fun agregarLeer(libro : Libro){
-        librosALeer.add(libro)
-    }
+
+
+
     fun leido(libro: Libro): Boolean = this.librosLeidos.contains(libro)
     fun cantidadLecturasDe(libro: Libro): Int {
         //val predicate: (Libro) -> Boolean = {it == libro}

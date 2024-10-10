@@ -29,25 +29,16 @@ object ServiceLibros {
 
     fun obtenerLibros(idUser: Int, estado: Boolean): List<LibroDTO> {
         val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
-        val libros: List<Libro> = if (estado) {
-            usuario.librosLeidos.toList()
-        } else {
-            usuario.librosALeer.toList()
-        }
+        val libros: List<Libro> = usuario.mostrarLibros(estado)
         return libros.map { it.toDTO() }
     }
 
     fun agregarLibros(idUser: Int, estado: Boolean, idLibro: List<Int>): List<LibroDTO> {
         val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
         val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }
-         libros.forEach { libro ->
-            if (estado) {
-                usuario.agregarLeido(libro)
-            } else {
-                usuario.agregarLeer(libro)
-            }
-        }
-        return libros.map { it.toDTO() }.toList()
+        val librosAgregados : List<Libro> = usuario.agregarLibros(libros, estado)
+
+        return librosAgregados.map { it.toDTO() }.toList()
     }
 
     fun paraLeer(idUser: Int): List<LibroDTO> {
