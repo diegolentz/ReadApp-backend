@@ -39,7 +39,7 @@ data class UserProfileDTO(
     //Exclusivo de perfil de usuario
     var fechaNacimiento: LocalDate,
     var email: String,
-    var perfil: List<String>,
+    var perfil: List<Any>,
     var tipoDeLector: String,
     val amigos: MutableList<Usuario>,
     val librosLeidos: MutableList<Libro>,
@@ -72,7 +72,7 @@ data class UserInfoDTO(
     var alias: String?,
     var fechaNacimiento: LocalDate?,
     var email: String?,
-    var perfil: List<String>?,
+    var perfil: List<Any>?,
     var tipoDeLector: String?,
 )
 

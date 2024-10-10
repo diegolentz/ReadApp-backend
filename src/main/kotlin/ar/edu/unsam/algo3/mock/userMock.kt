@@ -21,12 +21,12 @@ val USERS = listOf(
     },
     Usuario(
         fotoPath = "dwightSchrute.jpeg",
-        nombre = "Dwight Schrute",
-        alias = "",
+        nombre = "ValenP",
+        alias = "vlenpg",
         fechaNacimiento = LocalDate.now(),
-        apellido = "",
+        apellido = "Pugliese",
         palabrasPorMinutos = (5..250).random(),
-        direccionMail = "",
+        direccionMail = "example@gmail.com",
         lenguaje = Lenguaje.values().random()
     ).apply {
         username = "valen"

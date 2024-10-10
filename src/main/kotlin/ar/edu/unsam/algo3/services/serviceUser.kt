@@ -99,14 +99,14 @@ object ServiceUser {
         }
     }
 
-    fun asignarPerfiles(perfiles: List<String>): PerfilDeUsuario {
+    fun asignarPerfiles(perfiles: List<Any>): PerfilDeUsuario {
         if (perfiles.size > 1) {
             return Combinador(perfiles.map { perfilBusquedaFactory(it) }.toMutableSet())
         }
         return perfilBusquedaFactory(perfiles.first())
     }
 
-    private fun perfilBusquedaFactory(perfil: String): PerfilDeUsuario {
+    private fun perfilBusquedaFactory(perfil: Any): PerfilDeUsuario {
         return when (perfil) {
             Precavido.toString() -> Precavido
             Leedor.toString() -> Leedor
