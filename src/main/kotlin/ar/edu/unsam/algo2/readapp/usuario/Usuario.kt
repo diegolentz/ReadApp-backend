@@ -85,7 +85,13 @@ class Usuario(
     fun cuantificarLibroLeido(libro: Libro) {
         cantidadVecesLeido[librosLeidos.indexOf(libro)] += 1
     }
-
+    fun agregarLeido(libro: Libro) {
+        librosALeer.remove(libro)
+        leer(libro)
+    }
+    fun agregarLeer(libro : Libro){
+        librosALeer.add(libro)
+    }
     fun leido(libro: Libro): Boolean = this.librosLeidos.contains(libro)
     fun cantidadLecturasDe(libro: Libro): Int {
         //val predicate: (Libro) -> Boolean = {it == libro}

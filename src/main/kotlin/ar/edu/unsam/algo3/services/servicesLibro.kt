@@ -29,13 +29,10 @@ object ServiceLibros {
 
     fun obtenerLibros(idUser: Int, estado: Boolean): List<LibroDTO> {
         val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
-        val librosLeidos: List<Libro> = usuario.librosLeidos.toList()
         val libros: List<Libro> = if (estado) {
-            librosLeidos
+            usuario.librosLeidos.toList()
         } else {
-            usuario.librosALeer.filter {
-                libroALeer -> !librosLeidos.map { it.id }.contains(libroALeer.id)
-            }
+            usuario.librosALeer.toList()
         }
         return libros.map { it.toDTO() }
     }
@@ -45,9 +42,9 @@ object ServiceLibros {
         val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }
          libros.forEach { libro ->
             if (estado) {
-                usuario.leer(libro)
+                usuario.agregarLeido(libro)
             } else {
-                usuario.librosALeer.add(libro)
+                usuario.agregarLeer(libro)
             }
         }
         return libros.map { it.toDTO() }.toList()
