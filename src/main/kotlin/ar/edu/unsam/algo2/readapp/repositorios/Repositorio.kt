@@ -53,7 +53,7 @@ class Repositorio<T : AvaliableInstance> {
         return objetosEnMemoria.first { it.id == objectID } //devuelve elemento o null
     }
 
-    fun search(texto: String): List<T> = objetosEnMemoria.filter { it.cumpleCriterioBusqueda(texto) }
+    fun search(texto: String): List<T> = objetosEnMemoria.filter { it.cumpleCriterioBusqueda(texto.lowercase()) }
 
     private fun asignarID(objeto: T) {
         objeto.id = objetosEnMemoria.size + 1

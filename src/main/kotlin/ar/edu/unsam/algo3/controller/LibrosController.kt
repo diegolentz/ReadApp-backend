@@ -33,4 +33,7 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     @GetMapping("/add-Books")
     fun agregarALeeer(@RequestParam idUser: Int): List<LibroDTO> = serviceLibros.paraLeer(idUser)
 
+    @GetMapping("/librosSearch/filter")
+    fun obtenerLibrosFiltrados(@RequestParam filtro: String): List<LibroDTO> = serviceLibros.obtenerLibrosFiltrados(filtro)
+
 }

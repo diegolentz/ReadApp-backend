@@ -35,6 +35,17 @@ object ServiceLibros {
         return libros.map { it.toDTO() }
     }
 
+    fun obtenerLibrosFiltrados(filtro: String): List<LibroDTO> {
+        libros = repoLibro.search(filtro).toMutableList()
+
+       // this.books = this.filtro ?
+       // (this.books.filter((book) => book.title.replace(/\s+/g, '').toLowerCase().includes(
+       // this.filtro.replace(/\s+/g, '').toLowerCase()) ||
+       // book.author.replace(/\s+/g, '').toLowerCase().includes(this.filtro.replace(/\s+/g, '').toLowerCase()))) :
+       // (this.books);
+        return libros.map { it.toDTO() }
+    }
+
     fun agregarLibros(idUser: Int, estado: Boolean, idLibro: List<Int>): List<LibroDTO> {
         val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
         val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }

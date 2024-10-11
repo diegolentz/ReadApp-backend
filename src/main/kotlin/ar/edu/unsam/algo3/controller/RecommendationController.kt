@@ -29,5 +29,7 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
 //    @DeleteMapping("/recommendations{id}")
 //    fun deleteRecommendation(@PathVariable id: Int) = serviceRecommendation.deleteRecommendation(id)
 
-
+    @GetMapping("/recommendations/filter")
+    fun getRecommendationFilter(@RequestParam filtro: String) : List<RecomendacionDTO> =
+        serviceRecommendation.getWithFilter(filtro)
 }
