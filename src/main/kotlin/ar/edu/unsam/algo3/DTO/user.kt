@@ -72,8 +72,14 @@ data class UserInfoDTO(
     var alias: String?,
     var fechaNacimiento: LocalDate?,
     var email: String?,
-    var perfil: List<Any>?,
+    var perfil: List<PerfilDeLecturaDTO>?,
     var tipoDeLector: String?,
+)
+
+data class PerfilDeLecturaDTO(
+    var tipoPerfil: String,
+    var rangoMin: Double = 0.0,
+    var rangoMax: Double = 0.0
 )
 
 data class LoginRequest(
@@ -93,7 +99,7 @@ data class CreateAccountRequest(
 )
 
 data class CreateAccountResponse(
-    var message:String = "Cuenta creada con exito"
+    var message: String = "Cuenta creada con exito"
 )
 
 fun Usuario.toDTOProfileFriends() = UserProfileFriendsDTO(
@@ -102,7 +108,7 @@ fun Usuario.toDTOProfileFriends() = UserProfileFriendsDTO(
     nombre = nombre,
     apellido = apellido,
     amigos = amigos.map { it.toDTOFriend() }
-    )
+)
 
 data class UserProfileFriendsDTO(
     var id: Int?,

@@ -33,7 +33,7 @@ val USERS = listOf(
     ).apply {
         username = "valen"
         password = "valen"
-        perfil = Calculador(1.0, 10.0)
+        perfil = Leedor
     },
 
     Usuario(
