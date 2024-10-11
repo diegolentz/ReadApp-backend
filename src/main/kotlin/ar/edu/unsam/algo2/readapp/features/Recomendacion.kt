@@ -111,9 +111,12 @@ class Recomendacion(
         this.librosLeidosEnRecomendacion(usuario).sumOf { libro -> usuario.tiempoLecturaBase(libro) }
     private fun librosLeidosEnRecomendacion(usuario: Usuario) = librosRecomendados.filter{ libro -> usuario.leido(libro)}
 
-    override fun cumpleCriterioBusqueda(texto: String) =  creador.apellido === texto ||
-            librosRecomendados.any { libro -> libro.titulo.contains(texto) ||
-                    valoraciones.any { valoracion -> valoracion.comentario.contains(texto)}}
+    //override fun cumpleCriterioBusqueda(texto: String) =  creador.apellido === texto ||
+    //        librosRecomendados.any { libro -> libro.titulo.contains(texto) ||
+    //                valoraciones.any { valoracion -> valoracion.comentario.contains(texto)}}
+
+    override fun cumpleCriterioBusqueda(texto: String): Boolean =
+        titulo.lowercase().contains(texto.lowercase())
 
     fun toDTO(): RecomendacionDTO = RecomendacionDTO(
         creador = this.creador.nombreApellido(creador),

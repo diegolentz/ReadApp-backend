@@ -50,5 +50,10 @@ object ServiceRecommendation {
         return recommendation
     }
 
+    fun getWithFilter(filtro: String): List<RecomendacionDTO> {
+        recomendaciones = recommendationRepository.search(filtro).toMutableList()
+        return recomendaciones.map { it: Recomendacion -> it.toDTO() }
+    }
+
 }
 
