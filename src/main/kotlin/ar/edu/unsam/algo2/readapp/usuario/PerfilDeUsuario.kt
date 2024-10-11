@@ -35,9 +35,9 @@ interface PerfilDeUsuario {
     fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean
     fun recomendacionEsInteresante(recomendacion: Recomendacion, usuario: Usuario) = condicion(recomendacion, usuario)
 
-    fun toList(): List<Any> = listOf(this.toString())
+    fun toList(): List<Any> = listOf(this)
 
-    @JsonProperty("perfil")
+    @JsonProperty("tipoPerfil")
     override fun toString(): String
 }
 
@@ -93,9 +93,6 @@ class Calculador(var rangoMin: Double, var rangoMax: Double) : PerfilDeUsuario {
 
     override fun toString(): String = "Calculador"
 
-    override fun toList(): List<Any> {
-        return listOf(this.toString(), listOf(rangoMin, rangoMax))
-    }
 }
 
 object Demandante : PerfilDeUsuario {
