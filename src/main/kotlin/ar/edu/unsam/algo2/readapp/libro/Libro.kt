@@ -23,9 +23,8 @@ class Libro(
 
 ) : AvaliableInstance {
 
-
     override var id: Int = -1//POR DEFAULT AL FINAL
-    override fun cumpleCriterioBusqueda(texto: String) = (titulo.contains(texto) || autor.apellido.contains(texto))
+    override fun cumpleCriterioBusqueda(texto: String) = (titulo.lowercase().contains(texto) || autor.apellido.lowercase().contains(texto) || autor.nombre.lowercase().contains(texto))
 
     companion object {
         val PAGINAS_LIBRO_LARGO_MIN: Int = 600
