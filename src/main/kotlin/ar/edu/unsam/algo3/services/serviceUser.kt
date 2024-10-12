@@ -99,21 +99,20 @@ object ServiceUser {
         }
     }
 
-    fun asignarPerfiles(perfiles: List<String>): PerfilDeUsuario {
+    fun asignarPerfiles(perfiles: List<PerfilDeLecturaDTO>): PerfilDeUsuario {
         if (perfiles.size > 1) {
             return Combinador(perfiles.map { perfilBusquedaFactory(it) }.toMutableSet())
         }
         return perfilBusquedaFactory(perfiles.first())
     }
 
-    private fun perfilBusquedaFactory(perfil: String): PerfilDeUsuario {
-        return when (perfil) {
+    private fun perfilBusquedaFactory(perfil: PerfilDeLecturaDTO): PerfilDeUsuario {
+        return when (perfil.tipoPerfil) {
             Precavido.toString() -> Precavido
             Leedor.toString() -> Leedor
             Poliglota.toString() -> Poliglota
             Nativista.toString() -> Nativista
-            //Solucionar tema calculador
-            Calculador(0.0, 0.0).toString() -> Calculador(0.0, 0.0)
+            Calculador(0.0, 0.0).toString() -> Calculador(perfil.rangoMin, perfil.rangoMax)
             Demandante.toString() -> Demandante
             Experimentado.toString() -> Experimentado
             Cambiante.toString() -> Cambiante

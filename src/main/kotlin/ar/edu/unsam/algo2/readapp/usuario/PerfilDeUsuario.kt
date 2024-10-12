@@ -2,6 +2,8 @@ package ar.edu.unsam.algo2.readapp.usuario
 
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.libro.Libro
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///   ESTRUCTURA
@@ -33,8 +35,9 @@ interface PerfilDeUsuario {
     fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean
     fun recomendacionEsInteresante(recomendacion: Recomendacion, usuario: Usuario) = condicion(recomendacion, usuario)
 
-    fun toList(): List<String> = listOf(this.toString())
+    fun toList(): List<Any> = listOf(this)
 
+    @JsonProperty("tipoPerfil")
     override fun toString(): String
 }
 
@@ -74,6 +77,7 @@ object Nativista : PerfilDeUsuario {
 
 class Calculador(var rangoMin: Double, var rangoMax: Double) : PerfilDeUsuario {
 
+
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         recomendacion.tiempodeLectura(usuario) in this.rango()
 
@@ -88,6 +92,7 @@ class Calculador(var rangoMin: Double, var rangoMax: Double) : PerfilDeUsuario {
     }
 
     override fun toString(): String = "Calculador"
+
 }
 
 object Demandante : PerfilDeUsuario {
@@ -116,7 +121,9 @@ object Experimentado : PerfilDeUsuario {
 
 object Cambiante : PerfilDeUsuario {
 
+    @JsonIgnore
     val EDAD_MAX_LEEDOR: Int = 25
+
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         checkeoPerfil(usuario).condicion(recomendacion, usuario)
 
@@ -134,7 +141,10 @@ object Cambiante : PerfilDeUsuario {
     override fun toString(): String = "Cambiante"
 }
 
-class Combinador(val perfiles: MutableSet<PerfilDeUsuario>) : PerfilDeUsuario {
+class Combinador(
+    @JsonIgnore
+    val perfiles: MutableSet<PerfilDeUsuario>
+) : PerfilDeUsuario {
     override fun condicion(recomendacion: Recomendacion, usuario: Usuario): Boolean =
         perfiles.all { it.condicion(recomendacion, usuario) }
 
@@ -146,7 +156,7 @@ class Combinador(val perfiles: MutableSet<PerfilDeUsuario>) : PerfilDeUsuario {
         perfiles.remove(perfil)
     }
 
-    override fun toList(): List<String> = perfiles.flatMap { it.toList() }
+    override fun toList(): List<PerfilDeUsuario> = perfiles.toList()
 
     override fun toString(): String = "Combinador"
 }
