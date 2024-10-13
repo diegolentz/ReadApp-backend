@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.mock
 
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
+import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.usuario.Calculador
 import ar.edu.unsam.algo2.readapp.usuario.Leedor
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
@@ -34,6 +35,10 @@ val USERS = listOf(
         username = "valen"
         password = "valen"
         perfil = Leedor
+        this.agregarLibros(
+            LIBROS,
+            estado = true
+        )
     },
 
     Usuario(

@@ -112,7 +112,7 @@ object ServiceUser {
             Leedor.toString() -> Leedor
             Poliglota.toString() -> Poliglota
             Nativista.toString() -> Nativista
-            Calculador(0.0, 0.0).toString() -> Calculador(perfil.rangoMin, perfil.rangoMax)
+            Calculador(1.0, 2.0).toString() -> Calculador(perfil.rangoMin, perfil.rangoMax)
             Demandante.toString() -> Demandante
             Experimentado.toString() -> Experimentado
             Cambiante.toString() -> Cambiante
