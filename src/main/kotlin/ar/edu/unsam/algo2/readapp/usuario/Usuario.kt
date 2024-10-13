@@ -89,7 +89,16 @@ class Usuario(
         }
         return libros
     }
-
+    fun eliminarLibros(libros : List<Libro>, estado : Boolean) : List<Libro> {
+        libros.forEach { libro ->
+            if(estado){
+                librosLeidos.remove(libro)
+            }else{
+                librosALeer.remove(libro)
+            }
+        }
+        return libros
+    }
     fun agregarALeer(libros: List<Libro>): List<Libro> {
         val librosNoExistentes = libros.filter { libro ->
             libro !in librosALeer && libro !in librosLeidos
