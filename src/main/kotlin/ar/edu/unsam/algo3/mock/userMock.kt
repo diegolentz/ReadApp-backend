@@ -52,13 +52,13 @@ val USERS = listOf(
         username = "delfi"
         password = "delfi"
         amigos = mutableListOf(Usuario(
-            nombre = "Andrea ",
+            nombre = "Andrea",
             apellido = "Perez",
             alias = "andr.per",
             fotoPath = "kellyKapoor.jpeg"),
             Usuario(
                 fotoPath = "kevinMalone.jpeg",
-                nombre = "Kevin ",
+                nombre = "Kevin",
                 apellido = "Malone",
                 alias = "amantedelmuffin"
             ))

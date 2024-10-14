@@ -104,34 +104,43 @@ data class CreateAccountResponse(
     var message: String = "Cuenta creada con exito"
 )
 
-fun Usuario.toDTOProfileFriends() = UserProfileFriendsDTO(
-    id = id,
-    fotoPath = fotoPath,
-    nombre = nombre,
-    apellido = apellido,
-    amigos = amigos.map { it.toDTOFriend() }
-)
+//fun Usuario.toDTOProfileFriends() = UserProfileFriendsDTO(
+//    id = id,
+//    fotoPath = fotoPath,
+//    nombre = nombre,
+//    apellido = apellido,
+//    amigos = amigos.map { it.toDTOFriend() } )
 
-data class UserProfileFriendsDTO(
-    var id: Int?,
-    var fotoPath: String,
-    var nombre: String,
-    var apellido: String,
-    var amigos: List<UserFriendDTO>
-)
+//data class UserProfileFriendsDTO(
+//    var id: Int?,
+//    var fotoPath: String,
+//   var nombre: String,
+//    var apellido: String,
+//    var amigos: List<UserFriendDTO>
+//)
 
 fun Usuario.toDTOFriend() = UserFriendDTO(
     id = id,
     fotoPath = fotoPath,
-    nombre = nombre,
-    apellido = apellido,
+    nombreCompleto = "$nombre $apellido",
     alias = alias
 )
 
 data class UserFriendDTO(
     var id: Int?,
     var fotoPath: String,
-    var nombre: String,
-    var apellido: String,
+    var nombreCompleto: String,
     var alias: String
+)
+
+fun Usuario.toDTOProfileAside() = UserProfileAsideDTO(
+    id = id,
+    fotoPath = fotoPath,
+    nombreCompleto = "$nombre $apellido"
+)
+
+data class UserProfileAsideDTO(
+    var id: Int?,
+    var fotoPath: String,
+    var nombreCompleto: String
 )
