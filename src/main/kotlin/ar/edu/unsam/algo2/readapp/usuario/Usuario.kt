@@ -15,7 +15,7 @@ import java.time.LocalDate
 import java.time.Period
 
 class Usuario(
-    var fotoPath:String = "",
+    var fotoPath: String = "",
     var nombre: String = "",
     var apellido: String = "",
     var alias: String = "",
@@ -23,12 +23,23 @@ class Usuario(
     var palabrasPorMinutos: Int = (5..250).random(),
     var direccionMail: String = "",
     var lenguaje: Lenguaje = Lenguaje.entries.random(),
-    var email:String = "example@example.com"
+    var email: String = "example@example.com"
 ) : AvaliableInstance {
 
     //Interfaces
     var tipoDeLector: TipoDeLector = Recurrente
-    var perfil: PerfilDeUsuario = Combinador(mutableSetOf(Leedor,Precavido, Nativista, Demandante, Cambiante, Poliglota, Experimentado, Calculador(20.04,21.04)))
+    var perfil: PerfilDeUsuario = Combinador(
+        mutableSetOf(
+            Leedor,
+            Precavido,
+            Nativista,
+            Demandante,
+            Cambiante,
+            Poliglota,
+            Experimentado,
+            Calculador(20.04, 21.04)
+        )
+    )
 
     val listaObservers: MutableList<AgregarLibroObserver> = mutableListOf()
     override var id: Int = -1//POR DEFAULT AL FINAL
@@ -43,8 +54,8 @@ class Usuario(
     val recomendacionesAValorar: MutableList<Recomendacion> = mutableListOf()
     val recomendacionesValoradas: MutableMap<Recomendacion, Valoracion> = mutableMapOf()
 
-    var username:String = ""
-    var password:String = ""
+    var username: String = ""
+    var password: String = ""
 
     fun edad(): Int {
         return Period.between(this.fechaNacimiento, LocalDate.now()).years
@@ -74,11 +85,13 @@ class Usuario(
     fun tiempoLecturaFinal(libro: Libro): Double =
         this.tiempoLecturaBase(libro) + tipoDeLector.tiempoDeLectura(this, libro)
 
+    fun tiempoLecturaPromedio(): Double = (librosLeidos.map { tiempoLecturaFinal(it) }.sum() / librosLeidos.size)
+
     fun mostrarLibros(estado: Boolean): List<Libro> =
         if (estado) librosLeidos.toList()
         else librosALeer.toList()
 
-    fun agregarLibros(libros: List<Libro>, estado: Boolean) : List<Libro> {
+    fun agregarLibros(libros: List<Libro>, estado: Boolean): List<Libro> {
         libros.forEach { libro ->
             if (estado) {
                 librosALeer.remove(libro)
@@ -200,7 +213,8 @@ class Usuario(
     fun tieneLibrosPendientes(listaLibros: MutableSet<Libro>): Set<Libro> {
         return librosALeer.intersect(listaLibros)
     }
-    fun vetarAmigo(usuario: Usuario){
+
+    fun vetarAmigo(usuario: Usuario) {
         this.amigos.remove(usuario)
     }
 

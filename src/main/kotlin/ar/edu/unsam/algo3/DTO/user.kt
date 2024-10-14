@@ -45,6 +45,7 @@ data class UserProfileDTO(
     val librosLeidos: MutableList<Libro>,
     val librosALeer: MutableSet<Libro>,
     val recomendacionesAValorar: MutableList<Recomendacion>,
+    val tiempoLecturaPromedio:Double
 )
 
 fun Usuario.toDTOProfile() = UserProfileDTO(
@@ -62,7 +63,8 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     amigos = amigos,
     librosLeidos = librosLeidos,
     librosALeer = librosALeer,
-    recomendacionesAValorar = recomendacionesAValorar
+    recomendacionesAValorar = recomendacionesAValorar,
+    tiempoLecturaPromedio = this.tiempoLecturaPromedio()
 )
 
 data class UserInfoDTO(
