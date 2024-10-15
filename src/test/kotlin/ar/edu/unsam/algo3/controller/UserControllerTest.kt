@@ -2,9 +2,13 @@ package ar.edu.unsam.algo3.controller
 
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
-import ar.edu.unsam.algo3.dominio.CreateAccountRequest
-import ar.edu.unsam.algo3.dominio.LoginRequest
+import ar.edu.unsam.algo3.DTO.CreateAccountRequest
+import ar.edu.unsam.algo3.DTO.CreateAccountResponse
+import ar.edu.unsam.algo3.DTO.LoginRequest
+import ar.edu.unsam.algo3.mock.USERS
 import com.fasterxml.jackson.databind.ObjectMapper
+import excepciones.loginErrorMessage
+import excepciones.usernameInvalidMessage
 import org.json.JSONObject
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -37,7 +41,7 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
         mockMvc
             .perform(MockMvcRequestBuilders.get("/user/basic/1"))
             .andExpect(MockMvcResultMatchers.status().isOk)
-            .andExpect(MockMvcResultMatchers.jsonPath("$.nombre").value("Inosuke"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.nombre").value(USERS[0].nombre))
     }
 
     @Test
@@ -57,7 +61,7 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
             .perform(MockMvcRequestBuilders.get("/user/basic/$invalidID"))
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andReturn().resolvedException?.message
-        assertEquals(errorMessage, "$invalidID no es un entero")
+        assertEquals(errorMessage, "$invalidID no es un entero, ingrese un id válido")
     }
 
     @Test
@@ -104,7 +108,7 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andReturn().resolvedException?.message
 
-        assertEquals(errorMessage, "USUARIO INCORRECTO")
+        assertEquals(errorMessage, loginErrorMessage)
     }
 
     @Test
@@ -125,19 +129,19 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andReturn().resolvedException?.message
 
-        assertEquals(errorMessage, "PASSWORD INCORRECTA")
+        assertEquals(errorMessage, loginErrorMessage)
     }
 
     @Test
     fun `Crear cuenta, OK`() {
         //Se asume usuario registrado
-        val loguinRequest = CreateAccountRequest(
+        val createAccountRequest = CreateAccountRequest(
             username = "zaboomafoo",
             password = "zaboomafoo",
             name = "Zabu Mafu",
             email = "ZabuMafu@zaboomafoo"
         )
-        val json = ObjectMapper().writeValueAsString(loguinRequest)
+        val json = ObjectMapper().writeValueAsString(createAccountRequest)
         val response = mockMvc
             .perform(
                 MockMvcRequestBuilders.post("/createAccount")
@@ -149,9 +153,9 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
 
         val responseJSON = JSONObject(response)
 
-        val newUserID = responseJSON.getInt("userID")
+        val message = responseJSON.get("message")
         //Ya hay 6 usuarios(1 por integrante de grupo + admin), uno nuevo devuelve el userID=7
-        assertEquals(newUserID, 7)
+        assertEquals(message, CreateAccountResponse().message)
     }
 
     @Test
@@ -173,6 +177,6 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andReturn().resolvedException?.message
 
-        assertEquals(errorMessage, "Nombre de usuario NO DISPONIBLE")
+        assertEquals(errorMessage, usernameInvalidMessage)
     }
 }
