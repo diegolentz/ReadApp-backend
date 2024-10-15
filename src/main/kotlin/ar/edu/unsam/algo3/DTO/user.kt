@@ -144,3 +144,19 @@ data class UserProfileAsideDTO(
     var fotoPath: String,
     var nombreCompleto: String
 )
+
+data class PasswordRecoveryRequest(
+    var email: String = "",
+    var username: String = "",
+    var newPassword: String = ""
+)
+
+data class PasswordRecoveryResponse(
+    var email: String,
+    var username: String,
+    var newPassword: String
+)
+
+data class MessageResponse(
+    var message:String
+)

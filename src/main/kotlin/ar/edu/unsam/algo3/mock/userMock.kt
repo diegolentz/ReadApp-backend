@@ -90,6 +90,7 @@ val USERS = listOf(
     ).apply {
         username = "adrian"
         password = "adrian"
+        email = "adrian@adrian"
     },
     Usuario(
         fotoPath = "",

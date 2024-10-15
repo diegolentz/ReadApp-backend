@@ -50,7 +50,7 @@ class UserController(val serviceUser: ServiceUser) {
     fun updateUsuario(@RequestBody body: UserInfoDTO): UserProfileDTO = serviceUser.updateUserInfo(body)
 
     @PostMapping("/passwordRecovery")
-    fun passwordRecovery(@RequestBody loginRequestBody: CreateAccountRequest): CreateAccountResponse {
-        return serviceUser.createAccount(loginRequestBody)
+    fun passwordRecovery(@RequestBody passwordRecoveryBody: PasswordRecoveryRequest): MessageResponse {
+        return serviceUser.passwordRecover(passwordRecoveryBody)
     }
 }
