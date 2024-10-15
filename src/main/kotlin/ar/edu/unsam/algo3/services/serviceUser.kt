@@ -66,8 +66,20 @@ object ServiceUser {
         return this.getByIdRaw(idTypeString).toDTOProfile()
     }
 
-    fun getByIdFriends(idTypeString: String): UserProfileFriendsDTO {
-        return this.getByIdRaw(idTypeString).toDTOProfileFriends()
+    fun getByIdFriends(idTypeString: String): List<UserFriendDTO> {
+        val usuarioLogueado = this.getByIdRaw(idTypeString)
+        return usuarioLogueado.amigos.map { it.toDTOFriend() }
+    }
+
+    fun getByIdNotFriends(idTypeString: String): List<UserFriendDTO>  {
+        val usuarios = this.getAll().toMutableList()
+        val usuarioLogueado = this.getByIdRaw(idTypeString)
+        usuarios.remove(usuarioLogueado)
+        return this.notMyFriends(usuarios, usuarioLogueado)
+    }
+
+    private fun notMyFriends(usuarios: List<Usuario>, usuarioLogueado: Usuario): List<UserFriendDTO> {
+        return usuarios.filter { !usuarioLogueado.esAmigoDe(it) }.map { it.toDTOFriend() }
     }
 
     fun validateLogin(loginRequest: LoginRequest): LoginResponse {
