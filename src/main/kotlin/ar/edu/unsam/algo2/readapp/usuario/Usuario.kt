@@ -13,6 +13,7 @@ import excepciones.BusinessException
 import excepciones.RecomendacionException
 import java.time.LocalDate
 import java.time.Period
+import kotlin.math.roundToInt
 
 class Usuario(
     var fotoPath: String = "",
@@ -85,7 +86,10 @@ class Usuario(
     fun tiempoLecturaFinal(libro: Libro): Double =
         this.tiempoLecturaBase(libro) + tipoDeLector.tiempoDeLectura(this, libro)
 
-    fun tiempoLecturaPromedio(): Double = (librosLeidos.map { tiempoLecturaFinal(it) }.sum() / librosLeidos.size)
+    fun tiempoLecturaPromedio(): Double {
+        val valor = (librosLeidos.map { tiempoLecturaFinal(it) }.sum() / librosLeidos.size)
+        return (valor * 100).roundToInt() / 100.0
+    }
 
     fun mostrarLibros(estado: Boolean): List<Libro> =
         if (estado) librosLeidos.toList()
