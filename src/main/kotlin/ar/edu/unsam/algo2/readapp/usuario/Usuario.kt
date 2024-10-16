@@ -88,8 +88,11 @@ class Usuario(
         this.tiempoLecturaBase(libro) + tipoDeLector.tiempoDeLectura(this, libro)
 
     fun tiempoLecturaPromedio(): Double {
-        val valor = (librosLeidos.map { tiempoLecturaFinal(it) }.sum() / librosLeidos.size)
-        return (valor * 100).roundToInt() / 100.0
+        if(librosLeidos.isNotEmpty()){
+            val valor = (librosLeidos.map { tiempoLecturaFinal(it) }.sum() / librosLeidos.size)
+            return (valor * 100).roundToInt() / 100.0
+        }
+        return 0.0
     }
 
     fun mostrarLibros(estado: Boolean): List<Libro> =
