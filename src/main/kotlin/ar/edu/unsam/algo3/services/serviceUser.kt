@@ -179,6 +179,10 @@ object ServiceUser {
             .alias(newAccountRequest.name)
             .lenguaje(Lenguaje.ESPANIOL)
             .build()
+            .apply {
+                perfil = Leedor
+                tipoDeLector = Promedio
+            }
     }
 
     fun passwordRecover(passwordRecoveryRequest: PasswordRecoveryRequest): MessageResponse {
