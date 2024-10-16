@@ -91,7 +91,7 @@ object ServiceUser {
         val viejoUsuario = getByIdRaw(nuevoUsuario.id.toString())
         nuevoUsuario.nombre?.let { viejoUsuario.nombre = it }
         nuevoUsuario.apellido?.let { viejoUsuario.apellido = it }
-        nuevoUsuario.alias?.let { viejoUsuario.alias = it }
+        nuevoUsuario.username?.let { viejoUsuario.username = it }
         nuevoUsuario.fechaNacimiento?.let { viejoUsuario.fechaNacimiento = it }
         nuevoUsuario.email?.let { viejoUsuario.email = it }
         nuevoUsuario.perfil?.let { viejoUsuario.perfil = asignarPerfiles(it) }

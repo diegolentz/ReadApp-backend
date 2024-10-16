@@ -12,7 +12,7 @@ data class UserBasicDTO(
     var fotoPath: String,
     val nombre: String,
     val apellido: String,
-    val alias: String,
+    val username: String,
     val lenguaje: Lenguaje,
     //Solo para vistas home, mis recomendaciones,
     val palabrasPorMinutos: Int,
@@ -23,7 +23,7 @@ fun Usuario.toDTOBasic() = UserBasicDTO(
     fotoPath = fotoPath,
     nombre = nombre,
     apellido = apellido,
-    alias = alias,
+    username = username,
     lenguaje = lenguaje,
     palabrasPorMinutos = palabrasPorMinutos
 )
@@ -33,7 +33,7 @@ data class UserProfileDTO(
     var fotoPath: String,
     var nombre: String,
     var apellido: String,
-    var alias: String,
+    var username: String,
     var lenguaje: Lenguaje,
     var palabrasPorMinutos: Int,
     //Exclusivo de perfil de usuario
@@ -53,7 +53,7 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     fotoPath = fotoPath,
     nombre = nombre,
     apellido = apellido,
-    alias = alias,
+    username = username,
     lenguaje = lenguaje,
     palabrasPorMinutos = palabrasPorMinutos,
     fechaNacimiento = fechaNacimiento,
@@ -67,11 +67,11 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     tiempoLecturaPromedio = this.tiempoLecturaPromedio()
 )
 
-data class UserInfoDTO(
+data class  UserInfoDTO(
     var id: Int?,
     var nombre: String?,
     var apellido: String?,
-    var alias: String?,
+    var username: String?,
     var fechaNacimiento: LocalDate?,
     var email: String?,
     var perfil: List<PerfilDeLecturaDTO>?,
