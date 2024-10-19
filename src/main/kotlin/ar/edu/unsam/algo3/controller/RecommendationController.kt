@@ -2,6 +2,7 @@
 package ar.edu.unsam.algo3.controller
 import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 import ar.edu.unsam.algo3.DTO.RecomendacionEditarDTO
+import ar.edu.unsam.algo3.DTO.ValoracionDTO
 
 import ar.edu.unsam.algo3.services.ServiceRecommendation
 
@@ -18,13 +19,13 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
    @GetMapping("/recommendations/{id}")
    fun getRecommendationById(@PathVariable id: Int) : RecomendacionDTO = serviceRecommendation.getByIdDTO(id)
 
-//    @PostMapping("/recommendations/{id}")
-//    fun createRecommendation(@RequestBody recommendationDTO: RecommendationDTO): Recomendacion =
-//        serviceRecommendation.createRecommendation(recommendationDTO.convertir())
-//
     @PutMapping("/recommendations")
     fun updateRecommendation(@RequestBody newRecommendation: RecomendacionEditarDTO): RecomendacionEditarDTO =
         serviceRecommendation.updateRecommendation(newRecommendation)
+
+    @PutMapping("/recommendations/{id}")
+    fun createValoracion(@RequestBody valoracion:ValoracionDTO,@PathVariable id: Int ): ValoracionDTO =
+        serviceRecommendation.createValoracion(valoracion,id)
 
 //    @DeleteMapping("/recommendations{id}")
 //    fun deleteRecommendation(@PathVariable id: Int) = serviceRecommendation.deleteRecommendation(id)
