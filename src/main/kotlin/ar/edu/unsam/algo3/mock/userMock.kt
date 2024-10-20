@@ -7,7 +7,6 @@ import ar.edu.unsam.algo2.readapp.usuario.*
 import ar.edu.unsam.algo2.readapp.usuario.Promedio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 
-val libros = LIBROS
 
 var diego:Usuario = UsuarioBuilder(Usuario())
     .fotoPath("inosuke.jpeg")
@@ -80,6 +79,12 @@ fun auxGenerarRecomendaciones(){
     diego.leer(LIBROS[0])
     diego.leer(LIBROS[1])
     diego.leer(LIBROS[2])
+    diego.agregarLibroALeer(LIBROS[3])
+    diego.agregarLibroALeer(LIBROS[4])
+    diego.agregarLibroALeer(LIBROS[5])
+    diego.agregarLibroALeer(LIBROS[6])
+    diego.agregarLibroALeer(LIBROS[7])
+    diego.agregarLibroALeer(LIBROS[8])
     diego.crearRecomendacion(
         titulo = "Historias Cortas de Ciencia Ficción",
         contenido = "En un futuro donde las máquinas dominan el espacio exterior, un pequeño grupo de humanos lucha por sobrevivir. Esta colección reúne relatos que exploran la inteligencia artificial, los viajes intergalácticos y las fronteras de la ciencia moderna, presentando una visión fascinante del futuro.",
