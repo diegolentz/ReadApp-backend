@@ -8,7 +8,11 @@ import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 import ar.edu.unsam.algo3.DTO.RecomendacionEditarDTO
 import ar.edu.unsam.algo3.DTO.ValoracionDTO
+
 import ar.edu.unsam.algo3.DTO.toDTO
+
+import ar.edu.unsam.algo3.services.ServiceLibros
+
 
 //import ar.edu.unsam.algo3.dominio.RecommendationDTO
 
@@ -79,11 +83,17 @@ class Recomendacion(
         this.valoraciones.add(valoracion)
     }
 
-    fun actualizar(recomendacionActualizada: RecomendacionEditarDTO){
+    fun actualizar(recomendacionActualizada: RecomendacionEditarDTO) {
+
         this.titulo = recomendacionActualizada.titulo
         this.publica = recomendacionActualizada.publica
         this.contenido = recomendacionActualizada.contenido
-        /*this.librosRecomendados = recomendacionActualizada.librosRecomendados.map { it -> it. }*/
+
+        // Obtener los autores antes de llamar a fromDTO
+        this.librosRecomendados = recomendacionActualizada.librosRecomendados.map { libroDTO ->
+            val autor = ServiceLibros.getById(libroDTO.id).autor  // Obtener el autor de algún servicio
+            libroDTO.fromDTO(libroDTO, autor)  // Pasar el autor a fromDTO
+        }.toMutableSet()
     }
 
     //////////////////////////////////////////////////////////////////

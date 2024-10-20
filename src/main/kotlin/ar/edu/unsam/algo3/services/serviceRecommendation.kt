@@ -40,6 +40,7 @@ object ServiceRecommendation {
 
     fun updateRecommendation(recomendacionActualizada: RecomendacionEditarDTO): RecomendacionEditarDTO {
         val recomendacion = getById(recomendacionActualizada.id)
+
         recomendacion.actualizar(recomendacionActualizada)
         recommendationRepository.update(recomendacion)
         return recomendacion.editarDTO()
