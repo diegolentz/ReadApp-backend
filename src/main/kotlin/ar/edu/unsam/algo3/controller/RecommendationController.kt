@@ -2,8 +2,8 @@
 package ar.edu.unsam.algo3.controller
 import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 import ar.edu.unsam.algo3.DTO.RecomendacionEditarDTO
+import ar.edu.unsam.algo3.DTO.RecommendationCardDTO
 import ar.edu.unsam.algo3.DTO.ValoracionDTO
-
 import ar.edu.unsam.algo3.services.ServiceRecommendation
 
 import org.springframework.web.bind.annotation.*
@@ -14,17 +14,21 @@ import org.springframework.web.bind.annotation.*
 class RecommendationController(val serviceRecommendation: ServiceRecommendation) {
 
     @GetMapping("/recommendations")
-    fun getRecommendations(): List<RecomendacionDTO> = serviceRecommendation.getAll()
+    fun getAllRecommendations(): List<RecommendationCardDTO> = serviceRecommendation.getAll()
 
    @GetMapping("/recommendations/{id}")
    fun getRecommendationById(@PathVariable id: Int) : RecomendacionDTO = serviceRecommendation.getByIdDTO(id)
 
+//    @PostMapping("/recommendations/{id}")
+//    fun createRecommendation(@RequestBody recommendationDTO: RecommendationDTO): Recomendacion =
+//        serviceRecommendation.createRecommendation(recommendationDTO.convertir())
+//
     @PutMapping("/recommendations")
     fun updateRecommendation(@RequestBody newRecommendation: RecomendacionEditarDTO): RecomendacionEditarDTO =
         serviceRecommendation.updateRecommendation(newRecommendation)
 
     @PutMapping("/recommendations/{id}")
-    fun createValoracion(@RequestBody valoracion:ValoracionDTO,@PathVariable id: Int ): ValoracionDTO =
+    fun createValoracion(@RequestBody valoracion: ValoracionDTO, @PathVariable id: Int ): ValoracionDTO =
         serviceRecommendation.createValoracion(valoracion,id)
 
 //    @DeleteMapping("/recommendations{id}")
@@ -33,4 +37,9 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
     @GetMapping("/recommendations/filter")
     fun getRecommendationFilter(@RequestParam filtro: String) : List<RecomendacionDTO> =
         serviceRecommendation.getWithFilter(filtro)
+
+    //Recomendaciones de home o privadas
+    @GetMapping("/recommendationsLoggedUser")
+    fun getUserRecommendations(@RequestParam privada: Boolean): List<RecommendationCardDTO> = serviceRecommendation.getUserRecommendations(privada)
+
 }
