@@ -38,6 +38,7 @@ val pica:Usuario = UsuarioBuilder(Usuario())
     .email("pica@hotmail.com").alias("elPica")
     .username("pica").password("pica")
     .modoLectura(Promedio).tipoPerfil(Precavido)
+    .autoresPreferidos(autorPreferidoPica)
     .build()
 
 
@@ -130,21 +131,14 @@ fun auxGenerarRecomendaciones(){
         librosParaRecomendar = mutableSetOf(LIBROS[6], LIBROS[7])
     )
 
-    pica.leer(LIBROS[7])
-    pica.leer(LIBROS[8])
-    pica.leer(LIBROS[9])
+    pica.leer(libroAutorUnico)
     pica.crearRecomendacion(
         titulo = "Misterios de la Historia Antigua 2",
         contenido = "Continuacion del viaje, sarasa",
         publico = false,
-        librosParaRecomendar = mutableSetOf(LIBROS[8], LIBROS[7])
+        librosParaRecomendar = mutableSetOf(libroAutorUnico)
     )
-    pica.crearRecomendacion(
-        titulo = "Descubrimientos del Océano Desconocido",
-        contenido = "Una exploración profunda en los misterios que yacen en las profundidades del océano.",
-        publico = true,
-        librosParaRecomendar = mutableSetOf(LIBROS[7], LIBROS[9])
-    )
+
 
     LIBROS.forEach{
         adrian.leer(it)
@@ -177,5 +171,12 @@ fun auxGenerarRecomendaciones(){
         contenido = "Un análisis profundo sobre los fenómenos más enigmáticos del universo.",
         publico = false,
         librosParaRecomendar = mutableSetOf(LIBROS[1])
+    )
+    adrian.leer(libroAutorUnico)
+    adrian.crearRecomendacion(
+        titulo = "Libro de autor unico",
+        contenido = "Continuacion del viaje, sarasa",
+        publico = true,
+        librosParaRecomendar = mutableSetOf(libroAutorUnico)
     )
 }

@@ -1,6 +1,8 @@
 package ar.edu.unsam.algo3.mock
 
 import LibroBuilder
+import ar.edu.unsam.algo2.readapp.builders.AutorBuilder
+import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo3.services.ServiceAutor
@@ -58,3 +60,6 @@ val LIBROS = (1..12).map {
     libroRandom()
 }
 
+var autorPreferidoPica: Autor = AutorBuilder().build()
+var libroAutorUnico: Libro = LibroBuilder().autor(autorPreferidoPica)
+    .build()

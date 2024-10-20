@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo2.readapp.builders
 
+import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.usuario.PerfilDeUsuario
 import ar.edu.unsam.algo2.readapp.usuario.TipoDeLector
@@ -51,6 +52,10 @@ class UsuarioBuilder(val nuevoUsuario: Usuario = Usuario()) {
 
     fun fotoPath(path: String): UsuarioBuilder = apply {
         nuevoUsuario.fotoPath = path
+    }
+
+    fun autoresPreferidos(autor:Autor):UsuarioBuilder = apply {
+        nuevoUsuario.autoresPreferidos.add(autor)
     }
     fun build(): Usuario = nuevoUsuario
 }
