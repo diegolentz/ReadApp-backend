@@ -62,13 +62,9 @@ object ServiceRecommendation {
 
     fun createValoracion(valoracionDTO: ValoracionDTO, id:Int): ValoracionDTO {
         var recomendacionAValorar = this.getById(id)
-        var valoracionNueva = Valoracion(
-            autor = Usuario(nombre = "prueba"),
-            valor = valoracionDTO.score,
-            comentario = valoracionDTO.comentario,
-        )
-        recomendacionAValorar.agregarValroacion(valoracionNueva)
-        return valoracionNueva.toDTO()
+        var usuario = ServiceUser.loggedUser
+        usuario.valorarRecomendacion(recomendacionAValorar,valoracionDTO.score,valoracionDTO.comentario)
+        return valoracionDTO
     }
 
     fun getUserRecommendations(private: Boolean): List<RecommendationCardDTO> {
