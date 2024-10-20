@@ -29,11 +29,7 @@ class Valoracion(var valor: Int, var comentario: String, var autor: Usuario) {
     }
     fun validarPuntaje(valoracion: Int) = valoracion < VALOR_MIN || valoracion > VALOR_MAX
 
-    fun toDTO(): ValoracionDTO = ValoracionDTO(
-        author = this.autor.nombreApellido(autor),
-        score = this.valor,
-        date = this.fecha,
-        comentario = this.comentario
-    )
+
+
     
 }

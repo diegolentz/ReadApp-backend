@@ -1,8 +1,9 @@
 package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
+import ar.edu.unsam.algo2.readapp.features.Valoracion
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
-import ar.edu.unsam.algo3.DTO.RecomendacionDTO
-import ar.edu.unsam.algo3.DTO.RecomendacionEditarDTO
+import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.DTO.*
 import ar.edu.unsam.algo3.mock.RECOMMENDATIONS
 import excepciones.BusinessException
 import org.springframework.stereotype.Service
@@ -54,6 +55,17 @@ object ServiceRecommendation {
     fun getWithFilter(filtro: String): List<RecomendacionDTO> {
         recomendaciones = recommendationRepository.search(filtro).toMutableList()
         return recomendaciones.map { it: Recomendacion -> it.toDTO() }
+    }
+
+    fun createValoracion(valoracionDTO: ValoracionDTO, id:Int): ValoracionDTO {
+        var recomendacionAValorar = this.getById(id)
+        var valoracionNueva = Valoracion(
+            autor = Usuario(nombre = "prueba"),
+            valor = valoracionDTO.score,
+            comentario = valoracionDTO.comentario,
+        )
+        recomendacionAValorar.agregarValroacion(valoracionNueva)
+        return valoracionNueva.toDTO()
     }
 
 }

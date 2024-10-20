@@ -8,7 +8,11 @@ import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 import ar.edu.unsam.algo3.DTO.RecomendacionEditarDTO
 import ar.edu.unsam.algo3.DTO.ValoracionDTO
+
+import ar.edu.unsam.algo3.DTO.toDTO
+
 import ar.edu.unsam.algo3.services.ServiceLibros
+
 
 //import ar.edu.unsam.algo3.dominio.RecommendationDTO
 
@@ -75,7 +79,12 @@ class Recomendacion(
     ///////////////////////////////////////////////////////////////////
     fun editar(libroParaAgregar: Libro) { librosRecomendados.add(libroParaAgregar) }
 
+    fun agregarValroacion(valoracion: Valoracion){
+        this.valoraciones.add(valoracion)
+    }
+
     fun actualizar(recomendacionActualizada: RecomendacionEditarDTO) {
+
         this.titulo = recomendacionActualizada.titulo
         this.publica = recomendacionActualizada.publica
         this.contenido = recomendacionActualizada.contenido
