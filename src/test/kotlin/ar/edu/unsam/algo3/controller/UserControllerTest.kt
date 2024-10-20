@@ -154,7 +154,6 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
         val responseJSON = JSONObject(response)
 
         val message = responseJSON.get("message")
-        //Ya hay 6 usuarios(1 por integrante de grupo + admin), uno nuevo devuelve el userID=7
         assertEquals(message, CreateAccountResponse().message)
     }
 

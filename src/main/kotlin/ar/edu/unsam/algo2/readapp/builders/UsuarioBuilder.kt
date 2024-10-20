@@ -1,6 +1,8 @@
 package ar.edu.unsam.algo2.readapp.builders
 
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
+import ar.edu.unsam.algo2.readapp.usuario.PerfilDeUsuario
+import ar.edu.unsam.algo2.readapp.usuario.TipoDeLector
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import java.time.LocalDate
 
@@ -39,6 +41,16 @@ class UsuarioBuilder(val nuevoUsuario: Usuario = Usuario()) {
     }
     fun password(password: String): UsuarioBuilder = apply {
         nuevoUsuario.password = password
+    }
+    fun modoLectura(opcion: TipoDeLector): UsuarioBuilder = apply {
+        nuevoUsuario.tipoDeLector = opcion
+    }
+    fun tipoPerfil(opcion: PerfilDeUsuario): UsuarioBuilder = apply {
+        nuevoUsuario.perfil = opcion
+    }
+
+    fun fotoPath(path: String): UsuarioBuilder = apply {
+        nuevoUsuario.fotoPath = path
     }
     fun build(): Usuario = nuevoUsuario
 }

@@ -58,7 +58,7 @@ class Recomendacion(
     //////////////////////////////////////////////////////////////////
     //////////            CONDICION
     ///////////////////////////////////////////////////////////////////
-    fun accesoPublico(): Boolean = this.publica
+    private fun accesoPublico(): Boolean = this.publica
     fun esCreador(usuario: Usuario): Boolean = (usuario === creador)
     private fun accesoPrivado(usuario: Usuario):Boolean = creador.esAmigoDe(usuario)
     fun usuarioLeyoRecomendados(usuario: Usuario): Boolean = librosRecomendados.all{usuario.leido(it)}

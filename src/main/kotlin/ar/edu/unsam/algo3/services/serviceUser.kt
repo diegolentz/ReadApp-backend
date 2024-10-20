@@ -6,6 +6,8 @@ import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.*
 import ar.edu.unsam.algo3.DTO.*
 import ar.edu.unsam.algo3.mock.USERS
+import ar.edu.unsam.algo3.mock.auxGenerarAmistades
+import ar.edu.unsam.algo3.mock.auxGenerarRecomendaciones
 import excepciones.*
 import org.springframework.stereotype.Service
 
@@ -13,35 +15,13 @@ import org.springframework.stereotype.Service
 @Service
 object ServiceUser {
     private val userRepository: Repositorio<Usuario> = Repositorio()
-
+    var loggedUserId = 5
+    lateinit var loggedUser:Usuario
     init {
+        auxGenerarAmistades()
         USERS.forEach { user ->
             userRepository.create(user)
         }
-
-        val libros = ServiceLibros.get()
-
-        val usuarios = this.getAll()
-
-        val diego = usuarios[0]
-        diego.agregarLibroALeer(libros[0])
-        diego.agregarLibroALeer(libros[1])
-        diego.agregarLibroALeer(libros[2])
-        diego.agregarLibroALeer(libros[3])
-        diego.agregarLibroALeer(libros[4])
-        diego.agregarLibroALeer(libros[5])
-
-        diego.leer(libros[6])
-        diego.leer(libros[7])
-        diego.leer(libros[8])
-        diego.leer(libros[9])
-
-        diego.agregarAmigo(usuarios[1])
-        diego.agregarAmigo(usuarios[2])
-        diego.agregarAmigo(usuarios[3])
-
-        
-
     }
 
     fun getAll(): List<Usuario> = userRepository.getAll().toList()
@@ -84,7 +64,10 @@ object ServiceUser {
     fun validateLogin(loginRequest: LoginRequest): LoginResponse {
         val usuario = this.findUsername(loginRequest.username) ?: throw BadRequestException(loginErrorMessage)
         this.checkPassword(loginRequest.password, usuario!!.password)
-        return LoginResponse(userID = usuario.id)
+        val response = LoginResponse(userID = usuario.id)
+        this.loggedUserId = response.userID
+        this.loggedUser = this.getByIdRaw(loggedUserId.toString())
+        return response
     }
 
     fun updateUserInfo(nuevoUsuario: UserInfoDTO): UserProfileDTO {
@@ -201,6 +184,7 @@ object ServiceUser {
             throw throw BadRequestException("Incorrect Username or Email")
         }
     }
+
 }
 
 

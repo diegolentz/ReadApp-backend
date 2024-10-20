@@ -1,10 +1,13 @@
 package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
+import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 import ar.edu.unsam.algo3.DTO.RecomendacionEditarDTO
-import ar.edu.unsam.algo3.mock.RECOMMENDATIONS
-import excepciones.BusinessException
+import ar.edu.unsam.algo3.DTO.RecommendationCardDTO
+import ar.edu.unsam.algo3.DTO.toCardDTO
+import ar.edu.unsam.algo3.mock.USERS
+import ar.edu.unsam.algo3.mock.auxGenerarRecomendaciones
 import org.springframework.stereotype.Service
 
 
@@ -13,15 +16,18 @@ object ServiceRecommendation {
     private val recommendationRepository: Repositorio<Recomendacion> = Repositorio()
     var recomendaciones : MutableList<Recomendacion> = mutableListOf()
     init {
-        RECOMMENDATIONS.forEach { recommendation ->
-            recommendationRepository.create(recommendation)
+        auxGenerarRecomendaciones()
+        USERS.forEach { user ->
+            user.recomendaciones.forEach{
+                recommendationRepository.create(it)
+            }
         }
     }
 
 
-    fun getAll(): List<RecomendacionDTO> {
+    fun getAll(): List<RecommendationCardDTO> {
         recomendaciones = recommendationRepository.getAll().toMutableList()
-        return recomendaciones.map { it: Recomendacion -> it.toDTO() }
+        return recomendaciones.map { it: Recomendacion -> it.toCardDTO(ServiceUser.loggedUser) }
     }
 
     fun createRecommendation(recommendation: Recomendacion): Recomendacion {
@@ -29,6 +35,10 @@ object ServiceRecommendation {
         return this.getById(recommendation.id)
     }
 
+    fun getDTOCardAll(): List<RecommendationCardDTO> {
+        recomendaciones = recommendationRepository.getAll().toMutableList()
+        return recomendaciones.map { it: Recomendacion -> it.toCardDTO(this.getLoggedUser()) }
+    }
     fun getByIdDTO (recommendationID: Int): RecomendacionDTO {
         return recommendationRepository.getByID(recommendationID).toDTO()
     }
@@ -55,5 +65,32 @@ object ServiceRecommendation {
         return recomendaciones.map { it: Recomendacion -> it.toDTO() }
     }
 
+    fun getUserRecommendations(private: Boolean): List<RecommendationCardDTO> {
+        val user = this.getLoggedUser()
+        var userRecommendations = this.getLoggedUserRecommendations(user)
+        var filteredRecommendations = this.filterRecommendationsByFlag(userRecommendations, private)
+        return filteredRecommendations.map { it.toCardDTO(user) }
+    }
+
+    private fun getLoggedUser():Usuario{
+        val loggedUserId = ServiceUser.loggedUserId.toString()
+        return ServiceUser.getByIdRaw(loggedUserId)
+    }
+
+    private fun getLoggedUserRecommendations(user:Usuario):List<Recomendacion>{
+        recomendaciones = recommendationRepository.getAll().toMutableList()
+        return recomendaciones.filter {
+            it.esCreador(user)
+        }
+    }
+    private fun filterRecommendationsByFlag(recommendations:List<Recomendacion>,private:Boolean):List<Recomendacion>{
+        return if(private){
+            return recommendations.filter {
+                !it.publica
+            }
+        }else{
+            return recommendations
+        }
+    }
 }
 
