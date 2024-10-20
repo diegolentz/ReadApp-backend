@@ -32,7 +32,7 @@ val RECOMMENDATIONS = listOf(
         titulo = "Historias Cortas de Ciencia Ficción",
         contenido = "En un futuro donde las máquinas dominan el espacio exterior, un pequeño grupo de humanos lucha por sobrevivir. Esta colección reúne relatos que exploran la inteligencia artificial, los viajes intergalácticos y las fronteras de la ciencia moderna, presentando una visión fascinante del futuro.",
         publica = true,
-        valoraciones = valorations
+        valoraciones = mutableSetOf()
     ),
     Recomendacion(
         creador = users[1],
@@ -40,7 +40,7 @@ val RECOMMENDATIONS = listOf(
         titulo = "La Filosofía del Zen",
         contenido = "Este libro profundiza en las enseñanzas milenarias del Zen, una rama del budismo que enfatiza la meditación y la comprensión intuitiva del ser. A través de metáforas y historias breves, el autor invita al lector a reflexionar sobre la naturaleza del ser, la vida y el equilibrio interno.",
         publica = true,
-        valoraciones = valorations
+        valoraciones = mutableSetOf()
     ),
     Recomendacion(
         creador = users[2],
@@ -48,7 +48,7 @@ val RECOMMENDATIONS = listOf(
         titulo = "Viajes por Mundos Desconocidos",
         contenido = "Desde los océanos más profundos hasta los confines del espacio exterior, este libro lleva al lector a una travesía inolvidable. Explorando los límites de la realidad y la imaginación, el autor presenta una serie de aventuras que desafían las leyes de la física y de la mente humana.",
         publica = true,
-        valoraciones = valorations
+        valoraciones = mutableSetOf()
     ),
     Recomendacion(
         creador = users[3],
@@ -56,7 +56,7 @@ val RECOMMENDATIONS = listOf(
         titulo = "El Arte de la Guerra Moderna",
         contenido = "Un análisis profundo de las estrategias militares contemporáneas, desde las guerras cibernéticas hasta las tácticas de guerrilla urbana. Este libro examina cómo las tecnologías avanzadas y los conflictos geopolíticos han transformado el campo de batalla moderno, ofreciendo una perspectiva única sobre el futuro de la guerra.",
         publica = true,
-        valoraciones = valorations
+        valoraciones = mutableSetOf()
     ),
     Recomendacion(
         creador = users[4],
@@ -72,7 +72,7 @@ val RECOMMENDATIONS = listOf(
         titulo = "Misterios de la Historia Antigua",
         contenido = "Un viaje a través de los enigmas más grandes de las civilizaciones antiguas: desde las pirámides de Egipto hasta los secretos de la Atlántida. Este libro examina los misterios no resueltos y teorías fascinantes sobre culturas que dejaron un legado duradero, pero aún ocultan verdades por descubrir.",
         publica = true,
-        valoraciones = valorations
+        valoraciones = mutableSetOf()
     )
 )
 
