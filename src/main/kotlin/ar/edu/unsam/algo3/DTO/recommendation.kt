@@ -1,7 +1,8 @@
 package ar.edu.unsam.algo3.DTO
+
 import LibroDTO
-import ar.edu.unsam.algo2.readapp.features.Valoracion
-import ar.edu.unsam.algo2.readapp.libro.Libro
+import ar.edu.unsam.algo2.readapp.features.Recomendacion
+import ar.edu.unsam.algo2.readapp.usuario.Usuario
 
 
 class RecomendacionDTO(
@@ -11,8 +12,8 @@ class RecomendacionDTO(
     val contenido: String,
     var publica: Boolean,
     val valoraciones: MutableSet<ValoracionDTO>,
-    val valoracionTotal:Int,
-    var id : Int
+    val valoracionTotal: Int,
+    var id: Int
 )
 
 class RecomendacionEditarDTO(
@@ -20,5 +21,29 @@ class RecomendacionEditarDTO(
     val librosRecomendados: MutableSet<LibroDTO>,
     val contenido: String,
     val publica: Boolean,
-    var id:Int
+    var id: Int
+)
+
+data class RecommendationCardDTO(
+    var id: Int,
+    val title: String,
+    val isEditable: Boolean,
+    val isDeletable: Boolean,
+    var isPublic: Boolean,
+    val content: String,
+    var bookTitles: List<String>,
+    val popularity: Int,
+    val aproxTime: Double,
+)
+
+fun Recomendacion.toCardDTO(user:Usuario) = RecommendationCardDTO(
+    id = id,
+    title = titulo,
+    isEditable = this.esEditablePor(user, this.librosRecomendados),
+    isDeletable = this.esCreador(user),
+    isPublic = this.esAccesiblePara(user),
+    content = contenido,
+    bookTitles = librosRecomendados.map { it.titulo }.toList(),
+    popularity = this.valoracionPromedio(),
+    aproxTime = this.tiempodeLectura(user)
 )

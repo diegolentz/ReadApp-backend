@@ -9,6 +9,11 @@ import ar.edu.unsam.algo3.DTO.RecomendacionDTO
 import ar.edu.unsam.algo3.DTO.RecomendacionEditarDTO
 import ar.edu.unsam.algo3.DTO.ValoracionDTO
 
+import ar.edu.unsam.algo3.DTO.toDTO
+
+import ar.edu.unsam.algo3.services.ServiceLibros
+
+
 //import ar.edu.unsam.algo3.dominio.RecommendationDTO
 
 
@@ -58,7 +63,7 @@ class Recomendacion(
     //////////////////////////////////////////////////////////////////
     //////////            CONDICION
     ///////////////////////////////////////////////////////////////////
-    fun accesoPublico(): Boolean = this.publica
+    private fun accesoPublico(): Boolean = this.publica
     fun esCreador(usuario: Usuario): Boolean = (usuario === creador)
     private fun accesoPrivado(usuario: Usuario):Boolean = creador.esAmigoDe(usuario)
     fun usuarioLeyoRecomendados(usuario: Usuario): Boolean = librosRecomendados.all{usuario.leido(it)}
@@ -74,11 +79,22 @@ class Recomendacion(
     ///////////////////////////////////////////////////////////////////
     fun editar(libroParaAgregar: Libro) { librosRecomendados.add(libroParaAgregar) }
 
-    fun actualizar(recomendacionActualizada: RecomendacionEditarDTO){
+    fun agregarValroacion(valoracion: Valoracion){
+        this.valoraciones.add(valoracion)
+    }
+
+    fun actualizar(recomendacionActualizada: RecomendacionEditarDTO) {
+
         this.titulo = recomendacionActualizada.titulo
         this.publica = recomendacionActualizada.publica
         this.contenido = recomendacionActualizada.contenido
-        /*this.librosRecomendados = recomendacionActualizada.librosRecomendados.map { it -> it. }*/
+
+        // Obtener los autores antes de llamar a fromDTO
+        this.librosRecomendados = recomendacionActualizada.librosRecomendados.map { libroDTO ->
+            val autor = ServiceLibros.getById(libroDTO.id).autor  // Obtener el autor de algún servicio
+            libroDTO.fromDTO(libroDTO, autor)  // Pasar el autor a fromDTO
+        }.toMutableSet()
+        this.id = recomendacionActualizada.id
     }
 
     //////////////////////////////////////////////////////////////////
