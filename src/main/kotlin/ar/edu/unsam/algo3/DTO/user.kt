@@ -41,7 +41,7 @@ data class UserProfileDTO(
     var email: String,
     var perfil: List<Any>,
     var tipoDeLector: String,
-    val amigos: MutableList<Usuario>,
+    val amigos: List<UserFriendDTO>,
     val librosLeidos: MutableList<Libro>,
     val librosALeer: MutableSet<Libro>,
     val recomendacionesAValorar: MutableList<Recomendacion>,
@@ -60,7 +60,7 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     email = email,
     perfil = perfil.toList(),
     tipoDeLector = tipoDeLector.toString(),
-    amigos = amigos,
+    amigos = amigos.map { it.toDTOFriend() },
     librosLeidos = librosLeidos,
     librosALeer = librosALeer,
     recomendacionesAValorar = recomendacionesAValorar,
@@ -123,14 +123,14 @@ fun Usuario.toDTOFriend() = UserFriendDTO(
     id = id,
     fotoPath = fotoPath,
     nombreCompleto = "$nombre $apellido",
-    alias = alias
+    username = username
 )
 
 data class UserFriendDTO(
     var id: Int?,
     var fotoPath: String,
     var nombreCompleto: String,
-    var alias: String
+    var username: String
 )
 
 fun Usuario.toDTOProfileAside() = UserProfileAsideDTO(
@@ -159,4 +159,10 @@ data class PasswordRecoveryResponse(
 
 data class MessageResponse(
     var message:String
+)
+
+data class UpdateFriendsMessage(
+    var id: Int,
+    var amigosAModificar: List<String>,
+    var agregarAmigos: Boolean
 )

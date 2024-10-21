@@ -53,4 +53,8 @@ class UserController(val serviceUser: ServiceUser) {
     fun passwordRecovery(@RequestBody passwordRecoveryBody: PasswordRecoveryRequest): MessageResponse {
         return serviceUser.passwordRecover(passwordRecoveryBody)
     }
+
+    @PutMapping("/updateAmigos")
+    fun updateAmigos(@RequestBody body: UpdateFriendsMessage) = serviceUser.updateAmigos(body)
+
 }

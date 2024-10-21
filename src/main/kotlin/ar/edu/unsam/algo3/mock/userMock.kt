@@ -7,7 +7,6 @@ import ar.edu.unsam.algo2.readapp.usuario.*
 import ar.edu.unsam.algo2.readapp.usuario.Promedio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 
-
 var diego:Usuario = UsuarioBuilder(Usuario())
     .fotoPath("inosuke.jpeg")
     .nombre("Diego").apellido("").lenguaje(Lenguaje.ESPANIOL)
