@@ -28,7 +28,7 @@ class Autor(
   
     private fun superaEdad(): Boolean = edad > EDAD_MINIMA_CONDICION
 
-    override fun cumpleCriterioBusqueda(texto: String) = nombre.contains(texto) || apellido.contains(texto) || seudonimo === texto
+    override fun cumpleCriterioBusqueda(texto: String) = nombre.contains(texto) || apellido.contains(texto) || (seudonimo.lowercase() == texto)
 
 
     fun fromDTO(){}

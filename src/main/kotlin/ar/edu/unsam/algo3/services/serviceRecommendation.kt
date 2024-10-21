@@ -26,7 +26,7 @@ object ServiceRecommendation {
 
     fun getAll(): List<RecommendationCardDTO> {
         recomendaciones = recommendationRepository.getAll().toMutableList()
-        return recomendaciones.map { it: Recomendacion -> it.toCardDTO(ServiceUser.loggedUser) }
+        return recomendaciones.map { it: Recomendacion -> it.toCardDTO(ServiceUser.loggedUser) }.shuffled()
     }
 
     fun createRecommendation(recommendation: Recomendacion): Recomendacion {
