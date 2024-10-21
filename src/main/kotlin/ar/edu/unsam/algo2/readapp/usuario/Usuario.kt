@@ -73,7 +73,10 @@ class Usuario(
 
     fun esAmigoDe(usuario: Usuario): Boolean = this.amigos.contains(usuario)
     fun agregarAmigo(amigo: Usuario) {
-        amigos.add(amigo)
+        if (!this.esAmigoDe(amigo)) amigos.add(amigo)
+    }
+    fun eliminarAmigo(amigo: Usuario) {
+        amigos.remove(amigo)
     }
 
     ///////////////////////////////////////////////////////

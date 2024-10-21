@@ -40,7 +40,10 @@ object ServiceUser {
         diego.agregarAmigo(usuarios[2])
         diego.agregarAmigo(usuarios[3])
 
-        
+        val delfi = usuarios[2]
+        delfi.agregarAmigo(usuarios[1])
+        delfi.agregarAmigo(usuarios[3])
+        delfi.agregarAmigo(usuarios[4])
 
     }
 
@@ -98,6 +101,14 @@ object ServiceUser {
         nuevoUsuario.tipoDeLector?.let { viejoUsuario.tipoDeLector = tipoDeLectorFactory(it) }
         userRepository.update(viejoUsuario)
         return viejoUsuario.toDTOProfile()
+    }
+
+    fun updateAmigos(body: UpdateFriendsMessage) {
+        val amigosAModificarIds = body.amigosAModificar.map { amigo -> getByIdRaw(amigo) }
+        val usuarioLogueado = this.getByIdRaw(body.id.toString())
+
+        if (body.agregarAmigos) amigosAModificarIds.map { user -> usuarioLogueado.agregarAmigo(user) }
+        else amigosAModificarIds.map {user -> usuarioLogueado.eliminarAmigo(user)}
     }
 
     private fun tipoDeLectorFactory(tipo: String): TipoDeLector {

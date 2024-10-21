@@ -51,17 +51,6 @@ val USERS = listOf(
     ).apply {
         username = "delfi"
         password = "delfi"
-        amigos = mutableListOf(Usuario(
-            nombre = "Andrea",
-            apellido = "Perez",
-            alias = "andr.per",
-            fotoPath = "kellyKapoor.jpeg"),
-            Usuario(
-                fotoPath = "kevinMalone.jpeg",
-                nombre = "Kevin",
-                apellido = "Malone",
-                alias = "amantedelmuffin"
-            ))
     },
 
     Usuario(
