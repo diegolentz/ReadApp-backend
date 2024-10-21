@@ -94,6 +94,7 @@ class Recomendacion(
             val autor = ServiceLibros.getById(libroDTO.id).autor  // Obtener el autor de algún servicio
             libroDTO.fromDTO(libroDTO, autor)  // Pasar el autor a fromDTO
         }.toMutableSet()
+        this.id = recomendacionActualizada.id
     }
 
     //////////////////////////////////////////////////////////////////

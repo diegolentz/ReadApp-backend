@@ -131,12 +131,14 @@ fun auxGenerarRecomendaciones(){
         librosParaRecomendar = mutableSetOf(LIBROS[6], LIBROS[7])
     )
 
-    pica.leer(libroAutorUnico)
+    pica.leer(LIBROS[7])
+    pica.leer(LIBROS[6])
+
     pica.crearRecomendacion(
         titulo = "Misterios de la Historia Antigua 2",
         contenido = "Continuacion del viaje, sarasa",
         publico = false,
-        librosParaRecomendar = mutableSetOf(libroAutorUnico)
+        librosParaRecomendar = mutableSetOf(LIBROS[6], LIBROS[7])
     )
 
 
@@ -172,11 +174,11 @@ fun auxGenerarRecomendaciones(){
         publico = false,
         librosParaRecomendar = mutableSetOf(LIBROS[1])
     )
-    adrian.leer(libroAutorUnico)
+    /*adrian.leer(libroAutorUnico)
     adrian.crearRecomendacion(
         titulo = "Libro de autor unico",
         contenido = "Continuacion del viaje, sarasa",
         publico = true,
         librosParaRecomendar = mutableSetOf(libroAutorUnico)
-    )
+    )*/
 }
