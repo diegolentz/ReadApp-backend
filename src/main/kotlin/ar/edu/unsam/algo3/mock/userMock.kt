@@ -10,7 +10,7 @@ import ar.edu.unsam.algo2.readapp.usuario.Usuario
 
 var diego:Usuario = UsuarioBuilder(Usuario())
     .fotoPath("inosuke.jpeg")
-    .nombre("Diego").apellido("").lenguaje(Lenguaje.ESPANIOL)
+    .nombre("Diego").apellido("Lentz").lenguaje(Lenguaje.ESPANIOL)
     .email("diego@hotmail.com").alias("elDiego")
     .username("diego").password("1234")
     .modoLectura(Promedio).tipoPerfil(Precavido)
@@ -130,6 +130,7 @@ fun auxGenerarRecomendaciones(){
         publico = true,
         librosParaRecomendar = mutableSetOf(LIBROS[6], LIBROS[7])
     )
+
 
     pica.leer(LIBROS[7])
     pica.leer(LIBROS[6])

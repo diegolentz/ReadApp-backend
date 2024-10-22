@@ -5,6 +5,7 @@ import LibroBuilder
 import LibroDTO
 import ar.edu.unsam.algo2.readapp.builders.AutorBuilder
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
+import ar.edu.unsam.algo3.services.ServiceLibros
 
 
 class Libro(
@@ -62,16 +63,27 @@ class Libro(
             imagen = imagen
         )
 
-//    fun fromDTO(libroDTO: LibroDTO): Libro {
-//        var autor = encontrarAutor(libroDTO.id)
-//        LibroBuilder()
-//        .autor(autor)
-//
-//    }
+    fun fromDTO(libroDTO: LibroDTO): Libro {
+        return Libro(
+            autor = buscarAutor(libroDTO.id), // Assuming Autor can be created from a String
+            cantidadPalabras = libroDTO.cantidadPalabras,
+            cantidadPaginas = libroDTO.cantidadPaginas,
+            ediciones = libroDTO.ediciones,
+            ventasSemanales = libroDTO.ventasSemanales,
+            traducciones = libroDTO.traducciones,
+            titulo = libroDTO.titulo,
+            imagen = libroDTO.imagen
+        ).apply {
+            id = libroDTO.id
+        }
+    }
 
     fun convertirAutor(autor : Autor): String = "${autor.nombre} ${autor.apellido}"
 //    fun encontrarAutor(id: Int): Autor =
-
+    fun buscarAutor(id: Int): Autor {
+     var libro = ServiceLibros.getById(id)
+        return libro.autor
+    }
 }
 
 

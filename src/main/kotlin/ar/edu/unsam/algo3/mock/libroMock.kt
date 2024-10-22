@@ -102,5 +102,4 @@ var libro_12: Libro = LibroBuilder()
 val LIBROS = mutableListOf(
     libro_1, libro_2, libro_3, libro_4,
     libro_5, libro_6, libro_7, libro_8,
-    libro_9, libro_10, libro_11, libro_12,
-    libroAutorUnico)
+    libro_9, libro_10, libro_11, libro_12)
