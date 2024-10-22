@@ -48,4 +48,8 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
     @GetMapping("/recommendationsByProfile")
     fun getRecommendationsByProfile(): List<RecommendationCardDTO> =
         serviceRecommendation.getRecommendationsByProfile()
+
+    @PutMapping("/addToValueLater/{id}")
+    fun createValoracion(@PathVariable id: Int): MessageResponse =
+        serviceRecommendation.addToValueLater(id)
 }

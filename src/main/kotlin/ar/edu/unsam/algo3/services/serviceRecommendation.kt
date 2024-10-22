@@ -9,6 +9,7 @@ import ar.edu.unsam.algo3.mock.auxGenerarRecomendaciones
 import ar.edu.unsam.algo3.mock.auxGenerarRecomendacionesAValorar
 import excepciones.BusinessException
 import excepciones.deletedRecommendation
+import excepciones.recommendationAdded
 import org.springframework.stereotype.Service
 
 
@@ -117,6 +118,12 @@ object ServiceRecommendation {
         return filteredRecommendations.map {
             it.toCardDTO(loggedUser)
         }
+    }
+    fun addToValueLater(id:Int): MessageResponse{
+        val loggedUser = ServiceUser.loggedUser
+        val recommendation = recommendationRepository.getByID(id)
+        loggedUser.agregarRecomendacionAValorar(recommendation)
+        return MessageResponse(recommendationAdded)
     }
 }
 

@@ -30,6 +30,7 @@ data class RecommendationCardDTO(
     val isEditable: Boolean,
     val isDeletable: Boolean,
     var isPublic: Boolean,
+    var isPending: Boolean,
     val content: String,
     var bookTitles: List<String>,
     val popularity: Int,
@@ -42,8 +43,9 @@ fun Recomendacion.toCardDTO(user:Usuario) = RecommendationCardDTO(
     isEditable = this.esEditablePor(user, this.librosRecomendados),
     isDeletable = this.esCreador(user),
     isPublic = this.esAccesiblePara(user),
+    isPending = user.recomendacionesAValorar.contains(this) && !this.esCreador(user),
     content = contenido,
     bookTitles = librosRecomendados.map { it.titulo }.toList(),
     popularity = this.valoracionPromedio(),
-    aproxTime = this.tiempodeLectura(user)
+    aproxTime = this.tiempodeLectura(user),
 )
