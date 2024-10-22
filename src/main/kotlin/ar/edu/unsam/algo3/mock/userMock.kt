@@ -8,6 +8,8 @@ import ar.edu.unsam.algo2.readapp.usuario.*
 import ar.edu.unsam.algo2.readapp.usuario.Promedio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 
+val PHOTOS_PATH = listOf<String>("random_1.jpeg", "random_2.jpeg")
+
 var diego:Usuario = UsuarioBuilder(Usuario())
     .fotoPath("inosuke.jpeg")
     .nombre("Diego").apellido("Lentz").lenguaje(Lenguaje.ESPANIOL)
@@ -44,7 +46,7 @@ val pica:Usuario = UsuarioBuilder(Usuario())
 
 val adrian:Usuario = UsuarioBuilder(Usuario())
     .fotoPath("kevinMalone.jpeg")
-    .nombre("Adrian").apellido("").lenguaje(Lenguaje.ESPANIOL)
+    .nombre("Adrian").apellido("Perez").lenguaje(Lenguaje.ESPANIOL)
     .email("adrian@hotmail.com").alias("elAdri")
     .username("adrian").password("adrian")
     .modoLectura(Ansioso).tipoPerfil(Leedor)

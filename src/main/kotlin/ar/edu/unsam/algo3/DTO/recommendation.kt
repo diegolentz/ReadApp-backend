@@ -45,5 +45,5 @@ fun Recomendacion.toCardDTO(user:Usuario) = RecommendationCardDTO(
     content = contenido,
     bookTitles = librosRecomendados.map { it.titulo }.toList(),
     popularity = this.valoracionPromedio(),
-    aproxTime = this.tiempodeLectura(user)
+    aproxTime = String.format("%.1f", this.tiempodeLectura(user)).toDouble()
 )

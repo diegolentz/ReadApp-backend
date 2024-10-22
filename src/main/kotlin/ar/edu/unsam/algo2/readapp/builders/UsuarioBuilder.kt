@@ -31,6 +31,7 @@ class UsuarioBuilder(val nuevoUsuario: Usuario = Usuario()) {
 
     fun email(email: String): UsuarioBuilder = apply {
         nuevoUsuario.direccionMail = email
+        nuevoUsuario.email = email
     }
 
     fun lenguaje(lenguaje: Lenguaje): UsuarioBuilder = apply {

@@ -95,7 +95,7 @@ var libro_11: Libro = LibroBuilder()
 var libro_12: Libro = LibroBuilder()
     .titulo("El bosque negro").autor(autores.random())
     .cantidadPaginas(520).cantidadPalabras(200 * 520)
-    .ventasSemanales(1400).edicionesRandom().traduccionesRandom()
+    .ventasSemanales(1400).edicionesRandom().traduccionesRandom(6)
     .imagen("https://i.pinimg.com/originals/ab/ec/d5/abecd51b79366c089872d1e88e6c7424.jpg")
     .build()
 

@@ -152,9 +152,7 @@ data class PasswordRecoveryRequest(
 )
 
 data class PasswordRecoveryResponse(
-    var email: String,
-    var username: String,
-    var newPassword: String
+    var message: String = "Contrasenia cambiada cone exito!"
 )
 
 data class MessageResponse(

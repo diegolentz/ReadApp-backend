@@ -45,4 +45,7 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
     fun getRecommendationsToValue(): List<RecommendationCardDTO> =
         serviceRecommendation.getRecommendationsToValue()
 
+    @GetMapping("/recommendationsByProfile")
+    fun getRecommendationsByProfile(): List<RecommendationCardDTO> =
+        serviceRecommendation.getRecommendationsByProfile()
 }

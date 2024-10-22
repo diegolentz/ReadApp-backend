@@ -107,5 +107,16 @@ object ServiceRecommendation {
             it.toCardDTO(loggedUser)
         }
     }
+
+    fun getRecommendationsByProfile():List<RecommendationCardDTO>{
+        val loggedUser = ServiceUser.loggedUser
+        val recommendations = recommendationRepository.getAll()
+        val filteredRecommendations = recommendations.filter {
+            loggedUser.perfil.recomendacionEsInteresante(it,loggedUser)
+        }
+        return filteredRecommendations.map {
+            it.toCardDTO(loggedUser)
+        }
+    }
 }
 

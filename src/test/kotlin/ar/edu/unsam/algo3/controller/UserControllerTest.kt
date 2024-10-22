@@ -2,14 +2,13 @@ package ar.edu.unsam.algo3.controller
 
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
-import ar.edu.unsam.algo3.DTO.CreateAccountRequest
-import ar.edu.unsam.algo3.DTO.CreateAccountResponse
-import ar.edu.unsam.algo3.DTO.LoginRequest
+import ar.edu.unsam.algo3.DTO.*
 import ar.edu.unsam.algo3.mock.USERS
+import ar.edu.unsam.algo3.mock.adrian
 import com.fasterxml.jackson.databind.ObjectMapper
-import excepciones.loginErrorMessage
-import excepciones.usernameInvalidMessage
+import excepciones.*
 import org.json.JSONObject
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -27,14 +26,17 @@ import kotlin.test.assertEquals
 @DisplayName("Dado un controller de Usuarios")
 class UserControllerTest(@Autowired val mockMvc: MockMvc) {
 
-    //Averiguar porque no encuentra los beans
-    @Autowired
-    lateinit var repo: Repositorio<Usuario>
-
-    @BeforeEach
-    fun init() {
-        repo.clearAll()
+    companion object{
+        var repo = Repositorio<Usuario>()
+        @JvmStatic
+        @BeforeAll
+        fun initializer(){
+              repo.run {
+                  adrian
+              }
+        }
     }
+
 
     @Test
     fun `Llamo al endpoint user-basic-{id} y responde con informacion basica del usuario, OK`() {
@@ -65,31 +67,6 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
     }
 
     @Test
-    fun `Login valido`() {
-        //Se asume usuario registrado
-        val loguinRequest = LoginRequest(
-            username = "adrian",
-            password = "adrian"
-        )
-        val json = ObjectMapper().writeValueAsString(loguinRequest)
-        //Como el login devuelve el ID de usuario, puedo verificar que sea el correcto
-        //Para el caso adrian, adrian, el id seria el 5, acorde al orden que se agregan al repositorio
-        //Diego => 1 , Valen => 2, Delfi => 3, Pica => 4, Adrian => 5
-        val responseBody = mockMvc
-            .perform(
-                MockMvcRequestBuilders.post("/login")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(json)
-            )
-            .andExpect(MockMvcResultMatchers.status().isOk)
-            .andReturn().response.contentAsString
-        val responseJSON = JSONObject(responseBody)
-
-        val loguedUserID = responseJSON.getInt("userID")
-        assertEquals(loguedUserID, 5)
-    }
-
-    @Test
     fun `Login NO valido, USUARIO INCORRECTO`() {
 
         val loguinRequest = LoginRequest(
@@ -105,7 +82,7 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(json)
             )
-            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+            .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andReturn().resolvedException?.message
 
         assertEquals(errorMessage, loginErrorMessage)
@@ -126,10 +103,75 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(json)
             )
-            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+            .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andReturn().resolvedException?.message
 
         assertEquals(errorMessage, loginErrorMessage)
+    }
+
+    @Test
+    fun  `Login valido`() {
+        initializer()
+        val loguinRequest = LoginRequest(
+            username = "adrian",
+            password = "adrian"
+        )
+        val json = ObjectMapper().writeValueAsString(loguinRequest)
+        val responseBody = mockMvc
+            .perform(
+                MockMvcRequestBuilders.post("/login")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json)
+            )
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andReturn().response.contentAsString
+        val responseJSON = JSONObject(responseBody)
+
+        val loguedUserID = responseJSON.getInt("userID")
+        assertEquals(5, loguedUserID)
+    }
+
+    @Test
+    fun `Crear cuenta, USUARIO NO DISPONIBLE`() {
+        repo.create(adrian)
+        val createAccountRequest = CreateAccountRequest(
+            username = "adrian",
+            password = "zaboomafoo",
+            name = "Zabu Mafu",
+            email = "ZabuMafu@zaboomafoo"
+        )
+        val json = ObjectMapper().writeValueAsString(createAccountRequest)
+        val errorMessage = mockMvc
+            .perform(
+                MockMvcRequestBuilders.post("/createAccount")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json)
+            )
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+            .andReturn().resolvedException?.message
+
+        assertEquals(errorMessage, usernameInvalidMessage)
+    }
+
+    @Test
+    fun `Crear cuenta, MAIL NO DISPONIBLE`() {
+        val createAccountRequest = CreateAccountRequest(
+            username = "zaboomafoo",
+            password = "zaboomafoo",
+            name = "Zabu Mafu",
+            email = "adrian@hotmail.com"
+        )
+        val json = ObjectMapper().writeValueAsString(createAccountRequest)
+        val errorMessage = mockMvc
+            .perform(
+                MockMvcRequestBuilders.post("/createAccount")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json)
+            )
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+            .andReturn().resolvedException?.message
+
+        assertEquals(errorMessage, emailInvalidMessage)
     }
 
     @Test
@@ -158,24 +200,68 @@ class UserControllerTest(@Autowired val mockMvc: MockMvc) {
     }
 
     @Test
-    fun `Crear cuenta, USUARIO NO DISPONIBLE`() {
+    fun `Recuperar contrasenia, EMAIL INCORRECTO`() {
         //Se asume usuario registrado
-        val loguinRequest = CreateAccountRequest(
+        val loguinRequest = PasswordRecoveryRequest(
             username = "adrian",
-            password = "zaboomafoo",
-            name = "Zabu Mafu",
-            email = "ZabuMafu@zaboomafoo"
+            email = "adrian@pepe",
+            newPassword = "pepe"
         )
         val json = ObjectMapper().writeValueAsString(loguinRequest)
         val errorMessage = mockMvc
             .perform(
-                MockMvcRequestBuilders.post("/createAccount")
+                MockMvcRequestBuilders.post("/passwordRecovery")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(json)
             )
-            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+            .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andReturn().resolvedException?.message
 
-        assertEquals(errorMessage, usernameInvalidMessage)
+        assertEquals(passwordRecoveryErrorMessage, errorMessage)
+    }
+
+    @Test
+    fun `Recuperar contrasenia, USUARIO INCORRECTO`() {
+        //Se asume usuario registrado
+        val loguinRequest = PasswordRecoveryRequest(
+            username = "zaboomafoo",
+            email = "adrian@hotmail.com",
+            newPassword = "pepe"
+        )
+        val json = ObjectMapper().writeValueAsString(loguinRequest)
+        val errorMessage = mockMvc
+            .perform(
+                MockMvcRequestBuilders.post("/passwordRecovery")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json)
+            )
+            .andExpect(MockMvcResultMatchers.status().isNotFound)
+            .andReturn().resolvedException?.message
+
+        assertEquals(errorMessage, passwordRecoveryErrorMessage)
+    }
+
+    @Test
+    fun `Recuperar contrasenia, OK`() {
+        //Se asume usuario registrado
+        val request = PasswordRecoveryRequest(
+            username = "adrian",
+            email = "adrian@hotmail.com",
+            newPassword = "pepe"
+        )
+        val json = ObjectMapper().writeValueAsString(request)
+        val response = mockMvc
+            .perform(
+                MockMvcRequestBuilders.post("/passwordRecovery")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json)
+            )
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andReturn().response.contentAsString
+
+        val responseJSON = JSONObject(response)
+
+        val message = responseJSON.get("message")
+        assertEquals(message, MessageResponse(passwordChangeOK).message)
     }
 }

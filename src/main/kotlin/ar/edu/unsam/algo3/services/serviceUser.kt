@@ -5,6 +5,7 @@ import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.*
 import ar.edu.unsam.algo3.DTO.*
+import ar.edu.unsam.algo3.mock.PHOTOS_PATH
 import ar.edu.unsam.algo3.mock.USERS
 import ar.edu.unsam.algo3.mock.auxGenerarAmistades
 import ar.edu.unsam.algo3.mock.auxGenerarRecomendaciones
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service
 @Service
 object ServiceUser {
     private val userRepository: Repositorio<Usuario> = Repositorio()
-    var loggedUserId = 5
+    var loggedUserId:Int = -1
     lateinit var loggedUser:Usuario
     init {
         auxGenerarAmistades()
@@ -62,7 +63,7 @@ object ServiceUser {
     }
 
     fun validateLogin(loginRequest: LoginRequest): LoginResponse {
-        val usuario = this.findUsername(loginRequest.username) ?: throw BadRequestException(loginErrorMessage)
+        val usuario = this.findUsername(loginRequest.username) ?: throw NotFoundException(loginErrorMessage)
         this.checkPassword(loginRequest.password, usuario!!.password)
         val response = LoginResponse(userID = usuario.id)
         this.loggedUserId = response.userID
@@ -124,7 +125,7 @@ object ServiceUser {
 
     private fun checkPassword(inputPassword: String, userPassword: String) {
         if (inputPassword != userPassword) {
-            throw throw BadRequestException(loginErrorMessage)
+            throw throw NotFoundException(loginErrorMessage)
         }
     }
 
@@ -140,12 +141,12 @@ object ServiceUser {
     private fun checkAvaliableUsername(username: String) {
         val usuario: Usuario? = this.findUsername(username)
         //Si es Not Null, existe un Usuario con ese Username
-        if (usuario != null) throw BusinessException(usernameInvalidMessage)
+        if (usuario != null) throw BadRequestException(usernameInvalidMessage)
     }
     private fun checkAvaliableEmail(email: String) {
         val usuario: Usuario? = this.findEmail(email)
         //Si es Not Null, existe un Usuario con ese Username
-        if (usuario != null) throw BusinessException(emailInvalidMessage)
+        if (usuario != null) throw BadRequestException(emailInvalidMessage)
     }
     private fun findUsername(username: String): Usuario? {
         val usuario: Usuario? = this.userRepository.getAll().find {
@@ -169,6 +170,7 @@ object ServiceUser {
             .email(newAccountRequest.email)
             .alias(newAccountRequest.name)
             .lenguaje(Lenguaje.ESPANIOL)
+            .fotoPath(PHOTOS_PATH[0])
             .build()
             .apply {
                 perfil = Leedor
@@ -181,15 +183,15 @@ object ServiceUser {
         val email:String = passwordRecoveryRequest.email
         val newPassword:String = passwordRecoveryRequest.newPassword
 
-        val usuario: Usuario = this.findUsername(username) ?: throw BadRequestException("Incorrect Username or Email")
-        usuario.password = newPassword
+        val usuario: Usuario = this.findUsername(username) ?: throw NotFoundException(passwordRecoveryErrorMessage)
         this.checkEmail(email, usuario!!.email)
-        return MessageResponse("Contrasenia cambiada correctamente!")
+        usuario.password = newPassword
+        return MessageResponse(passwordChangeOK)
     }
 
     private fun checkEmail(requestEmail:String, userEmail:String){
         if (requestEmail != userEmail) {
-            throw throw BadRequestException("Incorrect Username or Email")
+            throw throw NotFoundException(passwordRecoveryErrorMessage)
         }
     }
 
