@@ -83,6 +83,14 @@ object ServiceUser {
         return viejoUsuario.toDTOProfile()
     }
 
+    fun updateAmigos(body: UpdateFriendsMessage) {
+        val amigosAModificarIds = body.amigosAModificar.map { amigo -> getByIdRaw(amigo) }
+        val usuarioLogueado = this.getByIdRaw(body.id.toString())
+
+        if (body.agregarAmigos) amigosAModificarIds.map { user -> usuarioLogueado.agregarAmigo(user) }
+        else amigosAModificarIds.map {user -> usuarioLogueado.eliminarAmigo(user)}
+    }
+
     private fun tipoDeLectorFactory(tipo: String): TipoDeLector {
         return when (tipo) {
             Promedio.toString() -> Promedio

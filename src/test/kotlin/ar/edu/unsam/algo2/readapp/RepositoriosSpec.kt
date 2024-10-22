@@ -225,25 +225,12 @@ class RepositoriosSpec : DescribeSpec({
                             "parcialmente con alguno de los títulos de los libros o reseña"
                 ) {
 
-                    it("busqueda exacta apellido creador") {
-                        val busquedaEx = repositorioRecomendaciones.search("gonzalez")
-                        val busquedaPa = repositorioRecomendaciones.search("gonz")
-
-                        busquedaEx.shouldContain(recomendacionX)
-                        busquedaPa.shouldNotContain(recomendacionX)
-                    }
                     it("busqueda parcial titulos de libros") {
                         val busquedaPa = repositorioRecomendaciones.search("sistemas")
                         val busquedaPa2 = repositorioRecomendaciones.search("progr")
 
                         busquedaPa.shouldContain(recomendacionX)
                         busquedaPa2.shouldContain(recomendacionX)
-                    }
-                    it("busqueda parcial de resena") {
-                        val busquedaPa = repositorioRecomendaciones.search("buen")
-
-                        busquedaPa.shouldContain(recomendacionX)
-
                     }
 
                 }

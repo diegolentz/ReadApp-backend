@@ -63,7 +63,7 @@ class Recomendacion(
     //////////////////////////////////////////////////////////////////
     //////////            CONDICION
     ///////////////////////////////////////////////////////////////////
-    private fun accesoPublico(): Boolean = this.publica
+    fun accesoPublico(): Boolean = this.publica
     fun esCreador(usuario: Usuario): Boolean = (usuario === creador)
     private fun accesoPrivado(usuario: Usuario):Boolean = creador.esAmigoDe(usuario)
     fun usuarioLeyoRecomendados(usuario: Usuario): Boolean = librosRecomendados.all{usuario.leido(it)}
@@ -94,6 +94,7 @@ class Recomendacion(
             val autor = ServiceLibros.getById(libroDTO.id).autor  // Obtener el autor de algún servicio
             libroDTO.fromDTO(libroDTO, autor)  // Pasar el autor a fromDTO
         }.toMutableSet()
+        this.id = recomendacionActualizada.id
     }
 
     //////////////////////////////////////////////////////////////////
@@ -126,12 +127,13 @@ class Recomendacion(
         this.librosLeidosEnRecomendacion(usuario).sumOf { libro -> usuario.tiempoLecturaBase(libro) }
     private fun librosLeidosEnRecomendacion(usuario: Usuario) = librosRecomendados.filter{ libro -> usuario.leido(libro)}
 
-    //override fun cumpleCriterioBusqueda(texto: String) =  creador.apellido === texto ||
-    //        librosRecomendados.any { libro -> libro.titulo.contains(texto) ||
-    //                valoraciones.any { valoracion -> valoracion.comentario.contains(texto)}}
+    override fun cumpleCriterioBusqueda(texto: String):Boolean{
+        return  this.titulo.lowercase() == texto ||
+                librosRecomendados.any { libro -> libro.titulo.lowercase().contains(texto)}
+    }
 
-    override fun cumpleCriterioBusqueda(texto: String): Boolean =
-        titulo.lowercase().contains(texto.lowercase())
+//    override fun cumpleCriterioBusqueda(texto: String): Boolean =
+//        titulo.lowercase().contains(texto.lowercase())
 
     fun toDTO(): RecomendacionDTO = RecomendacionDTO(
         creador = this.creador.nombreApellido(creador),

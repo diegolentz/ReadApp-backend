@@ -24,7 +24,7 @@ import kotlin.test.assertEquals
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DisplayName("Dado un controller de Libros")
+@DisplayName("Dado un controller de Usuarios")
 class UserControllerTest(@Autowired val mockMvc: MockMvc) {
 
     //Averiguar porque no encuentra los beans
