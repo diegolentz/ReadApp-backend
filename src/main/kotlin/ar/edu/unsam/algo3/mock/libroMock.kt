@@ -58,7 +58,7 @@ var libro_6: Libro = LibroBuilder()
     .build()
 
 var libro_7: Libro = LibroBuilder()
-    .titulo("Un viaje inesperado").autor(autores.random())
+    .titulo("Un viaje inesperado").autor(AUTOR[0])
     .cantidadPaginas(390).cantidadPalabras(200 * 390)
     .ventasSemanales(2200).edicionesRandom().traduccionesRandom()
     .imagen("https://http2.mlstatic.com/D_NQ_NP_998326-MLC54028482109_022023-O.webp")
