@@ -6,7 +6,9 @@ import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.DTO.*
 import ar.edu.unsam.algo3.mock.USERS
 import ar.edu.unsam.algo3.mock.auxGenerarRecomendaciones
+import ar.edu.unsam.algo3.mock.auxGenerarRecomendacionesAValorar
 import excepciones.BusinessException
+import excepciones.deletedRecommendation
 import org.springframework.stereotype.Service
 
 
@@ -16,6 +18,7 @@ object ServiceRecommendation {
     var recomendaciones : MutableList<Recomendacion> = mutableListOf()
     init {
         auxGenerarRecomendaciones()
+        auxGenerarRecomendacionesAValorar()
         USERS.forEach { user ->
             user.recomendaciones.forEach{
                 recommendationRepository.create(it)
@@ -49,10 +52,12 @@ object ServiceRecommendation {
         return recomendacion.editarDTO()
     }
 
-    fun deleteRecommendation(recommendationID: Int): Recomendacion {
-        val recommendation = getById(recommendationID)
+    fun deleteRecommendation(recommendationID: Int): MessageResponse {
+        val usuarioLogueado = ServiceUser.loggedUser
+        val recommendation = recommendationRepository.getByID(recommendationID)
         recommendationRepository.delete(recommendation)
-        return recommendation
+        usuarioLogueado.eliminarRecomendacion(recommendation)
+        return MessageResponse(deletedRecommendation)
     }
 
     fun getWithFilter(filtro: String): List<RecomendacionDTO> {
@@ -92,6 +97,25 @@ object ServiceRecommendation {
             }
         }else{
             return recommendations
+        }
+    }
+
+    fun getRecommendationsToValue():List<RecommendationCardDTO>{
+        val loggedUser = ServiceUser.loggedUser
+        val recommendations = loggedUser.recomendacionesAValorar
+        return recommendations.map {
+            it.toCardDTO(loggedUser)
+        }
+    }
+
+    fun getRecommendationsByProfile():List<RecommendationCardDTO>{
+        val loggedUser = ServiceUser.loggedUser
+        val recommendations = recommendationRepository.getAll()
+        val filteredRecommendations = recommendations.filter {
+            loggedUser.perfil.recomendacionEsInteresante(it,loggedUser)
+        }
+        return filteredRecommendations.map {
+            it.toCardDTO(loggedUser)
         }
     }
 }

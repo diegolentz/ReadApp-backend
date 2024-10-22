@@ -171,7 +171,7 @@ class Usuario(
         this.recomendaciones.addLast(recomendacion)
     }
 
-    private fun eliminarRecomendacion(recomendacion: Recomendacion) {
+    fun eliminarRecomendacion(recomendacion: Recomendacion) {
         this.recomendaciones.remove(recomendacion)
     }
 
