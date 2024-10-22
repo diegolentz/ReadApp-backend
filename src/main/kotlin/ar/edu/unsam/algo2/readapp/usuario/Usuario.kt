@@ -29,19 +29,8 @@ class Usuario(
 ) : AvaliableInstance {
 
     //Interfaces
-    var tipoDeLector: TipoDeLector = Recurrente
-    var perfil: PerfilDeUsuario = Combinador(
-        mutableSetOf(
-            Leedor,
-            Precavido,
-            Nativista,
-            Demandante,
-            Cambiante,
-            Poliglota,
-            Experimentado,
-            Calculador(20.04, 21.04)
-        )
-    )
+    var tipoDeLector: TipoDeLector = Promedio
+    var perfil: PerfilDeUsuario = Leedor
 
     val listaObservers: MutableList<AgregarLibroObserver> = mutableListOf()
     override var id: Int = -1//POR DEFAULT AL FINAL

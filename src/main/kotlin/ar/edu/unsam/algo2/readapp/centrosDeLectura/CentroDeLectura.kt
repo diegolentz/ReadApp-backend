@@ -30,7 +30,7 @@ abstract class CentroDeLectura(
 
     //Interface avaliable instance
     override var id: Int = -1
-    override fun cumpleCriterioBusqueda(texto: String) = libroDesignado.titulo === texto
+    override fun cumpleCriterioBusqueda(texto: String) = ( libroDesignado.titulo.lowercase() == texto)
 
     fun estaExpirado(): Boolean = !hayFechasVigentes() || condicionExpirar()
 

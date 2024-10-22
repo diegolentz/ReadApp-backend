@@ -4,6 +4,7 @@ import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.builders.AutorBuilder
 import excepciones.BookException
+import kotlin.random.Random
 
 
 class LibroBuilder (val newLibro: Libro = Libro()) {
@@ -29,7 +30,9 @@ class LibroBuilder (val newLibro: Libro = Libro()) {
     fun ediciones(ediciones: Int)= apply {
         newLibro.ediciones = ediciones
     }
-
+    fun edicionesRandom()= apply {
+        newLibro.ediciones = Random.nextInt()
+    }
     fun ventasSemanales(ventas: Int)= apply {
         newLibro.ventasSemanales = ventas
     }
