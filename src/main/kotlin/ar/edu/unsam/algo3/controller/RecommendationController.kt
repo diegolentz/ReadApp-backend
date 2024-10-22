@@ -29,7 +29,7 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
         serviceRecommendation.createValoracion(valoracion, id)
 
     @GetMapping("/recommendations/filter")
-    fun getRecommendationFilter(@RequestParam filtro: String): List<RecomendacionDTO> =
+    fun getRecommendationFilter(@RequestParam filtro: String): List<RecommendationCardDTO> =
         serviceRecommendation.getWithFilter(filtro)
 
     //Recomendaciones de home o privadas

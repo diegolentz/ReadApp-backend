@@ -128,7 +128,7 @@ class Recomendacion(
     private fun librosLeidosEnRecomendacion(usuario: Usuario) = librosRecomendados.filter{ libro -> usuario.leido(libro)}
 
     override fun cumpleCriterioBusqueda(texto: String):Boolean{
-        return  this.titulo.lowercase() == texto ||
+        return  this.titulo.lowercase().contains(texto) ||
                 librosRecomendados.any { libro -> libro.titulo.lowercase().contains(texto)}
     }
 

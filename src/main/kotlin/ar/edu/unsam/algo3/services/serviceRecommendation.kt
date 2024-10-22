@@ -60,9 +60,9 @@ object ServiceRecommendation {
         return MessageResponse(deletedRecommendation)
     }
 
-    fun getWithFilter(filtro: String): List<RecomendacionDTO> {
+    fun getWithFilter(filtro: String): List<RecommendationCardDTO> {
         recomendaciones = recommendationRepository.search(filtro).toMutableList()
-        return recomendaciones.map { it: Recomendacion -> it.toDTO() }
+        return recomendaciones.map { it: Recomendacion -> it.toCardDTO(ServiceUser.loggedUser) }
     }
 
     fun createValoracion(valoracionDTO: ValoracionDTO, id:Int): ValoracionDTO {
