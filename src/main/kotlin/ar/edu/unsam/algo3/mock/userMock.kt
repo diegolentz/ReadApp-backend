@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.mock
 
 import ar.edu.unsam.algo2.readapp.builders.UsuarioBuilder
+import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.usuario.Leedor
 import ar.edu.unsam.algo2.readapp.usuario.*
@@ -181,4 +182,16 @@ fun auxGenerarRecomendaciones(){
         publico = true,
         librosParaRecomendar = mutableSetOf(LIBROS[7])
     )
+}
+
+fun auxGenerarRecomendacionesAValorar(){
+    val recomendaciones = mutableListOf<Recomendacion>()
+    USERS.forEach { usuario ->
+        usuario.recomendaciones.forEach{
+            recomendaciones.add(it)
+        }
+    }
+
+    adrian.agregarRecomendacionAValorar(recomendaciones[0])
+    adrian.agregarRecomendacionAValorar(recomendaciones[5])
 }
