@@ -37,12 +37,6 @@ object ServiceLibros {
 
     fun obtenerLibrosFiltrados(filtro: String): List<LibroDTO> {
         libros = repoLibro.search(filtro).toMutableList()
-
-       // this.books = this.filtro ?
-       // (this.books.filter((book) => book.title.replace(/\s+/g, '').toLowerCase().includes(
-       // this.filtro.replace(/\s+/g, '').toLowerCase()) ||
-       // book.author.replace(/\s+/g, '').toLowerCase().includes(this.filtro.replace(/\s+/g, '').toLowerCase()))) :
-       // (this.books);
         return libros.map { it.toDTO() }
     }
 
