@@ -76,6 +76,7 @@ fun auxGenerarAmistades(){
 
     adrian.agregarAmigo(pica)
     adrian.agregarAmigo(diego)
+    adrian.agregarAmigo(adrian)
 }
 
 fun auxGenerarRecomendaciones(){

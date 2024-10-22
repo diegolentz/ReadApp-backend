@@ -11,3 +11,5 @@ val deletedRecommendation = "Recommendation deleted succesfully!"
 val passwordRecoveryErrorMessage = "Incorrect Username or Email"
 
 val passwordChangeOK = "Contrasenia cambiada con exito!"
+
+val recommendationAdded = "Recomendacion agregada a valorar!"
