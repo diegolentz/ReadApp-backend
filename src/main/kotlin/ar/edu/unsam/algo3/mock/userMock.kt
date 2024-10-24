@@ -121,6 +121,7 @@ fun auxGenerarRecomendaciones(){
     delfi.leer(LIBROS[5])
     delfi.leer(LIBROS[6])
     delfi.leer(LIBROS[7])
+    delfi.agregarAutorFavorito(AUTOR[0])
     delfi.crearRecomendacion(
         titulo = "El Universo en Expansión",
         contenido = "Este fascinante relato explora los últimos descubrimientos en cosmología, desde la teoría del Big Bang hasta la energía oscura. A través de una narrativa cautivadora, el autor nos lleva a comprender la inmensidad del universo y las incógnitas que aún desafían a los científicos de todo el mundo.",
