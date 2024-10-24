@@ -228,7 +228,7 @@ class Usuario(
         this.crearValoracion(valor, comentario, recomendacion)
     }
 
-    private fun puedeCrearValoracion(recomendacion: Recomendacion) =
+    fun puedeCrearValoracion(recomendacion: Recomendacion) =
         this.recomendoValoracion(recomendacion) || !recomendacion.puedeDejarValoracion(this)
 
     private fun crearValoracion(valor: Int, comentario: String, recomendacion: Recomendacion) {

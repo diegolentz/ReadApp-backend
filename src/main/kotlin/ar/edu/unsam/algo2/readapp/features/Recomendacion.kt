@@ -12,6 +12,7 @@ import ar.edu.unsam.algo3.DTO.ValoracionDTO
 import ar.edu.unsam.algo3.DTO.toDTO
 
 import ar.edu.unsam.algo3.services.ServiceLibros
+import ar.edu.unsam.algo3.services.ServiceUser
 
 
 //import ar.edu.unsam.algo3.dominio.RecommendationDTO
@@ -26,6 +27,7 @@ class Recomendacion(
     val valoraciones: MutableSet<Valoracion> = mutableSetOf()
 ): AvaliableInstance {
 
+    var puedeValorar:Boolean = false
 
     override var id:Int = -1//POR DEFAULT AL FINAL
     //////////////////////////////////////////////////////////////////
@@ -143,7 +145,8 @@ class Recomendacion(
         publica = publica,
         valoraciones = parseValoraciones(valoraciones),
         valoracionTotal = this.valoracionPromedio(),
-        id = this.id
+        id = this.id,
+        puedeValorar = this.puedeValorar
     )
     fun editarDTO(): RecomendacionEditarDTO = RecomendacionEditarDTO(
         titulo = this.titulo,

@@ -39,6 +39,7 @@ object ServiceRecommendation {
     }
 
     fun getByIdDTO (recommendationID: Int): RecomendacionDTO {
+        this.valorationUser(recommendationID)
         return recommendationRepository.getByID(recommendationID).toDTO()
     }
 
@@ -124,6 +125,12 @@ object ServiceRecommendation {
         val recommendation = recommendationRepository.getByID(id)
         loggedUser.agregarRecomendacionAValorar(recommendation)
         return MessageResponse(recommendationAdded)
+    }
+
+    fun valorationUser(recommendationID: Int){
+        val recomendacion = this.getById(recommendationID)
+        val puedeValorar = ServiceUser.loggedUser.puedeCrearValoracion(recomendacion)
+        recomendacion.puedeValorar = puedeValorar
     }
 }
 
