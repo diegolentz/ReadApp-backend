@@ -67,7 +67,7 @@ class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
         assertNotNull(usuarioCreado)
         assertEquals(1, usuarioCreado.id)
         //ya tiene libros para leer incorporados
-        assertTrue(ServiceLibros.obtenerLibros(1, false).size == 6)
+        assertTrue(ServiceLibros.obtenerLibros(false).size == 6)
 
         //  solicitud PUT para agregar libros
         mockMvc.perform(
