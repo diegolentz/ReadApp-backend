@@ -26,7 +26,7 @@ object ServiceLibros {
     fun getSearch(): List<LibroDTO> {
         libros = repoLibro.getAll().toMutableList()
         if (libros.isEmpty()) {
-            throw BusinessException("No se encontraron libros.")
+            throw BusinessException("No se encontraron libros")
         }
         return libros.map { it: Libro -> it.toDTO() }
     }
@@ -46,7 +46,7 @@ object ServiceLibros {
 
         val libros = repoLibro.search(filtro).toMutableList()
         if (libros.isEmpty()) {
-            throw BusinessException("El filtro no puede estar vacío")
+            throw BusinessException("No se encontraron busquedas cohinicidentes")
 
         }else{
             return libros.map { it.toDTO() }
@@ -63,7 +63,7 @@ object ServiceLibros {
             val librosAgregados: List<Libro> = usuario.agregarLibros(libros, estado)
             return librosAgregados.map { it.toDTO() }
         }catch (e: Exception){
-            throw BusinessException("No se encontraron libros.")
+            throw BusinessException("No se encontraron libros")
         }
     }
 
@@ -75,7 +75,7 @@ object ServiceLibros {
             val librosEliminados: List<Libro> = usuario.eliminarLibros(libros, estado)
             return librosEliminados.map { it.toDTO() }
         } catch (e: Exception) {
-            throw BusinessException("No se encontraron libros.")
+            throw BusinessException("No se encontraron libros")
         }
     }
 
@@ -85,7 +85,7 @@ object ServiceLibros {
         val libros = this.get()
         val agregarParaLeer: List<Libro> = usuario.agregarALeer(libros)
         if (agregarParaLeer.isEmpty()) {
-            throw BusinessException("No se encontraron libros.")
+            throw BusinessException("No se encontraron libros")
         }
         return agregarParaLeer.map { it.toDTO() }
     }
