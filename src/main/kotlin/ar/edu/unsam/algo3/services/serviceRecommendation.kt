@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.features.Valoracion
+import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.DTO.*
@@ -33,9 +34,17 @@ object ServiceRecommendation {
         return recomendaciones.map { it: Recomendacion -> it.toCardDTO(ServiceUser.loggedUser) }.shuffled()
     }
 
-    fun createRecommendation(recommendation: Recomendacion): Recomendacion {
-        recommendationRepository.create(recommendation)
-        return this.getById(recommendation.id)
+    fun createRecommendation(recomendacionCrearDTO: RecomendacionCrearDTO): RecomendacionDTO {
+        var user = ServiceUser.loggedUser
+        var nuevaRecomendacion = Recomendacion(Usuario()).fromCreateJSON(recomendacionCrearDTO)
+        user.crearRecomendacion(
+            titulo = nuevaRecomendacion.titulo,
+            librosParaRecomendar = nuevaRecomendacion.librosRecomendados,
+            contenido = nuevaRecomendacion.contenido,
+            publico = nuevaRecomendacion.publica
+        )
+        recommendationRepository.create(nuevaRecomendacion)
+        return nuevaRecomendacion.toDTO()
     }
 
     fun getByIdDTO (recommendationID: Int): RecomendacionDTO {
@@ -53,6 +62,8 @@ object ServiceRecommendation {
         recommendationRepository.update(recomendacion)
         return recomendacion.editarDTO()
     }
+
+
 
     fun deleteRecommendation(recommendationID: Int): MessageResponse {
         val usuarioLogueado = ServiceUser.loggedUser

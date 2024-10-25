@@ -3,6 +3,7 @@ package ar.edu.unsam.algo3.DTO
 import LibroDTO
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.services.ServiceUser
 
 
 class RecomendacionDTO(
@@ -15,6 +16,13 @@ class RecomendacionDTO(
     val valoracionTotal: Int,
     var id: Int,
     var puedeValorar: Boolean
+)
+
+class RecomendacionCrearDTO(
+    val titulo: String,
+    val librosRecomendados: MutableSet<LibroDTO>,
+    val contenido: String,
+    var publica: Boolean,
 )
 
 class RecomendacionEditarDTO(
@@ -50,3 +58,12 @@ fun Recomendacion.toCardDTO(user:Usuario) = RecommendationCardDTO(
     popularity = this.valoracionPromedio(),
     aproxTime = this.tiempodeLectura(user),
 )
+
+fun Recomendacion.fromCreateJSON(RecomendacionCrearDTO: RecomendacionCrearDTO) : Recomendacion =
+    Recomendacion(
+        creador = ServiceUser.loggedUser,
+        titulo = RecomendacionCrearDTO.titulo,
+        librosRecomendados = librosRecomendados.toMutableSet(),
+        contenido = RecomendacionCrearDTO.contenido,
+        publica = RecomendacionCrearDTO.publica
+    )

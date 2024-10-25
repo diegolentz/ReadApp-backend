@@ -148,6 +148,8 @@ class Recomendacion(
         id = this.id,
         puedeValorar = this.puedeValorar
     )
+
+
     fun editarDTO(): RecomendacionEditarDTO = RecomendacionEditarDTO(
         titulo = this.titulo,
         contenido = this.contenido,
