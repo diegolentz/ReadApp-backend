@@ -35,10 +35,11 @@ object ServiceLibros {
         val idUser = ServiceUser.loggedUserId
         val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
         val libros: List<Libro> = usuario.mostrarLibros(estado)
-        if (libros.isEmpty()) {
+        if (libros.size == 0) {
             throw BusinessException("No se encontraron libros.")
+        }else{
+            return libros.map { it.toDTO() }
         }
-        return libros.map { it.toDTO() }
     }
 
     fun obtenerLibrosFiltrados(filtro: String): List<LibroDTO> {
