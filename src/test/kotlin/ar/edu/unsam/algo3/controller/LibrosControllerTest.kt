@@ -34,11 +34,11 @@ class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
     @BeforeEach
     fun init() {
         repoUsuario.clearAll()
-
         val usuario = USERS[0]
         repoUsuario.create(usuario)
 
 
+        ServiceUser.loggedUserId = 1
     }
 
     @Test
@@ -50,7 +50,7 @@ class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
     }
 
     @Test
-    fun `Si creo libros se muestran correctamente y tiene el tamaño esperado`() {
+    fun `realizo un get de libros y obtengo los de la app`() {
         mockMvc
             .perform(MockMvcRequestBuilders.get("/librosSearch"))
             .andExpect(MockMvcResultMatchers.status().isOk)
@@ -67,7 +67,8 @@ class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
         assertNotNull(usuarioCreado)
         assertEquals(1, usuarioCreado.id)
         //ya tiene libros para leer incorporados
-        assertTrue(ServiceLibros.obtenerLibros(1, false).size == 6)
+
+        assertTrue(ServiceLibros.obtenerLibros(false).size == 6)
 
         //  solicitud PUT para agregar libros
         mockMvc.perform(
@@ -97,7 +98,6 @@ class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
                 .content(
                     """
                 {
-                    "idUser": 1,
                     "estado": true,
                     "idLibro": [1]
                 }
@@ -144,7 +144,7 @@ class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
         mockMvc.perform(
             MockMvcRequestBuilders.get("/librosSearch/filter")
                 .contentType("application/json")
-                .param("filtro", "El Mar en Calma")
+                .param("filtro", "Caminos de fuego")
         ).andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(1)
         )

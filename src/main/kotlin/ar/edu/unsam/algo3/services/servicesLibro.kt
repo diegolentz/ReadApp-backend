@@ -23,40 +23,74 @@ object ServiceLibros {
 
     fun getById(libroId: Int): Libro = repoLibro.getByID(libroId)
 
-
     fun getSearch(): List<LibroDTO> {
         libros = repoLibro.getAll().toMutableList()
-        return libros.map { it : Libro -> it.toDTO() }
+        if (libros.isEmpty()) {
+            throw BusinessException("No se encontraron libros")
+        }
+        return libros.map { it: Libro -> it.toDTO() }
     }
 
-    fun obtenerLibros(idUser: Int, estado: Boolean): List<LibroDTO> {
+    fun obtenerLibros(estado: Boolean): List<LibroDTO> {
+        val idUser = ServiceUser.loggedUserId
         val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
         val libros: List<Libro> = usuario.mostrarLibros(estado)
-        return libros.map { it.toDTO() }
+        if (libros.size == 0) {
+            throw BusinessException("No se encontraron libros.")
+        }else{
+            return libros.map { it.toDTO() }
+        }
     }
 
     fun obtenerLibrosFiltrados(filtro: String): List<LibroDTO> {
-        libros = repoLibro.search(filtro).toMutableList()
-        return libros.map { it.toDTO() }
+
+        val libros = repoLibro.search(filtro).toMutableList()
+        if (libros.isEmpty()) {
+            throw BusinessException("No se encontraron busquedas cohinicidentes")
+
+        }else{
+            return libros.map { it.toDTO() }
+        }
+
     }
 
-    fun agregarLibros(idUser: Int, estado: Boolean, idLibro: List<Int>): List<LibroDTO> {
-        val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
-        val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }
-        val librosAgregados : List<Libro> = usuario.agregarLibros(libros, estado)
-        return librosAgregados.map { it.toDTO() }
+
+    fun agregarLibros(estado: Boolean, idLibro: List<Int>): List<LibroDTO> {
+        try {
+            val idUser = ServiceUser.loggedUserId
+            val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
+            val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }
+            val librosAgregados: List<Libro> = usuario.agregarLibros(libros, estado)
+            return librosAgregados.map { it.toDTO() }
+        }catch (e: Exception){
+            throw BusinessException("No se encontraron libros")
+        }
     }
-    fun borrarLibro(idUser: Int, estado: Boolean, idLibro: List<Int>) : List<LibroDTO>{
-        val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
-        val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }
-        val librosEliminados : List<Libro> = usuario.eliminarLibros(libros, estado)
-        return librosEliminados.map { it.toDTO() }
+
+    fun borrarLibro(estado: Boolean, idLibro: List<Int>): List<LibroDTO> {
+        try {
+            val idUser = ServiceUser.loggedUserId
+            val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
+            val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }
+            val librosEliminados: List<Libro> = usuario.eliminarLibros(libros, estado)
+            return librosEliminados.map { it.toDTO() }
+        } catch (e: Exception) {
+            throw BusinessException("No se encontraron libros")
+        }
     }
-    fun paraLeer(idUser: Int): List<LibroDTO> {
+
+    fun paraLeer(): List<LibroDTO> {
+        val idUser = ServiceUser.loggedUserId
         val usuario = ServiceUser.getByIdRaw(idUser.toString())
         val libros = this.get()
-       val agregarParaLeer : List<Libro> = usuario.agregarALeer(libros)
+        val agregarParaLeer: List<Libro> = usuario.agregarALeer(libros)
+        if (agregarParaLeer.isEmpty()) {
+            throw BusinessException("No se encontraron libros")
+        }
         return agregarParaLeer.map { it.toDTO() }
     }
-
 }
+
+
+
+
