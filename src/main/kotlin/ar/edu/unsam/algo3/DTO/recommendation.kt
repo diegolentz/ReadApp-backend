@@ -17,6 +17,13 @@ class RecomendacionDTO(
     var puedeValorar: Boolean
 )
 
+class RecomendacionCrearDTO(
+    val titulo: String,
+    val librosRecomendados: MutableSet<LibroDTO>,
+    val contenido: String,
+    var publica: Boolean,
+)
+
 class RecomendacionEditarDTO(
     val titulo: String,
     val librosRecomendados: MutableSet<LibroDTO>,

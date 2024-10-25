@@ -16,10 +16,10 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
     @GetMapping("/recommendations/{id}")
     fun getRecommendationById(@PathVariable id: Int): RecomendacionDTO = serviceRecommendation.getByIdDTO(id)
 
-    //    @PostMapping("/recommendations/{id}")
-//    fun createRecommendation(@RequestBody recommendationDTO: RecommendationDTO): Recomendacion =
-//        serviceRecommendation.createRecommendation(recommendationDTO.convertir())
-//
+    @PostMapping("/recommendations")
+    fun createRecommendation(@RequestBody recommendationCrearDTO: RecomendacionCrearDTO): RecomendacionDTO =
+        serviceRecommendation.createRecommendation(recommendationCrearDTO)
+
     @PutMapping("/recommendations")
     fun updateRecommendation(@RequestBody newRecommendation: RecomendacionEditarDTO): RecomendacionEditarDTO =
         serviceRecommendation.updateRecommendation(newRecommendation)
