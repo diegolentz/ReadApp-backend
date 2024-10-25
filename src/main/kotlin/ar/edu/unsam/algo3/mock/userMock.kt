@@ -53,10 +53,10 @@ val adrian:Usuario = UsuarioBuilder(Usuario())
     .build()
 
 val admin:Usuario = UsuarioBuilder(Usuario())
-    .fotoPath("NULL.jpeg")
-    .nombre("NULL").apellido("")
+    .fotoPath("kevinMalone.jpeg")
+    .nombre("admin").apellido("")
     .email("NULL@NULL").alias("NULL")
-    .username("admin").password("admin")
+    .username("holaholahola").password("admin")
     .build()
 
 val USERS = listOf(diego, valen, delfi, pica, adrian, admin)

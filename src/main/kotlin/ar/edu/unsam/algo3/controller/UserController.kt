@@ -26,14 +26,9 @@ class UserController(val serviceUser: ServiceUser) {
         return serviceUser.getByIdProfile(idUsuario)
     }
 
-    @GetMapping("/user/friends/{idUsuario}")
-    fun getUserFriendsByID(@PathVariable idUsuario: String): List<UserFriendDTO> {
-        return serviceUser.getByIdFriends(idUsuario)
-    }
-
-    @GetMapping("/user/new-friends/{idUsuario}")
-    fun getUserNotFriendsByID(@PathVariable idUsuario: String): List<UserFriendDTO> {
-        return serviceUser.getByIdNotFriends(idUsuario)
+    @GetMapping("/user/friends")
+    fun getUserFriendsByID(@RequestParam id: Int, @RequestParam muestroAmigos: Boolean): List<UserFriendDTO> {
+        return serviceUser.getByIdFriends(id, muestroAmigos)
     }
 
     @PostMapping("/login")

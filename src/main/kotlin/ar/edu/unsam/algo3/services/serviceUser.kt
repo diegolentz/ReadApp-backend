@@ -46,16 +46,14 @@ object ServiceUser {
         return this.getByIdRaw(idTypeString).toDTOProfile()
     }
 
-    fun getByIdFriends(idTypeString: String): List<UserFriendDTO> {
-        val usuarioLogueado = this.getByIdRaw(idTypeString)
-        return usuarioLogueado.amigos.map { it.toDTOFriend() }
-    }
-
-    fun getByIdNotFriends(idTypeString: String): List<UserFriendDTO>  {
-        val usuarios = this.getAll().toMutableList()
-        val usuarioLogueado = this.getByIdRaw(idTypeString)
-        usuarios.remove(usuarioLogueado)
-        return this.notMyFriends(usuarios, usuarioLogueado)
+    fun getByIdFriends(idTypeString: Int, muestroAmigos: Boolean): List<UserFriendDTO> {
+        val usuarioLogueado = this.getByIdRaw(idTypeString.toString())
+        if (muestroAmigos) return usuarioLogueado.amigos.map { it.toDTOFriend() }
+        else {
+            val usuarios = this.getAll().toMutableList()
+            usuarios.remove(usuarioLogueado)
+            return this.notMyFriends(usuarios, usuarioLogueado)
+        }
     }
 
     private fun notMyFriends(usuarios: List<Usuario>, usuarioLogueado: Usuario): List<UserFriendDTO> {
