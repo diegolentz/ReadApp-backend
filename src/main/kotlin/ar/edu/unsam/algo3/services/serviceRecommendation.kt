@@ -36,13 +36,7 @@ object ServiceRecommendation {
 
     fun createRecommendation(recomendacionCrearDTO: RecomendacionCrearDTO): RecomendacionDTO {
         var user = ServiceUser.loggedUser
-        var nuevaRecomendacion = Recomendacion(
-            titulo = recomendacionCrearDTO.titulo,
-            librosRecomendados = recomendacionCrearDTO.librosRecomendados.map { Libro().fromDTO(it) }.toMutableSet(),
-            contenido = recomendacionCrearDTO.contenido,
-            publica = recomendacionCrearDTO.publica,
-            creador = user
-        )
+        var nuevaRecomendacion = Recomendacion(Usuario()).fromCreateJSON(recomendacionCrearDTO)
         user.crearRecomendacion(
             titulo = nuevaRecomendacion.titulo,
             librosParaRecomendar = nuevaRecomendacion.librosRecomendados,
