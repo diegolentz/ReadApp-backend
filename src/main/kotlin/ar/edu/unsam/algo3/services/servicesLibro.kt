@@ -47,8 +47,11 @@ object ServiceLibros {
         val libros = repoLibro.search(filtro).toMutableList()
         if (libros.isEmpty()) {
             throw BusinessException("El filtro no puede estar vacío")
+
+        }else{
+            return libros.map { it.toDTO() }
         }
-        return libros.map { it.toDTO() }
+
     }
 
 
