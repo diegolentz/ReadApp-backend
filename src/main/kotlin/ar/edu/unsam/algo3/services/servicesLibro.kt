@@ -29,7 +29,8 @@ object ServiceLibros {
         return libros.map { it : Libro -> it.toDTO() }
     }
 
-    fun obtenerLibros(idUser: Int, estado: Boolean): List<LibroDTO> {
+    fun obtenerLibros(estado: Boolean): List<LibroDTO> {
+        val idUser = ServiceUser.loggedUserId
         val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
         val libros: List<Libro> = usuario.mostrarLibros(estado)
         return libros.map { it.toDTO() }
@@ -40,19 +41,22 @@ object ServiceLibros {
         return libros.map { it.toDTO() }
     }
 
-    fun agregarLibros(idUser: Int, estado: Boolean, idLibro: List<Int>): List<LibroDTO> {
+    fun agregarLibros(estado: Boolean, idLibro: List<Int>): List<LibroDTO> {
+        val idUser = ServiceUser.loggedUserId
         val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
         val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }
         val librosAgregados : List<Libro> = usuario.agregarLibros(libros, estado)
         return librosAgregados.map { it.toDTO() }
     }
-    fun borrarLibro(idUser: Int, estado: Boolean, idLibro: List<Int>) : List<LibroDTO>{
+    fun borrarLibro(estado: Boolean, idLibro: List<Int>) : List<LibroDTO>{
+        val idUser = ServiceUser.loggedUserId
         val usuario: Usuario = ServiceUser.getByIdRaw(idUser.toString())
         val libros: List<Libro> = idLibro.map { libroId -> repoLibro.getByID(libroId) }
         val librosEliminados : List<Libro> = usuario.eliminarLibros(libros, estado)
         return librosEliminados.map { it.toDTO() }
     }
-    fun paraLeer(idUser: Int): List<LibroDTO> {
+    fun paraLeer(): List<LibroDTO> {
+        val idUser = ServiceUser.loggedUserId
         val usuario = ServiceUser.getByIdRaw(idUser.toString())
         val libros = this.get()
        val agregarParaLeer : List<Libro> = usuario.agregarALeer(libros)
