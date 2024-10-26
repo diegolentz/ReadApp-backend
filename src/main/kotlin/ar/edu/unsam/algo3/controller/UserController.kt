@@ -15,6 +15,8 @@ class UserController(val serviceUser: ServiceUser) {
             it.toDTOBasic()
         }
     }
+    @GetMapping("/usersTotal")
+    fun getAllUsersLength(): Int = serviceUser.getAllSize()
 
     @GetMapping("/user/basic/{idUsuario}")
     fun getUserBasicByID(@PathVariable idUsuario: String): UserBasicDTO {
