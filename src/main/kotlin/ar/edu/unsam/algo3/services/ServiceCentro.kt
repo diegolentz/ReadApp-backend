@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 import java.time.LocalDate
 
 @Service
-class ServiceCentro {
+object ServiceCentro {
     val repoCentro: Repositorio<CentroDeLectura> = Repositorio()
 
     init {

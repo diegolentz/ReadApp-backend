@@ -74,7 +74,7 @@ class ProcesoAgregarAutores(
     }
 }
 
-class ProcesoBorradoCentros(
+class BorrarCentrosInactivos(
     val repositorio: Repositorio<CentroDeLectura>,
 ) : Proceso() {
     override fun realizarAccion() {

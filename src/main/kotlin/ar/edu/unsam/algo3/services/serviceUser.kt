@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service
 
 @Service
 object ServiceUser {
-    private val userRepository: Repositorio<Usuario> = Repositorio()
+    val userRepository: Repositorio<Usuario> = Repositorio()
     var loggedUserId:Int = 5
     lateinit var loggedUser:Usuario
     init {
