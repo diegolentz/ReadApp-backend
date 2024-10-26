@@ -13,6 +13,9 @@ class RecommendationController(val serviceRecommendation: ServiceRecommendation)
     @GetMapping("/recommendations")
     fun getAllRecommendations(): List<RecommendationCardDTO> = serviceRecommendation.getAll()
 
+    @GetMapping("/recommendationsTotal")
+    fun getAllRecommendationsLength(): Int = serviceRecommendation.getAllSize()
+
     @GetMapping("/recommendations/{id}")
     fun getRecommendationById(@PathVariable id: Int): RecomendacionDTO = serviceRecommendation.getByIdDTO(id)
 
