@@ -4,8 +4,7 @@ import LibroDTO
 import ar.edu.unsam.algo2.readapp.libro.AgregarLibroRequest
 import ar.edu.unsam.algo3.services.ServiceLibros
 import org.springframework.web.bind.annotation.*
-
-@CrossOrigin(origins = arrayOf("http://localhost:4200"))
+@CrossOrigin(origins = ["http://localhost:4200", "http://localhost:5173"])
 @RestController
 class LibrosController(val serviceLibros: ServiceLibros) {
 
