@@ -8,14 +8,13 @@ import ar.edu.unsam.algo3.DTO.*
 import ar.edu.unsam.algo3.mock.PHOTOS_PATH
 import ar.edu.unsam.algo3.mock.USERS
 import ar.edu.unsam.algo3.mock.auxGenerarAmistades
-import ar.edu.unsam.algo3.mock.auxGenerarRecomendaciones
 import excepciones.*
 import org.springframework.stereotype.Service
 
 
 @Service
 object ServiceUser {
-    private val userRepository: Repositorio<Usuario> = Repositorio()
+    val userRepository: Repositorio<Usuario> = Repositorio()
     var loggedUserId:Int = 5
     lateinit var loggedUser:Usuario
     init {
@@ -192,6 +191,8 @@ object ServiceUser {
             throw throw NotFoundException(passwordRecoveryErrorMessage)
         }
     }
+
+    fun getAllSize(): Int = getAll().size
 
 }
 
