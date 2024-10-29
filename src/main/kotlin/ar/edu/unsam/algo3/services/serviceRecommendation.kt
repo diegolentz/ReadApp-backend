@@ -74,14 +74,20 @@ object ServiceRecommendation {
     }
 
     fun getWithFilter(filtro: String): List<RecommendationCardDTO> {
-        recomendaciones = recommendationRepository.search(filtro).toMutableList()
-        return recomendaciones.map { it: Recomendacion -> it.toCardDTO(ServiceUser.loggedUser) }
+        val interestingRecommendations = this.getInterestingRecommendations()
+        val filteredRecommendations = interestingRecommendations.filter {
+            it.cumpleCriterioBusqueda(filtro)
+        }
+        return filteredRecommendations.map { it: Recomendacion -> it.toCardDTO(ServiceUser.loggedUser) }
     }
 
     fun createValoracion(valoracionDTO: ValoracionDTO, id:Int): ValoracionDTO {
         var recomendacionAValorar = this.getById(id)
         var usuario = ServiceUser.loggedUser
         usuario.valorarRecomendacion(recomendacionAValorar,valoracionDTO.score,valoracionDTO.comentario)
+        if(usuario.recomendacionesAValorar.contains(recomendacionAValorar)){
+            usuario.recomendacionesAValorar.remove(recomendacionAValorar)
+        }
         return valoracionDTO
     }
 
@@ -105,12 +111,12 @@ object ServiceRecommendation {
     }
     private fun filterRecommendationsByFlag(recommendations:List<Recomendacion>,private:Boolean):List<Recomendacion>{
         return if(private){
-            return recommendations.filter {
+                return recommendations.filter {
                 !it.publica
             }
-        }else{
-            return recommendations
-        }
+            }else{
+                return recommendations
+            }
     }
 
     fun getRecommendationsToValue():List<RecommendationCardDTO>{
@@ -122,15 +128,12 @@ object ServiceRecommendation {
     }
 
     fun getRecommendationsByProfile():List<RecommendationCardDTO>{
-        val loggedUser = ServiceUser.loggedUser
-        val recommendations = recommendationRepository.getAll()
-        val filteredRecommendations = recommendations.filter {
-            loggedUser.perfil.recomendacionEsInteresante(it,loggedUser)
-        }
-        return filteredRecommendations.map {
-            it.toCardDTO(loggedUser)
+        val interestingRecommendations = this.getInterestingRecommendations()
+        return interestingRecommendations.map {
+            it.toCardDTO(ServiceUser.loggedUser)
         }
     }
+
     fun addToValueLater(id:Int): MessageResponse{
         val loggedUser = ServiceUser.loggedUser
         val recommendation = recommendationRepository.getByID(id)
@@ -142,6 +145,23 @@ object ServiceRecommendation {
         val recomendacion = this.getById(recommendationID)
         val puedeValorar = ServiceUser.loggedUser.puedeCrearValoracion(recomendacion)
         recomendacion.puedeValorar = puedeValorar
+    }
+
+
+    fun getInterestingRecommendations(): List<Recomendacion>{
+        val loggedUser = ServiceUser.loggedUser
+        val recommendations = recommendationRepository.getAll()
+        val filteredRecommendations = recommendations.filter {
+            loggedUser.perfil.recomendacionEsInteresante(it,loggedUser)
+        }
+        return filteredRecommendations
+    }
+
+    private fun filterInterestingRecommendations(recommendations:List<Recomendacion>): List<Recomendacion>{
+        val loggedUser = ServiceUser.loggedUser
+        return recommendations.filter {
+            loggedUser.perfil.recomendacionEsInteresante(it, loggedUser)
+        }
     }
 }
 
