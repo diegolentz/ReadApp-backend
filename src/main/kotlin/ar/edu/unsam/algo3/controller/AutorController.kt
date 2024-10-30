@@ -2,18 +2,23 @@ package ar.edu.unsam.algo3.controller
 
 
 import ar.edu.unsam.algo2.readapp.libro.Autor
+import ar.edu.unsam.algo3.DTO.AutorDTO
 import org.springframework.web.bind.annotation.*
 import ar.edu.unsam.algo3.services.ServiceAutor
-@CrossOrigin(origins = ["http://localhost:4200", "http://localhost:5173"])
+
+@CrossOrigin(origins = arrayOf("http://localhost:4200","http://localhost:5173" ))
+
 @RestController
 
 class AutorController(val serviceAutor: ServiceAutor) {
-    @GetMapping("/autores")
-    fun obtenerAutores(): List<Autor> = serviceAutor.get()
+    @GetMapping("/reactAutor")
+    fun obtenerAutores(): List<AutorDTO> = serviceAutor.getAll()
 
-    @GetMapping("/autores/{id}")
-    fun autorPorId(@PathVariable id: Int) = serviceAutor.getById(id)
+    @DeleteMapping("/reactAutor/{id}")
+    fun borrarAutor(@PathVariable id: Int) : Autor = serviceAutor.borrarAutor(id)
 
-    @DeleteMapping("/autores/{id}")
-    fun borrarAutor(@PathVariable id: Int) = serviceAutor.borrarAutor(id)
+
+//    @GetMapping("/autores/{id}")
+//    fun autorPorId(@PathVariable id: Int) : AutorDTO = serviceAutor.getById(id)
+//
 }

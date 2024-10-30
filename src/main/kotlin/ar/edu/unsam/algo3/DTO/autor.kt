@@ -1,2 +1,12 @@
 package ar.edu.unsam.algo3.DTO
 
+import ar.edu.unsam.algo2.readapp.libro.Lenguaje
+import com.jayway.jsonpath.internal.function.text.Length
+
+class AutorDTO(
+    val id: Int,
+    val nombre: String,
+    val apellido: String,
+    val nacionalidad : Lenguaje
+
+)
