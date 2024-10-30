@@ -17,12 +17,6 @@ object ServiceUser {
     val userRepository: Repositorio<Usuario> = Repositorio()
     var loggedUserId:Int = 5
     lateinit var loggedUser:Usuario
-    init {
-        auxGenerarAmistades()
-        USERS.forEach { user ->
-            userRepository.create(user)
-        }
-    }
 
     fun getAll(): List<Usuario> = userRepository.getAll().toList()
 
