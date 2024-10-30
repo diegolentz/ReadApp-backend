@@ -5,13 +5,16 @@ import ar.edu.unsam.algo3.services.ServiceRecommendation
 
 import org.springframework.web.bind.annotation.*
 
-@CrossOrigin(origins = ["http://localhost:4200"])
+@CrossOrigin(origins = ["http://localhost:4200", "http://localhost:5173"])
 @RestController
 
 class RecommendationController(val serviceRecommendation: ServiceRecommendation) {
 
     @GetMapping("/recommendations")
     fun getAllRecommendations(): List<RecommendationCardDTO> = serviceRecommendation.getAll()
+
+    @GetMapping("/recommendationsTotal")
+    fun getAllRecommendationsLength(): Int = serviceRecommendation.getAllSize()
 
     @GetMapping("/recommendations/{id}")
     fun getRecommendationById(@PathVariable id: Int): RecomendacionDTO = serviceRecommendation.getByIdDTO(id)

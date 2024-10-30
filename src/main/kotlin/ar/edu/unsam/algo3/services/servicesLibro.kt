@@ -89,6 +89,8 @@ object ServiceLibros {
         }
         return agregarParaLeer.map { it.toDTO() }
     }
+
+    fun getAllSize(): Int = repoLibro.getAll().size
 }
 
 

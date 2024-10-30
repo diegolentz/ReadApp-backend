@@ -80,8 +80,8 @@ data class  UserInfoDTO(
 
 data class PerfilDeLecturaDTO(
     var tipoPerfil: String,
-    var rangoMin: Double = 0.0,
-    var rangoMax: Double = 0.0
+    var rangoMin: Double,
+    var rangoMax: Double
 )
 
 data class LoginRequest(

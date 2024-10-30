@@ -23,7 +23,7 @@ class ProcesosBuilder {
     }
 
     fun borrarCentros(repositorioAsociado: Repositorio<CentroDeLectura>): ProcesosBuilder = apply {
-        val proceso = ProcesoBorradoCentros(repositorioAsociado)
+        val proceso = BorrarCentrosInactivos(repositorioAsociado)
         listaProcesos.add(proceso)
     }
 
