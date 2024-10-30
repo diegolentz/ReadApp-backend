@@ -17,7 +17,7 @@ object Bootstrap : CommandLineRunner {
     }
 
     private fun createUsers() {
-        var diego: Usuario = UsuarioBuilder(Usuario())
+        val diego: Usuario = UsuarioBuilder(Usuario())
             .fotoPath("inosuke.jpeg")
             .nombre("Diego").apellido("Lentz").lenguaje(Lenguaje.ESPANIOL)
             .email("diego@hotmail.com").alias("elDiego")
@@ -70,15 +70,15 @@ object Bootstrap : CommandLineRunner {
 
         USERS.forEach { user ->
             serviceUser.userRepository.create(user)
+            auxGenerarAmistades(USERS)
         }
 
-        auxGenerarAmistades(USERS)
+
     }
 
     private fun auxGenerarAmistades(usuarios: List<Usuario>) {
         val usuario1 = usuarios.random()
         val usuario2 = usuarios.filter { it != usuario1 }.random()
-
         usuario1.agregarAmigo(usuario2)
     }
 }
