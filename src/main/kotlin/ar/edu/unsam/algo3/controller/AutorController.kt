@@ -12,9 +12,11 @@ class AutorController(val serviceAutor: ServiceAutor) {
     @GetMapping("/reactAutor")
     fun obtenerAutores(): List<AutorDTO> = serviceAutor.getAll()
 
+    @DeleteMapping("/reactAutor/{id}")
+    fun borrarAutor(@PathVariable id: Int) : Autor = serviceAutor.borrarAutor(id)
+
+
 //    @GetMapping("/autores/{id}")
 //    fun autorPorId(@PathVariable id: Int) : AutorDTO = serviceAutor.getById(id)
 //
-//    @DeleteMapping("/autores/{id}")
-//    fun borrarAutor(@PathVariable id: Int) : AutorDTO = serviceAutor.borrarAutor(id)
 }
