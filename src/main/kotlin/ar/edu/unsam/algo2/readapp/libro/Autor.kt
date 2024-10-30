@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo2.readapp.libro
 
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
+import ar.edu.unsam.algo3.DTO.AutorDTO
 
 
 class Autor(
@@ -31,8 +32,14 @@ class Autor(
     override fun cumpleCriterioBusqueda(texto: String) = nombre.contains(texto) || apellido.contains(texto) || (seudonimo.lowercase() == texto)
 
 
+    fun toDTO() : AutorDTO = AutorDTO(
+        id = id,
+        nombre = nombre,
+        apellido = apellido,
+        nacionalidad = lenguaNativa
+
+    )
     fun fromDTO(){}
-    fun toDTO(){}
 
 
 
