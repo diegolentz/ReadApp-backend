@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(origins = ["http://localhost:4200", "http://localhost:5173"])
 @RestController
-
 class UserController(val serviceUser: ServiceUser) {
 
     @GetMapping("/users")

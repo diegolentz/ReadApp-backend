@@ -2,28 +2,36 @@ package ar.edu.unsam.algo3.bootstrap
 
 import LibroBuilder
 import ar.edu.unsam.algo2.readapp.builders.UsuarioBuilder
+import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.usuario.*
 import ar.edu.unsam.algo3.mock.AUTOR
+import ar.edu.unsam.algo3.mock.LIBROS
 import ar.edu.unsam.algo3.mock.autorPreferidoPica
 import ar.edu.unsam.algo3.services.ServiceAutor
 import ar.edu.unsam.algo3.services.ServiceLibros
+import ar.edu.unsam.algo3.services.ServiceRecommendation
 import ar.edu.unsam.algo3.services.ServiceUser
 import org.springframework.boot.CommandLineRunner
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User
 import org.springframework.stereotype.Component
+import java.awt.print.Book
 
 @Component
 object Bootstrap : CommandLineRunner {
     val serviceUser: ServiceUser = ServiceUser
-    val serviceBooks : ServiceLibros = ServiceLibros
-    val serviceAutor : ServiceAutor = ServiceAutor
+    val serviceBooks: ServiceLibros = ServiceLibros
+    val serviceAutor: ServiceAutor = ServiceAutor
+    val serviceRecomendacion: ServiceRecommendation = ServiceRecommendation
 
     override fun run(vararg args: String?) {
+        //El orden es importante
         createUsers()
-        createAutors()
-        createBooks(serviceAutor.get())
+//        createAutors()
+//        createBooks(serviceAutor.get())
+//        createRecommendations(serviceUser.getAll(), serviceBooks.get())
     }
 
     private fun createUsers() {
@@ -92,7 +100,7 @@ object Bootstrap : CommandLineRunner {
         usuario1.agregarAmigo(usuario2)
     }
 
-    private fun createBooks(autores:List<Autor>){
+    private fun createBooks(autores: List<Autor>) {
         val libro_1: Libro = LibroBuilder()
             .titulo("La sombra sobre Innsmouth").autor(autores.random())
             .cantidadPaginas(850).cantidadPalabras(200 * 850)
@@ -180,14 +188,15 @@ object Bootstrap : CommandLineRunner {
         val LIBROS = mutableListOf(
             libro_1, libro_2, libro_3, libro_4,
             libro_5, libro_6, libro_7, libro_8,
-            libro_9, libro_10, libro_11, libro_12)
+            libro_9, libro_10, libro_11, libro_12
+        )
 
         LIBROS.forEach({
             serviceBooks.repoLibro.create(it)
         })
     }
 
-    private fun createAutors(){
+    private fun createAutors() {
 
         val AUTOR = listOf(
             Autor(
@@ -232,4 +241,53 @@ object Bootstrap : CommandLineRunner {
         )
 
     }
+
+    private fun createRecommendations(users: List<Usuario>, books: List<Libro>) {
+
+        val TITULOS = mutableListOf(
+            "Historias Cortas de Ciencia Ficción",
+            "La Filosofía del Zen",
+            "Viajes por Mundos Desconocidos",
+            "El Arte de la Guerra Moderna",
+            "El Universo en Expansión",
+            "Misterios de la Historia Antigua 2",
+            "El Legado de las Civilizaciones Perdidas",
+            "La Ciencia de los Sueños Lúcidos",
+            "El Arte de la Meditación en la Vida Moderna",
+            "Libro de autor unico",
+        )
+
+        val CONTENIDOS = mutableListOf(
+            "En un futuro donde las máquinas dominan el espacio exterior, un pequeño grupo de humanos lucha por sobrevivir. Esta colección reúne relatos que exploran la inteligencia artificial, los viajes intergalácticos y las fronteras de la ciencia moderna, presentando una visión fascinante del futuro.",
+            "Este libro profundiza en las enseñanzas milenarias del Zen, una rama del budismo que enfatiza la meditación y la comprensión intuitiva del ser. A través de metáforas y historias breves, el autor invita al lector a reflexionar sobre la naturaleza del ser, la vida y el equilibrio interno.",
+            "Desde los océanos más profundos hasta los confines del espacio exterior, este libro lleva al lector a una travesía inolvidable. Explorando los límites de la realidad y la imaginación, el autor presenta una serie de aventuras que desafían las leyes de la física y de la mente humana.",
+            "Un análisis profundo de las estrategias militares contemporáneas, desde las guerras cibernéticas hasta las tácticas de guerrilla urbana. Este libro examina cómo las tecnologías avanzadas y los conflictos geopolíticos han transformado el campo de batalla moderno, ofreciendo una perspectiva única sobre el futuro de la guerra.",
+            "Este fascinante relato explora los últimos descubrimientos en cosmología, desde la teoría del Big Bang hasta la energía oscura. A través de una narrativa cautivadora, el autor nos lleva a comprender la inmensidad del universo y las incógnitas que aún desafían a los científicos de todo el mundo.",
+            "Un viaje a través de los enigmas más grandes de las civilizaciones antiguas: desde las pirámides de Egipto hasta los secretos de la Atlántida. Este libro examina los misterios no resueltos y teorías fascinantes sobre culturas que dejaron un legado duradero, pero aún ocultan verdades por descubrir.",
+            "Continuacion del viaje, sarasa"
+        )
+
+        val PUBLICOS = mutableListOf(
+            true, false
+        )
+
+        users.forEach {
+            users.random().leer(books.random())
+            users.random().leer(books.random())
+            users.random().leer(books.random())
+//            users.random().agregarLibroALeer(books.random())
+//            users.random().agregarLibroALeer(books.random())
+//            users.random().agregarLibroALeer(books.random())
+//            users.random().crearRecomendacion(
+//                titulo = TITULOS.random(),
+//                contenido = CONTENIDOS.random(),
+//                publico = PUBLICOS.random(),
+//                librosParaRecomendar = mutableSetOf(books.random())
+//            )
+        }
+
+
+    }
+
+
 }
