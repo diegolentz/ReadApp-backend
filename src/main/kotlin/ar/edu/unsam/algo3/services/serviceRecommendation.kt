@@ -3,9 +3,6 @@ import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.DTO.*
-import ar.edu.unsam.algo3.mock.USERS
-import ar.edu.unsam.algo3.mock.auxGenerarRecomendaciones
-import ar.edu.unsam.algo3.mock.auxGenerarRecomendacionesAValorar
 import excepciones.deletedRecommendation
 import excepciones.recommendationAdded
 import org.springframework.stereotype.Service
@@ -13,17 +10,17 @@ import org.springframework.stereotype.Service
 
 @Service
 object ServiceRecommendation {
-    private val recommendationRepository: Repositorio<Recomendacion> = Repositorio()
+    val recommendationRepository: Repositorio<Recomendacion> = Repositorio()
     var recomendaciones : MutableList<Recomendacion> = mutableListOf()
-    init {
-        auxGenerarRecomendaciones()
-        auxGenerarRecomendacionesAValorar()
-        USERS.forEach { user ->
-            user.recomendaciones.forEach{
-                recommendationRepository.create(it)
-            }
-        }
-    }
+//    init {
+//        auxGenerarRecomendaciones()
+//        auxGenerarRecomendacionesAValorar()
+//        USERS.forEach { user ->
+//            user.recomendaciones.forEach{
+//                recommendationRepository.create(it)
+//            }
+//        }
+//    }
 
     fun getAllRaw() : MutableList<Recomendacion> = recommendationRepository.getAll().toMutableList()
 
