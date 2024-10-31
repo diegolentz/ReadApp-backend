@@ -3,9 +3,6 @@ import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.DTO.*
-import ar.edu.unsam.algo3.mock.USERS
-import ar.edu.unsam.algo3.mock.auxGenerarRecomendaciones
-import ar.edu.unsam.algo3.mock.auxGenerarRecomendacionesAValorar
 import excepciones.deletedRecommendation
 import excepciones.recommendationAdded
 import org.springframework.stereotype.Service
