@@ -2,22 +2,17 @@ package ar.edu.unsam.algo3.bootstrap
 
 import LibroBuilder
 import ar.edu.unsam.algo2.readapp.builders.UsuarioBuilder
-import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.usuario.*
-import ar.edu.unsam.algo3.mock.AUTOR
-import ar.edu.unsam.algo3.mock.LIBROS
 import ar.edu.unsam.algo3.mock.autorPreferidoPica
 import ar.edu.unsam.algo3.services.ServiceAutor
 import ar.edu.unsam.algo3.services.ServiceLibros
 import ar.edu.unsam.algo3.services.ServiceRecommendation
 import ar.edu.unsam.algo3.services.ServiceUser
 import org.springframework.boot.CommandLineRunner
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User
 import org.springframework.stereotype.Component
-import java.awt.print.Book
 
 @Component
 object Bootstrap : CommandLineRunner {
@@ -27,13 +22,12 @@ object Bootstrap : CommandLineRunner {
     val serviceRecomendacion: ServiceRecommendation = ServiceRecommendation
 
     override fun run(vararg args: String?) {
-        //El orden es importante
-        createUsers()
-        createBooks()
-//        createRecommendations(serviceUser.getAll(), serviceBooks.get())
+        val users = createUsers()
+        val books = createBooks()
+        createRecommendations(users, books)
     }
 
-    private fun createUsers() {
+    private fun createUsers(): List<Usuario> {
         val diego: Usuario = UsuarioBuilder(Usuario())
             .fotoPath("inosuke.jpeg")
             .nombre("Diego").apellido("Lentz").lenguaje(Lenguaje.ESPANIOL)
@@ -90,6 +84,8 @@ object Bootstrap : CommandLineRunner {
             auxGenerarAmistades(USERS)
         }
 
+        return USERS
+
 
     }
 
@@ -99,7 +95,7 @@ object Bootstrap : CommandLineRunner {
         usuario1.agregarAmigo(usuario2)
     }
 
-    private fun createBooks() {
+    private fun createBooks(): MutableList<Libro> {
         val autores = createAutors()
 
         val libro_1: Libro = LibroBuilder()
@@ -195,6 +191,8 @@ object Bootstrap : CommandLineRunner {
         LIBROS.forEach({
             serviceBooks.repoLibro.create(it)
         })
+
+        return LIBROS
     }
 
     private fun createAutors(): List<Autor> {
@@ -274,23 +272,25 @@ object Bootstrap : CommandLineRunner {
             true, false
         )
 
-        users.forEach {
-            users.random().leer(books.random())
-            users.random().leer(books.random())
-            users.random().leer(books.random())
-//            users.random().agregarLibroALeer(books.random())
-//            users.random().agregarLibroALeer(books.random())
-//            users.random().agregarLibroALeer(books.random())
-//            users.random().crearRecomendacion(
-//                titulo = TITULOS.random(),
-//                contenido = CONTENIDOS.random(),
-//                publico = PUBLICOS.random(),
-//                librosParaRecomendar = mutableSetOf(books.random())
-//            )
-        }
+        users.forEach({
+            val libro = books.random()
+            it.leer(libro)
+            it.crearRecomendacion(
+                titulo = TITULOS.random(),
+                contenido = CONTENIDOS.random(),
+                publico = PUBLICOS.random(),
+                librosParaRecomendar = mutableSetOf(libro)
+            )
+        })
 
+        users.forEach({ user ->
+            user.recomendaciones.forEach({
+                serviceRecomendacion.recommendationRepository.create(it)
+            })
+        })
 
     }
 
-
 }
+
+
