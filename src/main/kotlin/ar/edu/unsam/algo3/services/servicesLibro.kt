@@ -14,11 +14,11 @@ object ServiceLibros {
     var libros: MutableList<Libro> = mutableListOf()
 
 
-    init {
-        LIBROS.forEach {
-            repoLibro.create(it)
-        }
-    }
+//    init {
+//        LIBROS.forEach {
+//            repoLibro.create(it)
+//        }
+//    }
     fun get() : List<Libro> = repoLibro.getAll().toList()
 
     fun getById(libroId: Int): Libro = repoLibro.getByID(libroId)

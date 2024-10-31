@@ -29,8 +29,7 @@ object Bootstrap : CommandLineRunner {
     override fun run(vararg args: String?) {
         //El orden es importante
         createUsers()
-//        createAutors()
-//        createBooks(serviceAutor.get())
+        createBooks()
 //        createRecommendations(serviceUser.getAll(), serviceBooks.get())
     }
 
@@ -100,7 +99,9 @@ object Bootstrap : CommandLineRunner {
         usuario1.agregarAmigo(usuario2)
     }
 
-    private fun createBooks(autores: List<Autor>) {
+    private fun createBooks() {
+        val autores = createAutors()
+
         val libro_1: Libro = LibroBuilder()
             .titulo("La sombra sobre Innsmouth").autor(autores.random())
             .cantidadPaginas(850).cantidadPalabras(200 * 850)
@@ -196,7 +197,7 @@ object Bootstrap : CommandLineRunner {
         })
     }
 
-    private fun createAutors() {
+    private fun createAutors(): List<Autor> {
 
         val AUTOR = listOf(
             Autor(
@@ -239,6 +240,8 @@ object Bootstrap : CommandLineRunner {
         AUTOR.forEach(
             { autor -> serviceAutor.repoAutor.create(autor) }
         )
+
+        return AUTOR
 
     }
 
