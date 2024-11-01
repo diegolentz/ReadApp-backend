@@ -6,7 +6,6 @@ import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.usuario.*
-import ar.edu.unsam.algo3.mock.autorPreferidoPica
 import ar.edu.unsam.algo3.services.ServiceAutor
 import ar.edu.unsam.algo3.services.ServiceLibros
 import ar.edu.unsam.algo3.services.ServiceRecommendation
@@ -58,7 +57,6 @@ object Bootstrap : CommandLineRunner {
             .email("pica@hotmail.com").alias("elPica")
             .username("pica").password("pica")
             .modoLectura(Promedio).tipoPerfil(Precavido)
-            .autoresPreferidos(autorPreferidoPica)
             .build()
 
 
