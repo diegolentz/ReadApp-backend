@@ -18,7 +18,7 @@ class AutorController(val serviceAutor: ServiceAutor) {
     fun borrarAutor(@PathVariable id: Int) : Autor = serviceAutor.borrarAutor(id)
 
 
-//    @GetMapping("/autores/{id}")
-//    fun autorPorId(@PathVariable id: Int) : AutorDTO = serviceAutor.getById(id)
-//
+    @GetMapping("/reactAutor/{id}")
+    fun autorPorId(@PathVariable id: Int) : AutorDTO = serviceAutor.editAutor(id)
+
 }

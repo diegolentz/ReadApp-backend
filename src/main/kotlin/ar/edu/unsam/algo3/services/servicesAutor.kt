@@ -24,6 +24,11 @@ object ServiceAutor {
 
     fun getById(autorID: Int): Autor = repoAutor.getByID(autorID)
 
+    fun editAutor(autorID: Int): AutorDTO {
+        val autor = repoAutor.getByID(autorID)
+        return autor.toDTO()
+    }
+
     fun borrarAutor(idAutor: Int): Autor {
         val autor = getById(idAutor)
         repoAutor.delete(autor)
