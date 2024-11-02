@@ -67,7 +67,7 @@ class Recomendacion(
     ///////////////////////////////////////////////////////////////////
     fun accesoPublico(): Boolean = this.publica
     fun esCreador(usuario: Usuario): Boolean = (usuario === creador)
-    private fun accesoPrivado(usuario: Usuario):Boolean = creador.esAmigoDe(usuario)
+    private fun accesoPrivado(usuario: Usuario):Boolean = creador.esAmigoDe(usuario) || this.esCreador(usuario)
     fun usuarioLeyoRecomendados(usuario: Usuario): Boolean = librosRecomendados.all{usuario.leido(it)}
     private fun usuarioLeyoAlgunRecomendado(usuario: Usuario):Boolean = librosRecomendados.any { libro -> usuario.librosLeidos.contains(libro) }
     fun unicoAutor(): Boolean =

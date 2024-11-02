@@ -91,7 +91,7 @@ object ServiceRecommendation {
 
     fun getUserRecommendations(private: Boolean): List<RecommendationCardDTO> {
         val user = this.getLoggedUser()
-        val userRecommendations = this.getLoggedUserRecommendations(user)
+        val userRecommendations = user.recomendaciones
         val filteredRecommendations = this.filterRecommendationsByFlag(userRecommendations, private)
         return filteredRecommendations.map { it.toCardDTO(user) }
     }
@@ -110,7 +110,7 @@ object ServiceRecommendation {
     private fun filterRecommendationsByFlag(recommendations:List<Recomendacion>,private:Boolean):List<Recomendacion>{
         return if(private){
                 return recommendations.filter {
-                !it.publica
+                it.publica == !private
             }
             }else{
                 return recommendations
