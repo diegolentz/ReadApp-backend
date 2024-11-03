@@ -76,7 +76,6 @@ fun auxGenerarAmistades(){
 
     adrian.agregarAmigo(pica)
     adrian.agregarAmigo(diego)
-    adrian.agregarAmigo(adrian)
 }
 
 fun auxGenerarRecomendaciones(){
@@ -150,11 +149,7 @@ fun auxGenerarRecomendaciones(){
     LIBROS.forEach{
         adrian.leer(it)
     }
-//    adrian.leer(LIBROS[9])
-//    adrian.leer(LIBROS[10])
-//    adrian.leer(LIBROS[1])
-//    adrian.leer(LIBROS[3])
-//    adrian.leer(LIBROS[4])
+
     adrian.crearRecomendacion(
         titulo = "El Legado de las Civilizaciones Perdidas",
         contenido = "Un viaje fascinante a través de las antiguas civilizaciones que desaparecieron sin dejar rastro.",
@@ -179,7 +174,6 @@ fun auxGenerarRecomendaciones(){
         publico = false,
         librosParaRecomendar = mutableSetOf(LIBROS[1])
     )
-    //adrian.leer(libroAutorUnico)
     adrian.leer(LIBROS[7])
     adrian.crearRecomendacion(
         titulo = "Libro de autor unico",

@@ -3,8 +3,12 @@ package ar.edu.unsam.algo3.DTO
 import ar.edu.unsam.algo2.readapp.features.Recomendacion
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
+import ar.edu.unsam.algo2.readapp.usuario.Combinador
+import ar.edu.unsam.algo2.readapp.usuario.PerfilDeUsuario
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.services.ServiceUser
 import java.time.LocalDate
+import kotlin.reflect.typeOf
 
 
 data class UserBasicDTO(
@@ -36,15 +40,10 @@ data class UserProfileDTO(
     var username: String,
     var lenguaje: Lenguaje,
     var palabrasPorMinutos: Int,
-    //Exclusivo de perfil de usuario
     var fechaNacimiento: LocalDate,
     var email: String,
     var perfil: List<Any>,
     var tipoDeLector: String,
-    val amigos: List<UserFriendDTO>,
-    val librosLeidos: MutableList<Libro>,
-    val librosALeer: MutableSet<Libro>,
-    val recomendacionesAValorar: MutableList<Recomendacion>,
     val tiempoLecturaPromedio:Double
 )
 
@@ -60,10 +59,6 @@ fun Usuario.toDTOProfile() = UserProfileDTO(
     email = email,
     perfil = perfil.toList(),
     tipoDeLector = tipoDeLector.toString(),
-    amigos = amigos.map { it.toDTOFriend() },
-    librosLeidos = librosLeidos,
-    librosALeer = librosALeer,
-    recomendacionesAValorar = recomendacionesAValorar,
     tiempoLecturaPromedio = this.tiempoLecturaPromedio()
 )
 
@@ -77,6 +72,7 @@ data class  UserInfoDTO(
     var perfil: List<PerfilDeLecturaDTO>?,
     var tipoDeLector: String?,
 )
+
 
 data class PerfilDeLecturaDTO(
     var tipoPerfil: String,
