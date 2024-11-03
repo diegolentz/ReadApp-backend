@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo2.readapp.libro
 
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
+import ar.edu.unsam.algo3.DTO.AuthorEditDTO
 import ar.edu.unsam.algo3.DTO.AutorDTO
 
 
@@ -24,23 +25,31 @@ class Autor(
     }
 
     fun esConsagrado(): Boolean = (this.superaEdad() && this.tienePremios())
-    
+
     private fun tienePremios(): Boolean = cantidadPremios > 0
-  
+
     private fun superaEdad(): Boolean = edad > EDAD_MINIMA_CONDICION
 
-    override fun cumpleCriterioBusqueda(texto: String) = nombre.contains(texto) || apellido.contains(texto) || (seudonimo.lowercase() == texto)
+    override fun cumpleCriterioBusqueda(texto: String) =
+        nombre.contains(texto) || apellido.contains(texto) || (seudonimo.lowercase() == texto)
 
+    fun obtenerLenguajes() = Lenguaje.values()
 
-    fun toDTO() : AutorDTO = AutorDTO(
+    fun toDTO(): AutorDTO = AutorDTO(
         id = id,
         nombre = nombre,
         apellido = apellido,
         nacionalidad = lenguaNativa
-
     )
-    fun fromDTO(){}
 
-
-
+    fun toEditDTO(): AuthorEditDTO = AuthorEditDTO(
+        id = id,
+        nombre = nombre,
+        apellido = apellido,
+        nacionalidad = lenguaNativa,
+        lenguaje = obtenerLenguajes()
+    )
 }
+
+
+
