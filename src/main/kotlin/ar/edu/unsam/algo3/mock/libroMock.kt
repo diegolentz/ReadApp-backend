@@ -22,12 +22,7 @@ var libro_1: Libro = LibroBuilder()
     .imagen("https://www.elejandria.com/covers/La_sombra_sobre_Innsmouth-H._P._Lovecraft-md.png")
     .build()
 
-var libro_2: Libro = LibroBuilder()
-    .titulo("Caminos de fuego").autor(autores.random())
-    .cantidadPaginas(600).cantidadPalabras(200 * 600)
-    .ventasSemanales(950).edicionesRandom().traduccionesRandom()
-    .imagen("https://media.s-bol.com/qPn8Q9DA0q0/550x827.jpg")
-    .build()
+var libro_2: Libro = LibroBuilder().bestSeller().build()
 
 var libro_3: Libro = LibroBuilder()
     .titulo("Sombras en la noche").autor(autores.random())

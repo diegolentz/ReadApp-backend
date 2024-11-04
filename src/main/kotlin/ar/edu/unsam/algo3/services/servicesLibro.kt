@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.services
 
+import BookWithBooleansDTO
 import LibroDTO
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
@@ -29,6 +30,14 @@ object ServiceLibros {
             throw BusinessException("No se encontraron libros")
         }
         return libros.map { it: Libro -> it.toDTO() }
+    }
+
+    fun getBooksWithBooleans(): List<BookWithBooleansDTO> {
+        libros = repoLibro.getAll().toMutableList()
+        if (libros.isEmpty()) {
+            throw BusinessException("No se encontraron libros")
+        }
+        return libros.map { it: Libro -> it.toBookWithBooleansDTO() }
     }
 
     fun obtenerLibros(estado: Boolean): List<LibroDTO> {
