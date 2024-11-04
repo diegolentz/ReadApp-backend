@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.controller
 
+import BookWithBooleansDTO
 import LibroDTO
 import ar.edu.unsam.algo2.readapp.libro.AgregarLibroRequest
 import ar.edu.unsam.algo3.services.ServiceLibros
@@ -14,6 +15,9 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     //traer todos los libros
     @GetMapping("/librosSearch")
     fun obtenerSearch(): List<LibroDTO> = serviceLibros.getSearch()
+
+    @GetMapping("/getBooksReact")
+    fun getBooksReact(): List<BookWithBooleansDTO> = serviceLibros.getBooksWithBooleans()
 
     //libros por estado
     @GetMapping("/obtenerlibroEstado")

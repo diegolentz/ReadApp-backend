@@ -108,6 +108,7 @@ object Bootstrap : CommandLineRunner {
             .cantidadPaginas(600).cantidadPalabras(200 * 600)
             .ventasSemanales(950).edicionesRandom().traduccionesRandom()
             .imagen("https://media.s-bol.com/qPn8Q9DA0q0/550x827.jpg")
+            .bestSeller()
             .build()
 
         val libro_3: Libro = LibroBuilder()
