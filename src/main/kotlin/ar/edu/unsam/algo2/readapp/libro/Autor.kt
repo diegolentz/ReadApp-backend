@@ -37,6 +37,13 @@ class Autor(
 
     fun obtenerLenguajes() = Lenguaje.values()
 
+    fun actualizar(autor: AutorDTO): Autor {
+        this.nombre = autor.nombre
+        this.apellido = autor.apellido
+        this.lenguaNativa = autor.nacionalidad
+        return this
+    }
+
 
 
     fun toDTO(): AutorDTO = AutorDTO(

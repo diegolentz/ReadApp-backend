@@ -32,12 +32,10 @@ object ServiceAutor {
     }
 
     fun actualizarAuthor(author : AutorDTO) : Autor  {
-        val confirmEdit = this.getById(author.id)
-         confirmEdit.nombre = author.nombre
-        confirmEdit.apellido = author.apellido
-        confirmEdit.lenguaNativa = author.nacionalidad
+        val autor = this.getById(author.id)
+        val autorActualizado = autor.actualizar(author)
 
-        return confirmEdit
+        return autorActualizado
     }
 
     fun borrarAutor(idAutor: Int): Autor {
