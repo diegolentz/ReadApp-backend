@@ -21,9 +21,10 @@ class Repositorio<T : AvaliableInstance> {
 
 
 
-    fun create(objeto: T): Boolean {
+    fun create(objeto: T): T {
         this.asignarID(objeto)
-        return objetosEnMemoria.add(objeto) //SI es Set devuelve true o false, si es list siempre devuelve true
+        objetosEnMemoria.add(objeto) //SI es Set devuelve true o false, si es list siempre devuelve true
+        return objeto
     }
 
     //void

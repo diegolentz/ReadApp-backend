@@ -3,6 +3,7 @@ package ar.edu.unsam.algo3.controller
 
 import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo3.DTO.AuthorEditDTO
+import ar.edu.unsam.algo3.DTO.AutorCreateDTO
 import ar.edu.unsam.algo3.DTO.AutorDTO
 import org.springframework.web.bind.annotation.*
 import ar.edu.unsam.algo3.services.ServiceAutor
@@ -26,4 +27,8 @@ class AutorController(val serviceAutor: ServiceAutor) {
         return serviceAutor.actualizarAuthor(request)
     }
 
+    @PostMapping("/createAuthor")
+    fun crearAutor(@RequestBody request : AutorCreateDTO) : Autor{
+        return serviceAutor.crearAutor(request)
+    }
 }

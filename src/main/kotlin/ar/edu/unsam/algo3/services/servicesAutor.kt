@@ -2,6 +2,7 @@ package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo3.DTO.AuthorEditDTO
+import ar.edu.unsam.algo3.DTO.AutorCreateDTO
 import ar.edu.unsam.algo3.DTO.AutorDTO
 import org.springframework.stereotype.Service
 
@@ -42,5 +43,11 @@ object ServiceAutor {
         val autor = getById(idAutor)
         repoAutor.delete(autor)
         return autor
+    }
+
+    fun crearAutor(autor: AutorCreateDTO): Autor  {
+       val autorNuevo : Autor = repoAutor.create(Autor(lenguaNativa = autor.lenguaNativa, edad = autor.edad, apellido = autor.apellido, nombre = autor.nombre, seudonimo = autor.seudonimo))
+
+        return autorNuevo
     }
 }

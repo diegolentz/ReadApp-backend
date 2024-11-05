@@ -20,3 +20,11 @@ class AuthorEditDTO (
     val lenguaje: Array<Lenguaje>
 
 )
+
+class AutorCreateDTO (
+    var lenguaNativa: Lenguaje ,
+    var edad: Int ,
+    var apellido: String ,
+    var nombre: String ,
+    var seudonimo: String
+)
