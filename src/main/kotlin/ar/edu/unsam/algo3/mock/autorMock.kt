@@ -40,5 +40,19 @@ val AUTOR = listOf(
         nombre = "Marcel",
         apellido = "Proust",
         seudonimo = "El Memorialista"
+    ),
+    Autor(
+        lenguaNativa = Lenguaje.FRANCES,
+        edad = 30,
+        nombre = "Kylian",
+        apellido = "Mbappe",
+        seudonimo = "el 10"
+    ),
+    Autor(
+        lenguaNativa = Lenguaje.MANDARIN,
+        edad = 42,
+        nombre = "Kan",
+        apellido = "wu",
+        seudonimo = "El poeta"
     )
 )

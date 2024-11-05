@@ -2,6 +2,7 @@ package ar.edu.unsam.algo3.services
 
 import BookWithBooleansDTO
 import LibroDTO
+import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
@@ -100,6 +101,11 @@ object ServiceLibros {
     }
 
     fun getAllSize(): Int = repoLibro.getAll().size
+
+    fun escribioLibro(autor : Autor) : Boolean  {
+        val libros = repoLibro.getAll().toList()
+        return libros.any { it.autor == autor }
+    }
 }
 
 

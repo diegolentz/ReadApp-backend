@@ -7,7 +7,8 @@ class AutorDTO(
     val id: Int,
     val nombre: String,
     val apellido: String,
-    val nacionalidad : Lenguaje
+    val nacionalidad : Lenguaje,
+    val creadorLibros: Boolean
 
 )
 

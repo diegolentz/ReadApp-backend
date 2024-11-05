@@ -19,8 +19,9 @@ object ServiceAutor {
     fun get(): List<Autor> = repoAutor.getAll().toList()
 
     fun getAll(): List<AutorDTO> {
-        var libros = repoAutor.getAll().toList()
-        return libros.map { it: Autor -> it.toDTO() }
+        var autores = repoAutor.getAll().toList()
+
+        return autores.map { it: Autor -> it.toDTO() }
     }
 
     fun getById(autorID: Int): Autor = repoAutor.getByID(autorID)

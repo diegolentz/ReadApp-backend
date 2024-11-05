@@ -12,13 +12,13 @@ import ar.edu.unsam.algo3.services.ServiceAutor
 @RestController
 
 class AutorController(val serviceAutor: ServiceAutor) {
-    @GetMapping("/reactAutor")
+    @GetMapping("/allAuthors")
     fun obtenerAutores(): List<AutorDTO> = serviceAutor.getAll()
 
-    @GetMapping("/reactAutor/{id}")
+    @GetMapping("/getAutor/{id}")
     fun autorPorId(@PathVariable id: Int) : AuthorEditDTO = serviceAutor.editAutor(id)
 
-    @DeleteMapping("/reactAutor/{id}")
+    @DeleteMapping("/deleteAutor/{id}")
     fun borrarAutor(@PathVariable id: Int) : Autor = serviceAutor.borrarAutor(id)
 
     @PutMapping("/editAuthor")
