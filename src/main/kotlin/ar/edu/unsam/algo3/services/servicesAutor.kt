@@ -45,8 +45,8 @@ object ServiceAutor {
         return autor
     }
 
-    fun crearAutor(autor: AutorCreateDTO): Autor  {
-       val autorNuevo : Autor = repoAutor.create(Autor(lenguaNativa = autor.lenguaNativa, edad = autor.edad, apellido = autor.apellido, nombre = autor.nombre, seudonimo = autor.seudonimo))
+    fun crearAutor(autor: AutorCreateDTO): Boolean  {
+       val autorNuevo : Boolean = repoAutor.create(Autor(lenguaNativa = autor.lenguaNativa, edad = autor.edad, apellido = autor.apellido, nombre = autor.nombre, seudonimo = autor.seudonimo))
 
         return autorNuevo
     }

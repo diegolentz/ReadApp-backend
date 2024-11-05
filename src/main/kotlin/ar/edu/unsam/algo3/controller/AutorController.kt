@@ -28,7 +28,7 @@ class AutorController(val serviceAutor: ServiceAutor) {
     }
 
     @PostMapping("/createAuthor")
-    fun crearAutor(@RequestBody request : AutorCreateDTO) : Autor{
+    fun crearAutor(@RequestBody request : AutorCreateDTO) : Boolean{
         return serviceAutor.crearAutor(request)
     }
 }
