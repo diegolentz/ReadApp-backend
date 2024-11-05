@@ -97,14 +97,14 @@ object Bootstrap : CommandLineRunner {
         val autores = createAutors()
 
         val libro_1: Libro = LibroBuilder()
-            .titulo("La sombra sobre Innsmouth").autor(autores.random())
+            .titulo("La sombra sobre Innsmouth").autor(autores[0])
             .cantidadPaginas(850).cantidadPalabras(200 * 850)
             .ventasSemanales(1200).edicionesRandom().traduccionesRandom()
             .imagen("https://www.elejandria.com/covers/La_sombra_sobre_Innsmouth-H._P._Lovecraft-md.png")
             .build()
 
         val libro_2: Libro = LibroBuilder()
-            .titulo("Caminos de fuego").autor(autores.random())
+            .titulo("Caminos de fuego").autor(autores[1])
             .cantidadPaginas(600).cantidadPalabras(200 * 600)
             .ventasSemanales(950).edicionesRandom().traduccionesRandom()
             .imagen("https://media.s-bol.com/qPn8Q9DA0q0/550x827.jpg")
@@ -112,28 +112,28 @@ object Bootstrap : CommandLineRunner {
             .build()
 
         val libro_3: Libro = LibroBuilder()
-            .titulo("Sombras en la noche").autor(autores.random())
+            .titulo("Sombras en la noche").autor(autores[2])
             .cantidadPaginas(400).cantidadPalabras(200 * 400)
             .ventasSemanales(2500).edicionesRandom().traduccionesRandom()
             .imagen("https://cdn.kobo.com/book-images/Images/a446b9b8-6f54-4edd-b1de-450d04abaa18/300/300/False/image.jpg")
             .build()
 
         val libro_4: Libro = LibroBuilder()
-            .titulo("El mar en calma y viaje feliz").autor(autores.random())
+            .titulo("El mar en calma y viaje feliz").autor(autores[3])
             .cantidadPaginas(950).cantidadPalabras(200 * 950)
             .ventasSemanales(3100).edicionesRandom().traduccionesRandom()
             .imagen("https://images.cdn1.buscalibre.com/fit-in/360x360/9f/67/9f672c2b0920c001252d8446a88ce260.jpg")
             .build()
 
         val libro_5: Libro = LibroBuilder()
-            .titulo("Ultima frontera").autor(autores.random())
+            .titulo("Ultima frontera").autor(autores[4])
             .cantidadPaginas(700).cantidadPalabras(200 * 700)
             .ventasSemanales(1800).edicionesRandom().traduccionesRandom()
             .imagen("https://tse2.mm.bing.net/th?id=OIP.hrEnCP84kpA99IFJkR7BywAAAA&pid=Api&P=0&h=180")
             .build()
 
         val libro_6: Libro = LibroBuilder()
-            .titulo("El ultimo refugio").autor(autores.random())
+            .titulo("El ultimo refugio").autor(autores[3])
             .cantidadPaginas(530).cantidadPalabras(200 * 530)
             .ventasSemanales(1450).edicionesRandom().traduccionesRandom()
             .imagen("https://proassetspdlcom.cdnstatics2.com/usuaris/libros/thumbs/54fbdd8d-9558-4328-bd98-983b52175273/m_175_310/329653_el-ultimo-refugio_9786070768958_3d_202104151753.webp")
@@ -147,35 +147,35 @@ object Bootstrap : CommandLineRunner {
             .build()
 
         val libro_8: Libro = LibroBuilder()
-            .titulo("El misterio del lago").autor(autores.random())
+            .titulo("El misterio del lago").autor(autores[1])
             .cantidadPaginas(750).cantidadPalabras(200 * 750)
             .ventasSemanales(2700).edicionesRandom().traduccionesRandom()
             .imagen("https://st.booknet.com/uploads/covers/220/1548248964_73.jpg")
             .build()
 
         val libro_9: Libro = LibroBuilder()
-            .titulo("La ciudad perdida").autor(autores.random())
+            .titulo("La ciudad perdida").autor(autores[2])
             .cantidadPaginas(450).cantidadPalabras(200 * 450)
             .ventasSemanales(1950).edicionesRandom().traduccionesRandom()
             .imagen("https://image.tmdb.org/t/p/original/grEVYkBAVIzQ4JmZ7ydceN9DFQR.jpg")
             .build()
 
         val libro_10: Libro = LibroBuilder()
-            .titulo("Sombras de la noche II").autor(autores.random())
+            .titulo("Sombras de la noche II").autor(autores[3])
             .cantidadPaginas(880).cantidadPalabras(200 * 880)
             .ventasSemanales(3300).edicionesRandom().traduccionesRandom()
             .imagen("https://cdn.kobo.com/book-images/Images/a446b9b8-6f54-4edd-b1de-450d04abaa18/300/300/False/image.jpg")
             .build()
 
         val libro_11: Libro = LibroBuilder()
-            .titulo("El mar en calma y viaje feliz II").autor(autores.random())
+            .titulo("El mar en calma y viaje feliz II").autor(autores[4])
             .cantidadPaginas(680).cantidadPalabras(200 * 680)
             .ventasSemanales(1250).edicionesRandom().traduccionesRandom()
             .imagen("https://images.cdn1.buscalibre.com/fit-in/360x360/9f/67/9f672c2b0920c001252d8446a88ce260.jpg")
             .build()
 
         val libro_12: Libro = LibroBuilder()
-            .titulo("El bosque negro").autor(autores.random())
+            .titulo("El bosque negro").autor(autores[1])
             .cantidadPaginas(520).cantidadPalabras(200 * 520)
             .ventasSemanales(1400).edicionesRandom().traduccionesRandom(6)
             .imagen("https://i.pinimg.com/originals/ab/ec/d5/abecd51b79366c089872d1e88e6c7424.jpg")
@@ -232,6 +232,20 @@ object Bootstrap : CommandLineRunner {
                 nombre = "Marcel",
                 apellido = "Proust",
                 seudonimo = "El Memorialista"
+            ),
+            Autor(
+                lenguaNativa = Lenguaje.FRANCES,
+                edad = 30,
+                nombre = "Kylian",
+                apellido = "Mbappe",
+                seudonimo = "el 10"
+            ),
+            Autor(
+                lenguaNativa = Lenguaje.MANDARIN,
+                edad = 42,
+                nombre = "Kan",
+                apellido = "wu",
+                seudonimo = "El poeta"
             )
         )
         AUTOR.forEach(

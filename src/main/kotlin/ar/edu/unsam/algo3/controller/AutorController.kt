@@ -3,6 +3,7 @@ package ar.edu.unsam.algo3.controller
 
 import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo3.DTO.AuthorEditDTO
+import ar.edu.unsam.algo3.DTO.AutorCreateDTO
 import ar.edu.unsam.algo3.DTO.AutorDTO
 import org.springframework.web.bind.annotation.*
 import ar.edu.unsam.algo3.services.ServiceAutor
@@ -12,13 +13,13 @@ import ar.edu.unsam.algo3.services.ServiceAutor
 @RestController
 
 class AutorController(val serviceAutor: ServiceAutor) {
-    @GetMapping("/reactAutor")
+    @GetMapping("/allAuthors")
     fun obtenerAutores(): List<AutorDTO> = serviceAutor.getAll()
 
-    @GetMapping("/reactAutor/{id}")
+    @GetMapping("/getAutor/{id}")
     fun autorPorId(@PathVariable id: Int) : AuthorEditDTO = serviceAutor.editAutor(id)
 
-    @DeleteMapping("/reactAutor/{id}")
+    @DeleteMapping("/deleteAutor/{id}")
     fun borrarAutor(@PathVariable id: Int) : Autor = serviceAutor.borrarAutor(id)
 
     @PutMapping("/editAuthor")
@@ -26,4 +27,8 @@ class AutorController(val serviceAutor: ServiceAutor) {
         return serviceAutor.actualizarAuthor(request)
     }
 
+    @PostMapping("/createAuthor")
+    fun crearAutor(@RequestBody request : AutorCreateDTO) : Boolean{
+        return serviceAutor.crearAutor(request)
+    }
 }

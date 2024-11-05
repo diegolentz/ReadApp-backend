@@ -2,6 +2,7 @@ package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo3.DTO.AuthorEditDTO
+import ar.edu.unsam.algo3.DTO.AutorCreateDTO
 import ar.edu.unsam.algo3.DTO.AutorDTO
 import org.springframework.stereotype.Service
 
@@ -19,8 +20,9 @@ object ServiceAutor {
     fun get(): List<Autor> = repoAutor.getAll().toList()
 
     fun getAll(): List<AutorDTO> {
-        var libros = repoAutor.getAll().toList()
-        return libros.map { it: Autor -> it.toDTO() }
+        var autores = repoAutor.getAll().toList()
+
+        return autores.map { it: Autor -> it.toDTO() }
     }
 
     fun getById(autorID: Int): Autor = repoAutor.getByID(autorID)
@@ -31,17 +33,21 @@ object ServiceAutor {
     }
 
     fun actualizarAuthor(author : AutorDTO) : Autor  {
-        val confirmEdit = this.getById(author.id)
-         confirmEdit.nombre = author.nombre
-        confirmEdit.apellido = author.apellido
-        confirmEdit.lenguaNativa = author.nacionalidad
+        val autor = this.getById(author.id)
+        val autorActualizado = autor.actualizar(author)
 
-        return confirmEdit
+        return autorActualizado
     }
 
     fun borrarAutor(idAutor: Int): Autor {
         val autor = getById(idAutor)
         repoAutor.delete(autor)
         return autor
+    }
+
+    fun crearAutor(autor: AutorCreateDTO): Boolean  {
+       val autorNuevo : Boolean = repoAutor.create(Autor(lenguaNativa = autor.lenguaNativa, edad = autor.edad, apellido = autor.apellido, nombre = autor.nombre, seudonimo = autor.seudonimo))
+
+        return autorNuevo
     }
 }
