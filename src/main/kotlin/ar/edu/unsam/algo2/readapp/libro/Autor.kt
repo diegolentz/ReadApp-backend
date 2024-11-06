@@ -1,8 +1,8 @@
 package ar.edu.unsam.algo2.readapp.libro
 
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
+import ar.edu.unsam.algo3.DTO.AuthorDTO
 import ar.edu.unsam.algo3.DTO.AuthorEditDTO
-import ar.edu.unsam.algo3.DTO.AutorDTO
 import ar.edu.unsam.algo3.services.ServiceAutor
 import ar.edu.unsam.algo3.services.ServiceLibros
 
@@ -37,7 +37,7 @@ class Autor(
 
     fun obtenerLenguajes() = Lenguaje.values()
 
-    fun actualizar(autor: AutorDTO): Autor {
+    fun actualizar(autor: AuthorEditDTO): Autor {
         this.nombre = autor.nombre
         this.apellido = autor.apellido
         this.lenguaNativa = autor.nacionalidad
@@ -46,11 +46,12 @@ class Autor(
 
 
 
-    fun toDTO(): AutorDTO = AutorDTO(
+    fun toDTO(): AuthorDTO = AuthorDTO(
         id = id,
         nombre = nombre,
         apellido = apellido,
         nacionalidad = lenguaNativa,
+        lenguaje = obtenerLenguajes(),
         creadorLibros = ServiceLibros.escribioLibro(this)
     )
 
@@ -58,9 +59,8 @@ class Autor(
         id = id,
         nombre = nombre,
         apellido = apellido,
-        nacionalidad = lenguaNativa,
-        lenguaje = obtenerLenguajes()
-    )
+        nacionalidad = lenguaNativa)
+
 
 }
 
