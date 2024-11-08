@@ -35,7 +35,7 @@ class Autor(
     override fun cumpleCriterioBusqueda(texto: String) =
         nombre.contains(texto) || apellido.contains(texto) || (seudonimo.lowercase() == texto)
 
-    fun obtenerLenguajes() = Lenguaje.values()
+//    fun obtenerLenguajes() = Lenguaje.values()
 
     fun actualizar(autor: AuthorEditDTO): Autor {
         this.nombre = autor.nombre
@@ -51,7 +51,7 @@ class Autor(
         nombre = nombre,
         apellido = apellido,
         nacionalidad = lenguaNativa,
-        lenguaje = obtenerLenguajes(),
+//        lenguaje = obtenerLenguajes(),
         creadorLibros = ServiceLibros.escribioLibro(this)
     )
 
