@@ -9,10 +9,13 @@ class AuthorDTO (
     val nombre: String,
     val apellido: String,
     val nacionalidad : Lenguaje,
-    val lenguaje: Array<Lenguaje>,
+//    val lenguaje: Array<Lenguaje>,
     val creadorLibros: Boolean
 
 )
+
+data class LenguajeDTO(val lenguajes: List<Lenguaje>)
+
 
 class AuthorEditDTO(
     val id : Int,

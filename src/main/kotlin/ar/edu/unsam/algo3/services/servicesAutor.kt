@@ -1,9 +1,11 @@
 package ar.edu.unsam.algo3.services
 import ar.edu.unsam.algo2.readapp.libro.Autor
+import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo3.DTO.AuthorCreateDTO
 import ar.edu.unsam.algo3.DTO.AuthorDTO
 import ar.edu.unsam.algo3.DTO.AuthorEditDTO
+import ar.edu.unsam.algo3.DTO.LenguajeDTO
 import org.springframework.stereotype.Service
 
 
@@ -11,12 +13,6 @@ import org.springframework.stereotype.Service
 object ServiceAutor {
     val repoAutor: Repositorio<Autor> = Repositorio()
 
-    // Inicialización de datos predeterminados
-//    init {
-//        AUTOR.forEach(
-//            { autor -> repoAutor.create(autor) }
-//        )
-//    }
     fun get(): List<Autor> = repoAutor.getAll().toList()
 
     fun getAll(): List<AuthorDTO> {
@@ -26,6 +22,13 @@ object ServiceAutor {
     }
 
     fun getById(autorID: Int): Autor = repoAutor.getByID(autorID)
+
+    fun obtenerLenguajes(): LenguajeDTO {
+        val lenguajes = Lenguaje.values().toList()
+        return LenguajeDTO(lenguajes)
+    }
+
+
 
     fun editAutor(autorID: Int): AuthorDTO {
         val autor = repoAutor.getByID(autorID)
