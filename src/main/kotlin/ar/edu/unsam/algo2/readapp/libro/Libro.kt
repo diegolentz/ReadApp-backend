@@ -3,8 +3,10 @@ package ar.edu.unsam.algo2.readapp.libro
 
 import BookWithBooleansDTO
 import LibroDTO
+import BookDetailDTO
 import ar.edu.unsam.algo2.readapp.builders.AutorBuilder
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
+import ar.edu.unsam.algo3.DTO.AuthorEditDTO
 import ar.edu.unsam.algo3.services.ServiceLibros
 
 
@@ -76,6 +78,21 @@ class Libro(
             isChallenging = this.esDesafiante()
         )
 
+    fun toBookDetailDTO(): BookDetailDTO = BookDetailDTO(
+        author = autor,
+        numberOfWords = cantidadPalabras,
+        numberOfPages = cantidadPaginas,
+        numberOfEditions = ediciones,
+        translations = traducciones,
+        originalLanguage = lenguajeAutor(),
+        weeklySales = ventasSemanales,
+        complex = esComplejo,
+        title = titulo,
+        id = id,
+        isBestSeller = this.esBestSeller(),
+        isChallenging = this.esDesafiante()
+    )
+
     fun fromDTO(libroDTO: LibroDTO): Libro {
         return Libro(
             autor = buscarAutor(libroDTO.id), // Assuming Autor can be created from a String
@@ -96,6 +113,20 @@ class Libro(
     fun buscarAutor(id: Int): Autor {
      var libro = ServiceLibros.getById(id)
         return libro.autor
+    }
+
+    fun update(book: BookDetailDTO): Libro {
+        this.titulo = book.title
+        this.autor = book.author
+        this.cantidadPalabras = book.numberOfWords
+        this.cantidadPaginas = book.numberOfPages
+        this.ediciones = book.numberOfEditions
+        this.ventasSemanales = book.weeklySales
+        this.traducciones = book.translations
+        this.esComplejo = book.complex
+        this.titulo = book.title
+
+        return this
     }
 }
 

@@ -1,8 +1,12 @@
 package ar.edu.unsam.algo3.controller
 
+import BookDetailDTO
 import BookWithBooleansDTO
 import LibroDTO
 import ar.edu.unsam.algo2.readapp.libro.AgregarLibroRequest
+import ar.edu.unsam.algo2.readapp.libro.Autor
+import ar.edu.unsam.algo3.DTO.AuthorDTO
+import ar.edu.unsam.algo3.DTO.AuthorEditDTO
 import ar.edu.unsam.algo3.services.ServiceLibros
 import org.springframework.web.bind.annotation.*
 @CrossOrigin(origins = ["http://localhost:4200", "http://localhost:5173"])
@@ -18,6 +22,15 @@ class LibrosController(val serviceLibros: ServiceLibros) {
 
     @GetMapping("/getBooksReact")
     fun getBooksReact(): List<BookWithBooleansDTO> = serviceLibros.getBooksWithBooleans()
+
+    @GetMapping("/getBookReact/{id}")
+    fun getBook(@PathVariable id: Int) : BookDetailDTO = serviceLibros.getById(id).toBookDetailDTO()
+
+    @PutMapping("/editBook")
+    fun updateBook(@RequestBody request : BookDetailDTO) : BookDetailDTO = serviceLibros.updateBook(request)
+
+    @DeleteMapping("/deleteBook/{id}")
+    fun deleteBook(@PathVariable id: Int) = serviceLibros.deleteBook(id)
 
     //libros por estado
     @GetMapping("/obtenerlibroEstado")
