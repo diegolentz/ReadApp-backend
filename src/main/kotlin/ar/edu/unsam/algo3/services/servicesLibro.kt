@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.services
 
+import BookDetailDTO
 import BookWithBooleansDTO
 import LibroDTO
 import ar.edu.unsam.algo2.readapp.libro.Autor
@@ -7,6 +8,7 @@ import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
 import ar.edu.unsam.algo3.mock.LIBROS
+import ar.edu.unsam.algo3.services.ServiceAutor.repoAutor
 import excepciones.BusinessException
 import org.springframework.stereotype.Service
 
@@ -39,6 +41,17 @@ object ServiceLibros {
             throw BusinessException("No se encontraron libros")
         }
         return libros.map { it: Libro -> it.toBookWithBooleansDTO() }
+    }
+
+    fun updateBook(book: BookDetailDTO): BookDetailDTO {
+        val book = this.getById(book.id)
+        val updatedBook = book.update(book.toBookDetailDTO())
+        return updatedBook.toBookDetailDTO()
+    }
+
+    fun deleteBook(id: Int) {
+        var book = this.getById(id)
+        repoLibro.delete(book)
     }
 
     fun obtenerLibros(estado: Boolean): List<LibroDTO> {
