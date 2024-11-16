@@ -12,12 +12,12 @@ abstract class Proceso() {
     val emailDestinatario:String = "admin@readapp.com.ar"
     //abstract var mailSender: MailSender
 
-    fun ejecutar(mailSender: MailSender){
-        this.realizarAccion()
+    fun ejecutar(mailSender: MailSender): Int {
         this.enviarMail(mailSender)
+        return this.realizarAccion()
     }
 
-    abstract fun realizarAccion()
+    abstract fun realizarAccion() : Int
 
     fun enviarMail(mailSender:MailSender){
         mailSender.enviarMail(
@@ -34,10 +34,12 @@ class BorrarUsuariosInactivos(
     val repositorioAsociado: Repositorio<Usuario>,
 ): Proceso() {
 
-    override fun realizarAccion() {
-        this.filtrarUsuariosInactivos().forEach{
+    override fun realizarAccion(): Int {
+        val usuariosInactivos = this.filtrarUsuariosInactivos()
+        usuariosInactivos.forEach{
             repositorioAsociado.delete(it)
         }
+        return usuariosInactivos.size
     }
 
     fun filtrarUsuariosInactivos(): List<Usuario>{
@@ -60,8 +62,9 @@ class ProcesoActualizadorLibros(
     val servicio: ServiceLibros,
     val repositorio: Repositorio<Libro>,
 ) : Proceso() {
-    override fun realizarAccion() {
+    override fun realizarAccion(): Int {
         ActualizadorLibro.actualizar(servicio, repositorio)
+        return servicio.libros.size
     }
 }
 
@@ -69,16 +72,19 @@ class ProcesoAgregarAutores(
     val autores: List<Autor>,
     val repositorio: Repositorio<Autor>,
 ) : Proceso() {
-    override fun realizarAccion() {
+    override fun realizarAccion(): Int {
         autores.forEach { autor: Autor -> repositorio.create(autor) }
+        return autores.size
     }
 }
 
 class BorrarCentrosInactivos(
     val repositorio: Repositorio<CentroDeLectura>,
 ) : Proceso() {
-    override fun realizarAccion() {
-        centrosExpirados().forEach { repositorio.delete(it) }
+    override fun realizarAccion(): Int {
+        val centrosExpirados = centrosExpirados()
+        centrosExpirados.forEach { repositorio.delete(it) }
+        return centrosExpirados.size
     }
 
     private fun centrosExpirados(): List<CentroDeLectura> {

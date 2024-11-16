@@ -9,8 +9,8 @@ class Administrador(val mailSender: MailSender){
 
     val procesosEjecutados: MutableList<Proceso> = mutableListOf()
 
-    fun ejecutarListaProcesos(){
-        listaProcesos.forEach{  it.ejecutar(mailSender)  }
+    fun ejecutarListaProcesos(): Int {
+        return listaProcesos.map{  it.ejecutar(mailSender)  }.sum()
     }
 
     fun agregarProceso(proceso:Proceso){

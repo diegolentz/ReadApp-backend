@@ -7,8 +7,6 @@ import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
-import ar.edu.unsam.algo3.mock.LIBROS
-import ar.edu.unsam.algo3.services.ServiceAutor.repoAutor
 import excepciones.BusinessException
 import org.springframework.stereotype.Service
 

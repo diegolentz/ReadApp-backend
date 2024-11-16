@@ -13,19 +13,18 @@ import org.springframework.stereotype.Service
 class ServiceAdmin {
     private val admin = Administrador(MailSenderStub())
 
-    fun borrarUsuariosInactivos(): String {
+    fun borrarUsuariosInactivos(): Map<String, Int> {
         admin.agregarProceso(BorrarUsuariosInactivos(userRepository))
         return ejecutar()
     }
 
-    fun borrarCentrosInactivos(): String {
+    fun borrarCentrosInactivos(): Map<String, Int> {
         admin.agregarProceso(BorrarCentrosInactivos(repoCentro))
         return ejecutar()
     }
 
-    fun ejecutar() : String{
-        admin.ejecutarListaProcesos()
-        return "Tarea ejecutada con éxito"
+    fun ejecutar() : Map<String, Int> {
+        return mapOf("updatedElements" to admin.ejecutarListaProcesos())
     }
 
     fun datosDashboard(): DashboardDTO {
