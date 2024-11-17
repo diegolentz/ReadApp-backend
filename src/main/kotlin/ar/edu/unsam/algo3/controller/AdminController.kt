@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class AdminController(val serviceAdmin: ServiceAdmin) {
     @DeleteMapping("/borrarUsuariosInactivos")
-    fun borrarUsuariosInactivos(): String = serviceAdmin.borrarUsuariosInactivos()
+    fun borrarUsuariosInactivos(): Map<String, Int> = serviceAdmin.borrarUsuariosInactivos()
 
     @DeleteMapping("/borrarCentrosInactivos")
-    fun borrarCentrosInactivos(): String = serviceAdmin.borrarCentrosInactivos()
+    fun borrarCentrosInactivos(): Map<String, Int> = serviceAdmin.borrarCentrosInactivos()
 
     @GetMapping("/dashboard")
     fun dashboardData() : DashboardDTO = serviceAdmin.datosDashboard()
