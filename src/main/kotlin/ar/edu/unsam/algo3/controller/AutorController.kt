@@ -36,4 +36,7 @@ class AutorController(val serviceAutor: ServiceAutor) {
     fun crearAutor(@RequestBody request : AuthorCreateDTO) : Boolean{
         return serviceAutor.crearAutor(request)
     }
+
+    @GetMapping("/allAuthorsForBooks")
+    fun getAuthorsForBooks(): List<AuthorEditDTO> = serviceAutor.getAllForBooks()
 }

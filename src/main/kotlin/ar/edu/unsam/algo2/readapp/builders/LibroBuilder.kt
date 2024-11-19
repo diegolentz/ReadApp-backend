@@ -31,7 +31,7 @@ class LibroBuilder (val newLibro: Libro = Libro()) {
         newLibro.ediciones = ediciones
     }
     fun edicionesRandom()= apply {
-        newLibro.ediciones = Random.nextInt()
+        newLibro.ediciones = Random.nextInt(0,20)
     }
     fun ventasSemanales(ventas: Int)= apply {
         newLibro.ventasSemanales = ventas

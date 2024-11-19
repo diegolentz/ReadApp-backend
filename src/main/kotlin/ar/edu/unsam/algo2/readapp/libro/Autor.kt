@@ -61,7 +61,6 @@ class Autor(
         apellido = apellido,
         nacionalidad = lenguaNativa)
 
-
 }
 
 
