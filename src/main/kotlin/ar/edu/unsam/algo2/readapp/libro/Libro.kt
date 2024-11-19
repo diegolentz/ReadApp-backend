@@ -7,6 +7,7 @@ import BookDetailDTO
 import ar.edu.unsam.algo2.readapp.builders.AutorBuilder
 import ar.edu.unsam.algo2.readapp.repositorios.AvaliableInstance
 import ar.edu.unsam.algo3.DTO.AuthorEditDTO
+import ar.edu.unsam.algo3.services.ServiceAutor
 import ar.edu.unsam.algo3.services.ServiceLibros
 
 
@@ -79,12 +80,11 @@ class Libro(
         )
 
     fun toBookDetailDTO(): BookDetailDTO = BookDetailDTO(
-        author = autor,
+        author = autor.toEditDTO(),
         numberOfWords = cantidadPalabras,
         numberOfPages = cantidadPaginas,
         numberOfEditions = ediciones,
         translations = traducciones,
-        originalLanguage = lenguajeAutor(),
         weeklySales = ventasSemanales,
         complex = esComplejo,
         title = titulo,
@@ -117,7 +117,7 @@ class Libro(
 
     fun update(book: BookDetailDTO): Libro {
         this.titulo = book.title
-        this.autor = book.author
+        this.autor = ServiceAutor.getById(book.author.id)
         this.cantidadPalabras = book.numberOfWords
         this.cantidadPaginas = book.numberOfPages
         this.ediciones = book.numberOfEditions

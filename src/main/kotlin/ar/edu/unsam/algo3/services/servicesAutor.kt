@@ -26,6 +26,14 @@ object ServiceAutor {
         return autores.map { it: Autor -> it.toDTO() }
     }
 
+    fun getAllForBooks(): List<AuthorEditDTO> {
+        var autores = repoAutor.getAll().toList()
+        if (autores.isEmpty()) {
+            throw BusinessException("Failed to fetch authors")
+        }
+        return autores.map { it: Autor -> it.toEditDTO() }
+    }
+
     fun obtenerLenguajes(): LenguajeDTO {
 
         val lenguajes = Lenguaje.values().toList()

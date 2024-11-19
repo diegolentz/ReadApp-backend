@@ -47,6 +47,10 @@ object ServiceLibros {
         return updatedBook.toBookDetailDTO()
     }
 
+    //fun getBookDetail(bookId: Int): BookDetailDTO {
+    //    val book = getById(bookId)
+    //    return book.toBookDetailDTO()}
+
     fun deleteBook(id: Int) {
         var book = this.getById(id)
         repoLibro.delete(book)
