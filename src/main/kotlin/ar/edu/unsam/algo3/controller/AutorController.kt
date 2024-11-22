@@ -24,6 +24,9 @@ class AutorController(val serviceAutor: ServiceAutor) {
     @GetMapping("/lenguajes")
     fun obtenerLenguajes(): List<LenguajeDTO> = listOf(serviceAutor.obtenerLenguajes())
 
+    @GetMapping("/findAuthor")
+    fun filter(@RequestParam filter : String) : List<AuthorDTO> = serviceAutor.getFilter(filter)
+
     @DeleteMapping("/deleteAutor/{id}")
     fun borrarAutor(@PathVariable id: Int) : Autor = serviceAutor.borrarAutor(id)
 
