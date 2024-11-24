@@ -129,7 +129,7 @@ object ServiceUser {
     }
 
 
-    private fun checkAvaliableUsername(username: String) {
+        private fun checkAvaliableUsername(username: String) {
         val usuario: Usuario? = this.findUsername(username)
         //Si es Not Null, existe un Usuario con ese Username
         if (usuario != null) throw BadRequestException(usernameInvalidMessage)
