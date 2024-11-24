@@ -53,3 +53,4 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     fun obtenerLibrosFiltrados(@RequestParam filtro: String): List<LibroDTO> = serviceLibros.obtenerLibrosFiltrados(filtro)
 
 }
+    
