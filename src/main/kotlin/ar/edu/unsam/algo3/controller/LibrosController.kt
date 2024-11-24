@@ -32,6 +32,9 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     @DeleteMapping("/deleteBook/{id}")
     fun deleteBook(@PathVariable id: Int) = serviceLibros.deleteBook(id)
 
+    @GetMapping("/librosSearch/filter")
+    fun obtenerLibrosFiltrados(@RequestParam filtro: String): List<LibroDTO> = serviceLibros.obtenerLibrosFiltrados(filtro)
+
     //libros por estado
     @GetMapping("/obtenerlibroEstado")
     fun obtenerLibroEstado(@RequestParam estado: Boolean): List<LibroDTO> = serviceLibros.obtenerLibros(estado)
@@ -40,17 +43,16 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     fun postLibroEstado(@RequestBody request: AgregarLibroRequest): List<LibroDTO> {
         return serviceLibros.agregarLibros(request.estado, request.idLibro)
     }
-
     @DeleteMapping("/eliminarLibroEstado")
     fun borrarLibro(@RequestBody request: AgregarLibroRequest) : List<LibroDTO>{
     return serviceLibros.borrarLibro(request.estado,request.idLibro)
     }
+
     //libros para leer
     @GetMapping("/add-Books")
     fun agregarALeeer(): List<LibroDTO> = serviceLibros.paraLeer()
 
-    @GetMapping("/librosSearch/filter")
-    fun obtenerLibrosFiltrados(@RequestParam filtro: String): List<LibroDTO> = serviceLibros.obtenerLibrosFiltrados(filtro)
+    @GetMapping("/bookSearch/filter")
+    fun getBookFilter(@RequestParam filter: String): List< BookWithBooleansDTO> = serviceLibros.getBooksWithBooleans(filter)
 
 }
-    

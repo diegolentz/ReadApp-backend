@@ -7,6 +7,7 @@ import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import com.sun.net.httpserver.Filter
 import excepciones.BusinessException
 import org.springframework.stereotype.Service
 
@@ -121,6 +122,19 @@ object ServiceLibros {
         val libros = repoLibro.getAll().toList()
         return libros.any { it.autor == autor }
     }
+
+    fun getBooksWithBooleans(filter: String): List<BookWithBooleansDTO> {
+
+        val libros = repoLibro.search(filter).toMutableList()
+        if (libros.isEmpty()) {
+            throw BusinessException("No se encontraron busquedas cohinicidentes")
+
+        }else{
+            return libros.map { it.toBookWithBooleansDTO() }
+        }
+
+    }
+
 }
 
 
