@@ -98,6 +98,7 @@ object Bootstrap : CommandLineRunner {
 
         val libro_1: Libro = LibroBuilder()
             .titulo("La sombra sobre Innsmouth").autor(autores[0])
+            .complejo()
             .cantidadPaginas(850).cantidadPalabras(200 * 850)
             .ventasSemanales(1200).edicionesRandom().traduccionesRandom()
             .imagen("https://www.elejandria.com/covers/La_sombra_sobre_Innsmouth-H._P._Lovecraft-md.png")
@@ -106,9 +107,9 @@ object Bootstrap : CommandLineRunner {
         val libro_2: Libro = LibroBuilder()
             .titulo("Caminos de fuego").autor(autores[1])
             .cantidadPaginas(600).cantidadPalabras(200 * 600)
-            .ventasSemanales(950).edicionesRandom().traduccionesRandom()
+            //.ventasSemanales(950).edicionesRandom().traduccionesRandom()
             .imagen("https://media.s-bol.com/qPn8Q9DA0q0/550x827.jpg")
-            .bestSeller()
+            .bestSellerReact()
             .build()
 
         val libro_3: Libro = LibroBuilder()
@@ -127,6 +128,7 @@ object Bootstrap : CommandLineRunner {
 
         val libro_5: Libro = LibroBuilder()
             .titulo("Ultima frontera").autor(autores[4])
+            .complejo()
             .cantidadPaginas(700).cantidadPalabras(200 * 700)
             .ventasSemanales(1800).edicionesRandom().traduccionesRandom()
             .imagen("https://tse2.mm.bing.net/th?id=OIP.hrEnCP84kpA99IFJkR7BywAAAA&pid=Api&P=0&h=180")
@@ -141,6 +143,7 @@ object Bootstrap : CommandLineRunner {
 
         val libro_7: Libro = LibroBuilder()
             .titulo("Un viaje inesperado").autor(autores[0])
+            .complejo()
             .cantidadPaginas(390).cantidadPalabras(200 * 390)
             .ventasSemanales(2200).edicionesRandom().traduccionesRandom()
             .imagen("https://http2.mlstatic.com/D_NQ_NP_998326-MLC54028482109_022023-O.webp")
