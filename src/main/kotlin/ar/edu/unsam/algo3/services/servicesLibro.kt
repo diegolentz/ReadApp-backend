@@ -1,12 +1,16 @@
 package ar.edu.unsam.algo3.services
 
+import BookCreateDTO
 import BookDetailDTO
 import BookWithBooleansDTO
 import LibroDTO
 import ar.edu.unsam.algo2.readapp.libro.Autor
+import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo2.readapp.repositorios.Repositorio
 import ar.edu.unsam.algo2.readapp.usuario.Usuario
+import ar.edu.unsam.algo3.DTO.AuthorCreateDTO
+import ar.edu.unsam.algo3.services.ServiceAutor.repoAutor
 import excepciones.BusinessException
 import org.springframework.stereotype.Service
 
@@ -41,11 +45,12 @@ object ServiceLibros {
         return libros.map { it: Libro -> it.toBookWithBooleansDTO() }
     }
 
-    fun updateBook(book: BookDetailDTO): BookDetailDTO {
-        val book = this.getById(book.id)
-        val updatedBook = book.update(book.toBookDetailDTO())
+    fun updateBook(id: Int, bookDTO: BookDetailDTO): BookDetailDTO {
+        val book = this.getById(id)
+        val updatedBook = book.update(bookDTO)
         return updatedBook.toBookDetailDTO()
     }
+
 
     //fun getBookDetail(bookId: Int): BookDetailDTO {
     //    val book = getById(bookId)
@@ -54,6 +59,26 @@ object ServiceLibros {
     fun deleteBook(id: Int) {
         var book = this.getById(id)
         repoLibro.delete(book)
+    }
+
+    fun createBook(book: BookCreateDTO) {
+        val author = ServiceAutor.getById(book.author)
+        try {
+            repoLibro.create(
+                Libro(
+                    titulo = book.title,
+                    autor = author,
+                    cantidadPaginas = book.numberOfPages,
+                    cantidadPalabras = book.numberOfWords,
+                    traducciones = book.translations,
+                    ediciones = book.numberOfEditions,
+                    imagen = "newBook.png",
+                    ventasSemanales = book.weeklySales,
+                    esComplejo = book.complex,
+                ))
+        } catch (e: Exception) {
+            throw BusinessException("Book cant be created")
+        }
     }
 
     fun obtenerLibros(estado: Boolean): List<LibroDTO> {

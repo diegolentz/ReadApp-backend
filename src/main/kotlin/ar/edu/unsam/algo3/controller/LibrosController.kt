@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.controller
 
+import BookCreateDTO
 import BookDetailDTO
 import BookWithBooleansDTO
 import LibroDTO
@@ -26,8 +27,15 @@ class LibrosController(val serviceLibros: ServiceLibros) {
     @GetMapping("/getBookReact/{id}")
     fun getBook(@PathVariable id: Int) : BookDetailDTO = serviceLibros.getById(id).toBookDetailDTO()
 
-    @PutMapping("/editBook")
-    fun updateBook(@RequestBody request : BookDetailDTO) : BookDetailDTO = serviceLibros.updateBook(request)
+    @PutMapping("/editBook/{id}")
+    fun updateBook(@PathVariable id: Int, @RequestBody request: BookDetailDTO): BookDetailDTO {
+        return serviceLibros.updateBook(id, request)
+    }
+
+    @PostMapping("/createBook")
+    fun createBook(@RequestBody request: BookCreateDTO) {
+        return serviceLibros.createBook(request)
+    }
 
     @DeleteMapping("/deleteBook/{id}")
     fun deleteBook(@PathVariable id: Int) = serviceLibros.deleteBook(id)
