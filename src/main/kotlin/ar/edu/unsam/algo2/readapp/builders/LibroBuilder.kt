@@ -63,14 +63,32 @@ class LibroBuilder (val newLibro: Libro = Libro()) {
         return this
     }
 
+    fun traduccionesParaBestseller(cantidad: Int = 6)= apply {
+        val lenguajesRandom = Lenguaje.entries.toList().shuffled().take(cantidad).toMutableSet()
+        newLibro.traducciones = lenguajesRandom
+        return this
+    }
+
     fun popular() = apply {
         newLibro.ediciones = Libro.EDICIONES_MIN + 1
         this.traduccionesRandom()
         return this
     }
 
+    fun popularParaBestseller() = apply {
+        newLibro.ediciones = Libro.EDICIONES_MIN + 1
+        this.traduccionesParaBestseller()
+        return this
+    }
+
     fun bestSeller() = apply {
         this.popular()
+        newLibro.ventasSemanales = Libro.VENTA_SEMANAL_MIN
+        return this
+    }
+
+    fun bestSellerReact() = apply {
+        this.popularParaBestseller()
         newLibro.ventasSemanales = Libro.VENTA_SEMANAL_MIN
         return this
     }

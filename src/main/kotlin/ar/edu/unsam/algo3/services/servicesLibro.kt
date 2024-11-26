@@ -75,7 +75,7 @@ object ServiceLibros {
                     cantidadPalabras = book.numberOfWords,
                     traducciones = book.translations,
                     ediciones = book.numberOfEditions,
-                    imagen = "newBook.png",
+                    imagen = "https://www.elejandria.com/covers/La_sombra_sobre_Innsmouth-H._P._Lovecraft-md.png",
                     ventasSemanales = book.weeklySales,
                     esComplejo = book.complex,
                 ))
