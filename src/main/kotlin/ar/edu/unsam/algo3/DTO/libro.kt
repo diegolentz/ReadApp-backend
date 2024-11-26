@@ -2,6 +2,7 @@ import ar.edu.unsam.algo2.readapp.libro.Autor
 import ar.edu.unsam.algo2.readapp.libro.Lenguaje
 import ar.edu.unsam.algo2.readapp.libro.Libro
 import ar.edu.unsam.algo3.DTO.AuthorEditDTO
+import ar.edu.unsam.algo3.services.ServiceAutor.repoAutor
 import org.intellij.lang.annotations.Language
 
 class LibroDTO(
@@ -71,19 +72,16 @@ class BookDetailDTO(
     var isBestSeller: Boolean,
     var isChallenging: Boolean,
 
-    ){
-    // Se pasa el autor como parámetro externo
-    fun fromDTO(libroDTO: LibroDTO, autor: Autor): Libro {
-        return Libro(
-            autor = autor,  // Usamos el autor que nos pasaron
-            cantidadPalabras = libroDTO.cantidadPalabras,
-            cantidadPaginas = libroDTO.cantidadPaginas,
-            ediciones = libroDTO.ediciones,
-            ventasSemanales = libroDTO.ventasSemanales,
-            traducciones = libroDTO.traducciones,
-            titulo = libroDTO.titulo,
-            imagen = libroDTO.imagen,
+    ){}
 
-            ).apply { id = libroDTO.id }
-    }
-    }
+class BookCreateDTO(
+    var title: String,
+    var author: Int,
+    var numberOfPages: Int,
+    var numberOfWords: Int,
+    var translations: MutableSet<Lenguaje>,
+    var image: String,
+    var numberOfEditions: Int,
+    var weeklySales: Int,
+    var complex: Boolean
+) {}
