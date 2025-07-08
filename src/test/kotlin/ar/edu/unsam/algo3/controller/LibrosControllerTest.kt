@@ -31,15 +31,15 @@ class LibroControllerTest(@Autowired val mockMvc: MockMvc) {
     @Autowired
     lateinit var repoUsuario: Repositorio<Usuario>
 
-    @BeforeEach
-    fun init() {
-        repoUsuario.clearAll()
-        val usuario = USERS[0]
-        repoUsuario.create(usuario)
-
-
-        ServiceUser.loggedUserId = 1
-    }
+//    @BeforeEach
+//    fun init() {
+//        repoUsuario.clearAll()
+//        val usuario = USERS[0]
+//        repoUsuario.create(usuario)
+//
+//
+//        ServiceUser.loggedUserId = 1
+//    }
 
     @Test
     fun `puedo mockear una llamada al endpoint via get y me responde correctamente`() {

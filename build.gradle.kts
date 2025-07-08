@@ -3,7 +3,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.5"
     kotlin("jvm") version "1.9.24"
     kotlin("plugin.spring") version "1.9.24"
-    kotlin("plugin.serialization") version "1.6.0"
+    kotlin("plugin.serialization") version "1.9.24"
     jacoco
     war
 }
@@ -24,23 +24,31 @@ repositories {
 dependencies {
     val kotestVersion = "5.8.0"
 
-    // básicos de cualquier proyecto Spring Boot
+    // Kotlin standard library
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    // Spring Boot starters
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
+
+    // Kotlin reflection
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    // Kotlin serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
+    // Jackson Kotlin module
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8")
+
+    // Tomcat (provided)
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
-    // testing
+    // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.mockk:mockk:1.13.9")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
-    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 kotlin {
@@ -59,13 +67,6 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
-}
-
-jacoco {
-    toolVersion = "0.8.12"
-}
-
-tasks.jacocoTestReport {
     classDirectories.setFrom(
         files(classDirectories.files.map {
             fileTree(it) {
@@ -80,8 +81,12 @@ tasks.jacocoTestReport {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.12"
+}
+
 tasks.register("runOnGitHub") {
     dependsOn("jacocoTestReport")
     group = "custom"
-    description = "$ ./gradlew runOnGitHub # runs on GitHub Action"
+    description = "\$ ./gradlew runOnGitHub # runs on GitHub Action"
 }
