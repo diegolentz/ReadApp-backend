@@ -1,6 +1,6 @@
 # ReadApp-backend
 
-¡Bienvenido al motor que impulsa **ReadApp**! Este repositorio contiene el backend de una plataforma creada para transformar la experiencia de lectura y gestión de libros en la era digital. Aquí es donde sucede la magia: desde la administración de usuarios y colecciones hasta el seguimiento de lecturas, recomendaciones inteligentes y mucho más.
+¡Bienvenido a **ReadApp**! Este repositorio contiene el backend de una plataforma creada para transformar la experiencia de lectura y gestión de libros en la era digital. Aquí es donde sucede la magia: desde la administración de usuarios y colecciones hasta el seguimiento de lecturas, recomendaciones inteligentes y mucho más.
 
 ## 🌟 Propósito del Proyecto
 
@@ -34,21 +34,6 @@ El backend de **ReadApp** está diseñado para ser mucho más que una simple bas
 
 ## 🛠️ Tecnología Utilizada
 
-- **Lenguaje:** (Ejemplo: Python)
-- **Framework:** (Ejemplo: FastAPI, Flask o Django)
-- **Base de Datos:** (Ejemplo: PostgreSQL, MySQL, SQLite, etc.)
-- **Autenticación:** JWT u otro sistema avanzado de seguridad
-- **Documentación de API:** (Ejemplo: Swagger/OpenAPI)
-- **Testing:** (Herramientas como pytest, unittest, etc.)
-
-> Personaliza esta sección según las tecnologías específicas que elegiste.
-
----
-
-## 🛡️ Licencia
-
-Este repositorio está protegido bajo una licencia privada. Su uso está reservado exclusivamente a los miembros autorizados del equipo.
-
----
-
-¡Gracias por ser parte del universo de **ReadApp**! 🚀📚
+- **Lenguaje:** Kotlin
+- **Framework:** Springboot
+- **Base de Datos:** PostgreSQL
